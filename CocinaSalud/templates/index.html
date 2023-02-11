@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div id="carouselDesktop" class="carousel slide d-none d-md-block" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselDesktop" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselDesktop" data-slide-to="1"></li>
+      <li data-target="#carouselDesktop" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="/static/img/prueba-carousel.png" alt="First slide">
+        <div class="carousel-caption d-md-block">
+          <h5>Primer slide</h5>
+          <p>A ver si esto funca</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/static/img/prueba-carousel.png" alt="Second slide">
+        <div class="carousel-caption d-md-block">
+          <h5>Segundo slide</h5>
+          <p>Y segunda Francia</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/static/img/prueba-carousel.png" alt="Third slide">
+        <div class="carousel-caption d-md-block">
+          <h5>Tercer slid</h5>
+          <p>Los últimos serán los primeros</p>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselDesktop" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only"></span>
+    </a>
+    <a class="carousel-control-next" href="#carouselDesktop" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only"></span>
+    </a>
+</div>
+
+<div id="carouselMobile" class="carousel slide d-block d-md-none" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselMobile" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselMobile" data-slide-to="1"></li>
+    <li data-target="#carouselMobile" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="/static/img/prueba-carousel-mobile.png" alt="First slide">
+      <div class="carousel-caption d-md-block">
+        <h5>Primer slide</h5>
+        <p>A ver si esto funca</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="/static/img/prueba-carousel-mobile.png" alt="Second slide">
+      <div class="carousel-caption d-md-block">
+        <h5>Segundo slide</h5>
+        <p>Y segunda Francia</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="/static/img/prueba-carousel-mobile.png" alt="Third slide">
+      <div class="carousel-caption d-md-block">
+        <h5>Tercer slid</h5>
+        <p>Los últimos serán los primeros</p>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselMobile" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only"></span>
+  </a>
+  <a class="carousel-control-next" href="#carouselMobile" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only"></span>
+  </a>
+</div>
+
+<div class="col-12 d-flex fila-columna-responsive fondo-gris-claro">
+    <div class="col-12 col-sm-6 text-center">
+        <img src="/static/img/inicio.jpg" class="size-imagen__inicio" alt="Index image">
+    </div>
+    <div class="col-12 col-sm-6" style="margin: auto;">
+        <h3 class="reenie-beanie size-h3-reenie titulo-inicio__alineacion">Te damos la bienvenida!</h3> 
+        <p class="roboto gris-oscuro p-inicio">En este espacio encontrarás TODO lo que necesitas para tener una alimentación saludable, deliciosa y beneficiosa para vos, los animales y el planeta.</p>
+        <p class="roboto gris-oscuro p-inicio">Aquí encontrarás:<br>
+            - Recetas riquísimas, fáciles, saludables y veganas.<br>
+            - Trucos y tips para aprender a cocinar saludable desde 0.<br>
+            - Todos los nutrientes de los alimentos y cómo benefician a tu cuerpo.<br>
+            - Cómo prevenir, tratar y mejorar las enfermedades desde la nutrición.
+        </p>   
+        <div class="text-center">
+           <a href="acerca_de/" class="btn slide-in-up fondo-boton blanco py-2 px-4 negrita-600">Sigue leyendo<i class="bi bi-heart px-2"></i></a>  
+        </div>
+        
+    </div>
+</div>
+
+<script>
+  $('.carousel').carousel({
+    interval: 6000
+  });
+</script>
+
+
+{% endblock %}
