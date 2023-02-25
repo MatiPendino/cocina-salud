@@ -1,0 +1,41 @@
+.imagebox-container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    height: 100%;
+    margin-bottom: 50px;
+    border-radius: 15px;
+}
+
+.imagebox-container:hover{
+    transition: all .3s ease;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(20,20,20, .5);
+}
+
+.imagebox-container-hover {
+    transition: all .3s ease;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(20,20,20, .5);
+}
+
+.container-images{
+    margin-bottom: 75px;
+}
+
+@media(min-width: 768px){
+    .container-images{
+        margin-bottom: 50px;
+    }
+}
+
+.titulo{
+    font-size: 50px;
+}
+
+@media(min-width: 768px){
+    .titulo{
+        font-size: 60px;
+    }
+}

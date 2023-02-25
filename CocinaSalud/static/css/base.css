@@ -26,12 +26,20 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.gloock {
+    font-family: "Gloock", "Raleway", sans-serif;
+}
+
 .blanco{
     color: white !important;
 }
 
 .gris-oscuro{
     color: #535353;
+}
+
+.black{
+    color: rgb(25,25,25);
 }
 
 .link{
@@ -57,19 +65,26 @@
 }
 
 .size-imagen__header{
-    max-width: 45%;
+    max-width: 100%;
 }
 
 .size-imagen__footer{
     max-width: 70%;
 }
 
+.size-imagen-container__header {
+    max-width: 50%;
+}
+
 @media(min-width: 768px){
     .size-imagen__header{
-        max-width: 22%;
+        max-width: 80%;
     }
     .size-imagen__footer{
         max-width: 55%;
+    }
+    .size-imagen-container__header {
+        max-width: 25%;
     }
 }
 
@@ -90,6 +105,16 @@
 @media(min-width:768px){
     .size-small{
         font-size: 16px;
+    }
+}
+
+.size-medium-gloock {
+    font-size: 25px;
+}
+
+@media(min-width:768px){
+    .size-medium-gloock{
+        font-size: 20px;
     }
 }
 
@@ -127,4 +152,10 @@
 
 .center-content-vertically{
     margin: auto 0px;
+}
+
+@media(max-width: 768px){
+    .centrar-mobile{
+        text-align: center;
+    }
 }

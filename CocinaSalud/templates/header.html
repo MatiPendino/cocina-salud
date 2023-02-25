@@ -1,75 +1,50 @@
 {% load static %}
 
-<nav class="navbar py-0 navbar-expand-lg">
-    <div class="d-flex flex-row justify-content-around fondo-verde p-2">
-        <a href="/" class="navbar-brand size-imagen__header"><img src="{% static '/img/logo.png' %}" class="px-4 pt-2" style="max-width: 100%;" alt="Logo"></a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#toggleCollapse" aria-controls="toggleCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="align-self-center navbar-collapse collapse" id="toggleCollapse">
-            <ul class="navbar-nav mr-auto w-100 justify-content-evenly">
-                <li class="nav-item active espacio-elementos">
-                    <a href="/inicio" class="roboto negrita blanco link">Inicio</a>
-                </li>
-                <li class="nav-item espacio-elementos">
-                    <a href="/acerca_de" class="roboto negrita blanco link">Acerca de</a>
-                </li>
-                <li class="nav-item espacio-elementos">
-                    <a href="/recetas" class="roboto negrita blanco link">Recetas</a>
-                </li>
-                <li class="nav-item espacio-elementos">
-                    <a href="/escuela_de_cocina" class="roboto negrita blanco link">Escuela de Cocina</a>
-                </li>
-                <li class="nav-item espacio-elementos">
-                    <a href="/nutricion" class="roboto negrita blanco link">Nutrición</a>
-                </li>
-                <li class="nav-item espacio-elementos">
-                    <a href="/salud" class="roboto negrita blanco link">Salud</a>
-                </li>
-            </ul>    
-        </div>
-        
-    </div>
+<style>
+  .nav-item{
+    transition: all 0.2s ease-out;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    border-radius: 100%;
+  }
+  .nav-item:hover {
+    padding-bottom: 0px;
+    background: none !important;
+    border-radius: 0;
+    border-bottom: 2px solid white;
+  }
+</style>
+
+<nav class="navbar py-0 navbar-expand-lg fondo-verde justify-content-around navbar-dark">
+  <div class="navbar-nav size-imagen-container__header">
+    <a href="/" class="navbar-brand size-imagen__header"><img src="{% static '/img/logo.png' %}" class="px-4 pt-2 w-100 image-responsive center-block" alt="Logo"></a>
+  </div>
+
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#toggleCollapse" aria-controls="toggleCollapse" aria-expanded="false" aria-label="Toggle navigation" style="border-color: rgba(255,255,255,0);">
+    <span class="navbar-toggler-icon" style="color: white;"></span>
+  </button>
+
+  <div class="align-items-end navbar-collapse collapse" id="toggleCollapse">
+    <ul class="navbar-nav mr-auto ">
+      <li class="nav-item active espacio-elementos">
+        <a href="/inicio" class="roboto negrita centrar-mobile blanco nav-link link">Inicio</a>
+      </li>
+      <li class="nav-item espacio-elementos">
+        <a href="/acerca_de" class="roboto negrita centrar-mobile blanco nav-link link">Acerca de</a>
+      </li>
+      <li class="nav-item espacio-elementos">
+        <a href="/recetas" class="roboto negrita centrar-mobile blanco nav-link link">Recetas</a>
+      </li>
+      <li class="nav-item espacio-elementos">
+        <a href="/escuela_de_cocina" class="roboto negrita centrar-mobile blanco nav-link link">Escuela de Cocina</a>
+      </li>
+      <li class="nav-item espacio-elementos">
+        <a href="/nutricion" class="roboto negrita centrar-mobile blanco nav-link link">Nutrición</a>
+      </li>
+      <li class="nav-item espacio-elementos">
+        <a href="/salud" class="roboto negrita centrar-mobile blanco nav-link link">Salud</a>
+      </li>
+    </ul>    
+  </div>
 </nav>
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="navbar-collapse collapse" id="navbarColor01" style="">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-      </ul>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
-
-  <div class="pos-f-t">
-    <div class="collapse" id="navbarToggleExternalContent">
-      <div class="bg-dark p-4">
-        <h4 class="text-white">Collapsed content</h4>
-        <span class="text-muted">Toggleable via the navbar brand.</span>
-      </div>
-    </div>
-    <nav class="navbar navbar-dark bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </nav>
-</div> -->
-  
