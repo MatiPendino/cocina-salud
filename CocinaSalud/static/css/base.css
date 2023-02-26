@@ -1,10 +1,4 @@
-.fondo-verde {
-    background-color: #097C10 !important;
-}
-
-.fondo-gris-claro{
-    background-color: #eeeeee;
-}
+/* Fuentes */
 
 .roboto{
     font-family: "Roboto", sans-serif; 
@@ -28,6 +22,22 @@
 
 .gloock {
     font-family: "Gloock", "Raleway", sans-serif;
+}
+
+.sawarabi-gothic {
+    font-family: 'Sawarabi Gothic', sans-serif;
+}
+
+.cambria {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.fondo-verde {
+    background-color: #097C10 !important;
+}
+
+.fondo-gris-claro{
+    background-color: #eeeeee;
 }
 
 .blanco{
@@ -158,4 +168,8 @@
     .centrar-mobile{
         text-align: center;
     }
+}
+
+.borde{
+    border-radius: 10px;
 }
