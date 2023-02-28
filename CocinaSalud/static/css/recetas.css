@@ -65,3 +65,13 @@
         margin-top: 10px;
     }
 }
+
+.size-texto-receta {
+    font-size: 15px;
+}
+
+@media(min-width: 768px){
+    .size-texto-receta {
+        font-size: 16px;
+    }
+}

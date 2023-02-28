@@ -170,6 +170,12 @@
     }
 }
 
+@media(max-width: 768px){
+    .margin-bottom-mobile {
+        margin-bottom: 15px;
+    }
+}
+
 .borde{
-    border-radius: 10px;
+    border-radius: 7px;
 }
