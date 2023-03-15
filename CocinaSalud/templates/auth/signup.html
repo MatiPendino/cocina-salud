@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="card o-hidden border-0 shadow-lg w-75 mx-auto my-4">
+        <div class="card-header py-3 fondo-verde blanco">
+            <h4 class="m-0 font-weight-bold">Registro de Nuevo Usuario </h4>
+        </div>
+        <div class="card-body">
+            <form action="/signup" method="post">
+            {% if message %}
+                <div class="alert alert-danger">
+                    <strong>{{ message|escape }}</strong>
+                </div>
+            {% endif %}
+            {% csrf_token %}
+                <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Nombre de usuario" required>
+                <input type="text" id="name" name="name" class="form-control mb-4" placeholder="Nombre" required>
+                <input type="text" id="surname" name="surname" class="form-control mb-4" placeholder="Apellido" required>
+                <input type="email" id="email" name="email" class="form-control mb-4" placeholder="Correo" required>
+                <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Contraseña" required>
+                <input type="password" id="confirm_password" class="form-control mb-2" name="confirm_password" placeholder="Confirmar contraseña" required>
+                <a href="/signin">¿Ya tienes una cuenta? Inicia sesión haciendo click aquí</a>
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn fondo-verde blanco text-center">Registrarse</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

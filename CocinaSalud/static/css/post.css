@@ -1,0 +1,25 @@
+@media(max-width: 768px) {
+    .margin-top-mobile {
+        margin-top: 10px;
+    }
+}
+
+.size-texto-cuerpo {
+    font-size: 17px;
+}
+
+@media(min-width: 768px){
+    .size-texto-cuerpo {
+        font-size: 18px;
+    }
+}
+
+.size-texto-receta {
+    font-size: 15px;
+}
+
+@media(min-width: 768px){
+    .size-texto-receta {
+        font-size: 16px;
+    }
+}

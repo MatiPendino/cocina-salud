@@ -179,3 +179,13 @@
 .borde{
     border-radius: 7px;
 }
+
+.user-dropdown-option {
+    text-align: center;
+    color: rgb(20,20,20)!important;
+    transition: all .3s ease-in-out!important;
+}
+
+.user-dropdown-option:hover {
+    background-color: rgb(240,240,240);
+}

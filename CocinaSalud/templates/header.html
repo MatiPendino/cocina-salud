@@ -29,20 +29,37 @@
       <li class="nav-item active espacio-elementos">
         <a href="/inicio" class="roboto negrita centrar-mobile blanco nav-link link">Inicio</a>
       </li>
-      <li class="nav-item espacio-elementos">
+      <!--<li class="nav-item espacio-elementos">
         <a href="/acerca_de" class="roboto negrita centrar-mobile blanco nav-link link">Acerca de</a>
-      </li>
+      </li> -->
       <li class="nav-item espacio-elementos">
         <a href="/recetas" class="roboto negrita centrar-mobile blanco nav-link link">Recetas</a>
       </li>
       <li class="nav-item espacio-elementos">
-        <a href="/escuela_de_cocina" class="roboto negrita centrar-mobile blanco nav-link link">Escuela de Cocina</a>
+        <a href="/escuela_cocina" class="roboto negrita centrar-mobile blanco nav-link link">Escuela de Cocina</a>
       </li>
       <li class="nav-item espacio-elementos">
         <a href="/nutricion" class="roboto negrita centrar-mobile blanco nav-link link">Nutrición</a>
       </li>
       <li class="nav-item espacio-elementos">
         <a href="/salud" class="roboto negrita centrar-mobile blanco nav-link link">Salud</a>
+      </li>
+      <li class="nav-item espacio-elementos">
+        <a href="/cursos" class="roboto negrita centrar-mobile blanco nav-link link">Cursos</a>
+      </li>
+      <li class="nav-item espacio-elementos">
+        {% if user.is_authenticated %}
+          <div class="dropdown dropleft" onclick="dropdown();" onblur="dropdown();"  >
+            <div id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="nav-link roboto negrita centrar-mobile blanco" style="text-decoration: none;">{{user.username}}<i class="bi bi-person-fill px-2"></i></span>
+            </div>
+            <div class="dropdown-menu shadow" aria-labelledby="dLabel">
+              <a class="nav-link drop-item text-left mb-2 user-dropdown-option" href="#" data-toggle="modal" data-target="#logoutModal"><i class="bi bi-box-arrow-in-left px-2"></i>Salir</a>
+            </div>
+
+        {% else %}
+          <a class="roboto negrita centrar-mobile blanco nav-link link" href="signin">Log In</a>
+        {% endif %}
       </li>
     </ul>    
   </div>
