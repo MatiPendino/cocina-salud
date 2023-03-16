@@ -12,7 +12,7 @@ class SaludIndex(ListView):
 
 def ver_salud(request, salud_id):
     salud = Salud.objects.filter(id=salud_id).first()
-    items_salud = ItemSalud.objects.filter(salud__id=salud_id).order_by('numero_paso')
+    items_salud = ItemSalud.objects.filter(salud__id=salud_id).order_by('numero_item')
 
     context = {
         'salud': salud,
