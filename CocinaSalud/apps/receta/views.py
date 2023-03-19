@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
 from .models import *
@@ -14,6 +14,9 @@ class RecetasIndex(ListView):
 def ver_receta(request, receta_id):
     receta = Receta.objects.filter(id=receta_id).first()
     pasos_receta = PasoReceta.objects.filter(receta__id=receta_id).order_by('numero_paso')
+
+    if not receta:
+        return redirect('recetas')
 
     # La imagen secundaria horizontal aparecerá entre medio de las instrucciones
     if pasos_receta.count() % 2 == 0:

@@ -5,11 +5,11 @@
         <div class="col-12 col-sm-4">
             <h4 class="roboto negrita blanco padding-titulo__footer size-titulo-footer">PÁGINAS</h4>
             <div class="d-flex flex-column">
-               <a href="" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Inicio</a>
-                <a href="" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Recetas</a>
-                <a href="" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Escuela de Cocina</a>
-                <a href="" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Nutrición</a>
-                <a href="" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Salud</a> 
+               <a href="#" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Inicio</a>
+                <a href="{% url 'recetas' %}" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Recetas</a>
+                <a href="{% url 'salud' %}" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Salud</a>
+                <a href="{% url 'nutricion' %}" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Nutrición</a>
+                <a href="{% url 'escuela_cocina' %}" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Escuela de Cocina</a> 
             </div>
         </div>
         <div class="col-12 col-sm-4">

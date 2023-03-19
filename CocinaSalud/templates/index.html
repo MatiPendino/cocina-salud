@@ -12,24 +12,31 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img class="d-block w-100" src="/static/img/prueba-carousel.png" alt="First slide">
+        <img class="d-block w-100" src="{% static 'img/banner_cocina.png' %}" alt="Cocina slide">
         <div class="carousel-caption d-md-block">
-          <h5>Primer slide</h5>
-          <p>A ver si esto funca</p>
+          <h3>COCINA</h3>
+          <a class="btn" href="{% url 'recetas' %}">VER MÁS</a>
         </div>
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="/static/img/prueba-carousel.png" alt="Second slide">
+        <img class="d-block w-100" src="{% static 'img/banner_salud.png' %}" alt="Salud slide">
         <div class="carousel-caption d-md-block">
-          <h5>Segundo slide</h5>
-          <p>Y segunda Francia</p>
+          <h3>SALUD</h3>
+          <a class="btn" href="{% url 'salud' %}">VER MÁS</a>
         </div>
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="/static/img/prueba-carousel.png" alt="Third slide">
+        <img class="d-block w-100" src="{% static 'img/banner_nutricion.png' %}" alt="Nutrición slide">
         <div class="carousel-caption d-md-block">
-          <h5>Tercer slid</h5>
-          <p>Los últimos serán los primeros</p>
+          <h3>NUTRICIÓN</h3>
+          <a class="btn" href="{% url 'nutricion' %}">VER MÁS</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="{% static 'img/banner_trucos.png' %}" alt="Trucos slide">
+        <div class="carousel-caption d-md-block">
+          <h3>TRUCOS DE COCINA</h3>
+          <a class="btn" href="{% url 'escuela_cocina' %}">VER MÁS</a>
         </div>
       </div>
     </div>
@@ -51,24 +58,31 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="/static/img/prueba-carousel-mobile.png" alt="First slide">
+      <img class="d-block w-100" src="{% static 'img/banner_cocina_mobile.png' %}" alt="Cocina mobile slide">
       <div class="carousel-caption d-md-block">
-        <h5>Primer slide</h5>
-        <p>A ver si esto funca</p>
+        <h3>COCINA</h3>
+        <a class="btn" href="{% url 'recetas' %}">VER MÁS</a>
       </div>
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="/static/img/prueba-carousel-mobile.png" alt="Second slide">
+      <img class="d-block w-100" src="{% static 'img/banner_salud_mobile.png' %}" alt="Salud mobile slide">
       <div class="carousel-caption d-md-block">
-        <h5>Segundo slide</h5>
-        <p>Y segunda Francia</p>
+        <h3>SALUD</h3>
+        <a class="btn" href="{% url 'salud' %}">VER MÁS</a>
       </div>
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="/static/img/prueba-carousel-mobile.png" alt="Third slide">
+      <img class="d-block w-100" src="{% static 'img/banner_nutricion_mobile.jpg' %}" alt="Nutrición mobile slide">
       <div class="carousel-caption d-md-block">
-        <h5>Tercer slid</h5>
-        <p>Los últimos serán los primeros</p>
+        <h3>NUTRICIÓN</h3>
+        <a class="btn" href="{% url 'nutricion' %}">VER MÁS</a>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'img/banner_trucos_mobile.png' %}" alt="Trucos mobile slide">
+      <div class="carousel-caption d-md-block">
+        <h3>TRUCOS DE COCINA</h3>
+        <a class="btn" href="{% url 'escuela_cocina' %}">VER MÁS</a>
       </div>
     </div>
   </div>
@@ -84,7 +98,7 @@
 
 <div class="col-12 d-flex fila-columna-responsive fondo-gris-claro ">
     <div class="col-12 col-sm-6 text-center">
-        <img src="/static/img/inicio.jpg" class="size-imagen__inicio" alt="Index image">
+        <img src="{% static 'img/inicio.jpg' %}" class="size-imagen__inicio" alt="Index image">
     </div>
     <div class="col-12 col-sm-6" style="margin: auto;">
         <h3 class="reenie-beanie size-h3-reenie titulo-inicio__alineacion">Te damos la bienvenida!</h3> 

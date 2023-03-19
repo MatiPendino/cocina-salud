@@ -65,3 +65,5 @@ def signin(request):
 def sign_out(request):
     logout(request)
     return redirect("/")
+
+# TODO: crear mensajes de error 404 y 500 personalizados

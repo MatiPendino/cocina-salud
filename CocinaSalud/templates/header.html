@@ -27,26 +27,26 @@
   <div class="align-items-end navbar-collapse collapse" id="toggleCollapse">
     <ul class="navbar-nav mr-auto ">
       <li class="nav-item active espacio-elementos">
-        <a href="/inicio" class="roboto negrita centrar-mobile blanco nav-link link">Inicio</a>
-      </li>
-      <!--<li class="nav-item espacio-elementos">
-        <a href="/acerca_de" class="roboto negrita centrar-mobile blanco nav-link link">Acerca de</a>
-      </li> -->
-      <li class="nav-item espacio-elementos">
-        <a href="/recetas" class="roboto negrita centrar-mobile blanco nav-link link">Recetas</a>
+        <a href="#" class="roboto negrita centrar-mobile blanco nav-link link">Inicio</a>
       </li>
       <li class="nav-item espacio-elementos">
-        <a href="/escuela_cocina" class="roboto negrita centrar-mobile blanco nav-link link">Escuela de Cocina</a>
+        <a href="{% url 'acerca_de' %}" class="roboto negrita centrar-mobile blanco nav-link link">Acerca de</a>
+      </li> <!-- TODO: QUITAR-->
+      <li class="nav-item espacio-elementos">
+        <a href="{% url 'recetas' %}" class="roboto negrita centrar-mobile blanco nav-link link">Recetas</a>
       </li>
       <li class="nav-item espacio-elementos">
-        <a href="/nutricion" class="roboto negrita centrar-mobile blanco nav-link link">Nutrición</a>
+        <a href="{% url 'salud' %}" class="roboto negrita centrar-mobile blanco nav-link link">Salud</a>
       </li>
       <li class="nav-item espacio-elementos">
-        <a href="/salud" class="roboto negrita centrar-mobile blanco nav-link link">Salud</a>
+        <a href="{% url 'nutricion' %}" class="roboto negrita centrar-mobile blanco nav-link link">Nutrición</a>
       </li>
       <li class="nav-item espacio-elementos">
+        <a href="{% url 'escuela_cocina' %}" class="roboto negrita centrar-mobile blanco nav-link link">Escuela de Cocina</a>
+      </li>
+      <!-- TODO <li class="nav-item espacio-elementos">
         <a href="/cursos" class="roboto negrita centrar-mobile blanco nav-link link">Cursos</a>
-      </li>
+      </li> 
       <li class="nav-item espacio-elementos">
         {% if user.is_authenticated %}
           <div class="dropdown dropleft" onclick="dropdown();" onblur="dropdown();"  >
@@ -60,7 +60,7 @@
         {% else %}
           <a class="roboto negrita centrar-mobile blanco nav-link link" href="signin">Log In</a>
         {% endif %}
-      </li>
+      </li> -->
     </ul>    
   </div>
 </nav>
