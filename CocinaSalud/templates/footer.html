@@ -1,37 +1,37 @@
 {% load static %}
 
 <footer>
-    <div class="fondo-verde text-center padding-container__footer d-flex fila-columna-responsive">
-        <div class="col-12 col-sm-4">
-            <h4 class="roboto negrita blanco padding-titulo__footer size-titulo-footer">PÁGINAS</h4>
-            <div class="d-flex flex-column">
-               <a href="#" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Inicio</a>
-                <a href="{% url 'recetas' %}" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Recetas</a>
-                <a href="{% url 'salud' %}" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Salud</a>
-                <a href="{% url 'nutricion' %}" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Nutrición</a>
-                <a href="{% url 'escuela_cocina' %}" class="raleway blanco link negrita-600 espacio-paginas__footer text-uppercase size__small">Escuela de Cocina</a> 
+    <div class="footer__container text-center d-flex">
+        <div class="col-12 col-sm-4 footer__pages">
+            <h4>PÁGINAS</h4>
+            <div class="d-flex flex-column footer__links">
+                <a href="#">INICIO</a>
+                <a href="{% url 'recetas' %}">RECETAS</a>
+                <a href="{% url 'salud' %}">SALUD</a>
+                <a href="{% url 'nutricion' %}">NUTRICIÓN</a>
+                <a href="{% url 'escuela_cocina' %}">ESCUELA DE COCINA</a> 
             </div>
         </div>
         <div class="col-12 col-sm-4">
-            <a href="/" style="max-width: 15%;"><img src="{% static 'img/logo_footer.png' %}" alt="Logo footer" class="size-imagen__footer"></a>
+            <a href="/" style="max-width: 15%;"><img src="{% static 'img/logo_footer.png' %}" alt="Logo footer" class="footer__image"></a>
         </div>
-        <div class="col-12 col-sm-4">
-            <h4 class="roboto negrita blanco padding-titulo__footer size-titulo-footer">NOSOTROS</h4>
-            <div class="espacio-redes__footer">
-                <a href="https://www.instagram.com/cocina.salud/" target="_blank" class="link"><i class="bi bi-instagram blanco"></i></a>
-                <a href="https://www.instagram.com/cocina.salud/" class="raleway blanco link negrita-600" target="_blank">@cocina.salud</a>
+        <div class="col-12 col-sm-4 footer__us">
+            <h4>NOSOTROS</h4>
+            <div class="footer__redes">
+                <a href="https://www.instagram.com/cocina.salud/" target="_blank" class="link"><i class="bi bi-instagram footer__redes__icon" id="instagram-icon"></i></a>
+                <a href="https://www.instagram.com/cocina.salud/" target="_blank" id="instagram-text">@cocina.salud</a>
             </div>
-            <div class="espacio-redes__footer">
-                <a href="https://www.youtube.com/c/COCINASALUDMEDICA" target="_blank" class="link"><i class="bi bi-youtube blanco"></i></a>
-                <a href="https://www.youtube.com/c/COCINASALUDMEDICA" class="raleway blanco link negrita-600" target="_blank">Cocina Salud</a>
+            <div class="footer__redes">
+                <a href="https://www.youtube.com/c/COCINASALUDMEDICA" target="_blank" class="link"><i class="bi bi-youtube footer__redes__icon" id="youtube-icon"></i></a>
+                <a href="https://www.youtube.com/c/COCINASALUDMEDICA" target="_blank" id="youtube-text">Cocina Salud</a>
             </div>
-            <div class="espacio-redes__footer">
-                <i class="bi bi-geo-alt blanco"></i>
-                <a href="" class="raleway blanco link negrita-600">Rosario, Santa Fe, Argentina</a>
+            <div class="footer__redes">
+                <i class="bi bi-geo-alt footer__redes__icon" id="location-icon"></i>
+                <a href="" id="location-text">Rosario, Santa Fe, Argentina</a>
             </div>
-            <div class="espacio-redes__footer">
-                <i class="bi bi-envelope blanco"></i>
-                <a href="" class="raleway blanco link negrita-600">cocinasalud2001@gmail.com</a>
+            <div class="footer__redes">
+                <i class="bi bi-envelope footer__redes__icon" id="mail-icon"></i>
+                <a href="" id="mail-text">cocinasalud2001@gmail.com</a>
             </div>
         </div>
     </div>

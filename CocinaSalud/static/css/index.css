@@ -60,7 +60,7 @@
 }
 
 .carousel-item div a {
-    background-color: rgb(9, 124, 16);
+    background-color: var(--primary-color);
     color: white;
     border: 1px solid white;
     padding: 8px 30px;

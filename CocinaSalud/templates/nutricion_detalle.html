@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Nutrición - {{nutricion.titulo}}{% endblock title %}
+
 {% block stylesheet %}
     <link href="{% static 'css/post.css' %}" rel="stylesheet">
 {% endblock stylesheet%}

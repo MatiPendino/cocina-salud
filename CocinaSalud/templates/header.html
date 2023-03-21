@@ -1,51 +1,36 @@
 {% load static %}
 
-<style>
-  .nav-item{
-    transition: all 0.2s ease-out;
-    padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
-    border-radius: 100%;
-  }
-  .nav-item:hover {
-    padding-bottom: 0px;
-    background: none !important;
-    border-radius: 0;
-    border-bottom: 2px solid white;
-  }
-</style>
-
-<nav class="navbar py-0 navbar-expand-lg fondo-verde justify-content-around navbar-dark">
-  <div class="navbar-nav size-imagen-container__header">
-    <a href="/" class="navbar-brand size-imagen__header"><img src="{% static '/img/logo.png' %}" class="px-4 pt-2 w-100 image-responsive center-block" alt="Logo"></a>
+<nav class="navbar py-0 navbar-expand-lg justify-content-around navbar-dark header__container">
+  <div class="navbar-nav header__image__container">
+    <a href="/" class="navbar-brand header__image"><img src="{% static '/img/logo.png' %}" class="px-4 pt-2 w-100" alt="Logo"></a>
   </div>
 
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#toggleCollapse" aria-controls="toggleCollapse" aria-expanded="false" aria-label="Toggle navigation" style="border-color: rgba(255,255,255,0);">
-    <span class="navbar-toggler-icon" style="color: white;"></span>
+    <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="align-items-end navbar-collapse collapse" id="toggleCollapse">
-    <ul class="navbar-nav mr-auto ">
-      <li class="nav-item active espacio-elementos">
-        <a href="#" class="roboto negrita centrar-mobile blanco nav-link link">Inicio</a>
+    <ul class="navbar-nav mr-auto header__nav-items">
+      <li class="nav-item active">
+        <a href="#" class="centrar-mobile nav-link">Inicio</a>
       </li>
-      <li class="nav-item espacio-elementos">
-        <a href="{% url 'acerca_de' %}" class="roboto negrita centrar-mobile blanco nav-link link">Acerca de</a>
+      <li class="nav-item">
+        <a href="{% url 'acerca_de' %}" class="centrar-mobile nav-link">Acerca de</a>
       </li> <!-- TODO: QUITAR-->
-      <li class="nav-item espacio-elementos">
-        <a href="{% url 'recetas' %}" class="roboto negrita centrar-mobile blanco nav-link link">Recetas</a>
+      <li class="nav-item">
+        <a href="{% url 'recetas' %}" class="centrar-mobile nav-link">Recetas</a>
       </li>
-      <li class="nav-item espacio-elementos">
-        <a href="{% url 'salud' %}" class="roboto negrita centrar-mobile blanco nav-link link">Salud</a>
+      <li class="nav-item">
+        <a href="{% url 'salud' %}" class="centrar-mobile nav-link">Salud</a>
       </li>
-      <li class="nav-item espacio-elementos">
-        <a href="{% url 'nutricion' %}" class="roboto negrita centrar-mobile blanco nav-link link">Nutrición</a>
+      <li class="nav-item">
+        <a href="{% url 'nutricion' %}" class="centrar-mobile nav-link">Nutrición</a>
       </li>
-      <li class="nav-item espacio-elementos">
-        <a href="{% url 'escuela_cocina' %}" class="roboto negrita centrar-mobile blanco nav-link link">Escuela de Cocina</a>
+      <li class="nav-item">
+        <a href="{% url 'escuela_cocina' %}" class="centrar-mobile nav-link">Escuela de Cocina</a>
       </li>
-      <!-- TODO <li class="nav-item espacio-elementos">
-        <a href="/cursos" class="roboto negrita centrar-mobile blanco nav-link link">Cursos</a>
+      <!-- TODO <li class="nav-item">
+        <a href="/cursos" class="roboto negrita centrar-mobile nav-link">Cursos</a>
       </li> 
       <li class="nav-item espacio-elementos">
         {% if user.is_authenticated %}
