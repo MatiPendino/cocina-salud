@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block stylesheet %}
+  <link href="{% static 'css/index.css'%}" rel="stylesheet">
+{% endblock stylesheet %}
+
 {% block content %}
 
 <div id="carouselDesktop" class="carousel slide d-none d-md-block" data-ride="carousel">
@@ -95,21 +99,21 @@
   </a>
 </div>
 
-<div class="col-12 d-flex fila-columna-responsive fondo-gris-claro ">
+<div class="col-12 d-flex welcome__container">
     <div class="col-12 col-sm-6 text-center">
-        <img src="{% static 'img/inicio.jpg' %}" class="size-imagen__inicio" alt="Index image">
+        <img src="{% static 'img/inicio.jpg' %}" class="welcome__image" alt="Welcome image">
     </div>
-    <div class="col-12 col-sm-6" style="margin: auto;">
-        <h3 class="reenie-beanie size-h3-reenie titulo-inicio__alineacion">Te damos la bienvenida!</h3> 
-        <p class="roboto gris-oscuro p-inicio">En este espacio encontrarás TODO lo que necesitas para tener una alimentación saludable, deliciosa y beneficiosa para vos, los animales y el planeta.</p>
-        <p class="roboto gris-oscuro p-inicio">Aquí encontrarás:<br>
+    <div class="col-12 col-sm-6 welcome__content">
+        <h3>Te damos la bienvenida!</h3> 
+        <p>En este espacio encontrarás TODO lo que necesitas para tener una alimentación saludable, deliciosa y beneficiosa para vos, los animales y el planeta.</p>
+        <p>Aquí encontrarás:<br>
             - Recetas riquísimas, fáciles, saludables y veganas.<br>
             - Trucos y tips para aprender a cocinar saludable desde 0.<br>
             - Todos los nutrientes de los alimentos y cómo benefician a tu cuerpo.<br>
             - Cómo prevenir, tratar y mejorar las enfermedades desde la nutrición.
         </p>   
         <div class="text-center pb-2">
-           <a href="acerca_de/" class="btn slide-in-up fondo-boton blanco py-2 px-4 negrita-600">Sigue leyendo<i class="bi bi-heart px-2"></i></a>  
+            <a href="{% url 'acerca_de' %}" class="btn slide-in-up welcome__button py-2 px-4">Sigue leyendo<i class="bi bi-heart px-2"></i></a>  
         </div>
         
     </div>

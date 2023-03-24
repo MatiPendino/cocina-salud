@@ -1,29 +1,32 @@
 {% extends "base.html" %}
-
 {% load static %}
 
 {% block title %}Acerca de {% endblock title %}
 
+{% block stylesheet %}
+    <link href="{% static 'css/acerca_de.css' %}" rel="stylesheet">
+{% endblock stylesheet %}
+
 {% block content %}
 
-<div class="col-12 d-flex fila-columna-responsive padding-container-blanco__acerca-de">
-    <div class="col-12 col-sm-6 text-center center-content-vertically pb-4">
-        <img src="/static/img/acerca1.jpg" class="size-imagen__acerca-de" alt="Index image">
+<div class="col-12 d-flex about__container">
+    <div class="col-12 col-sm-6 text-center about__image__container pb-4">
+        <img src="{% static 'img/acerca1.jpg' %}" alt="About image 1">
     </div>
-    <div class="col-12 col-sm-6" style="margin: auto;">
-        <h3 class="coming-soon size-h3-reenie titulo-inicio__alineacion">Bienvenidx!</h3> 
-        <p class="arial gris-oscuro p-inicio mb-4">Construimos este espacio para brindarte todo lo que necesitas en tu camino a una alimentación saludable.</p>
-        <p class="arial gris-oscuro p-inicio">Si estás buscando comida deliciosa y llena de nutrientes estás en el lugar adecuado. Si te interesa una alimentación basada en plantas, beneficiosa para vos, los animales y el planeta; te estábamos esperando.</p>      
+    <div class="col-12 col-sm-6 about__content__container">
+        <h3>Bienvenidx!</h3> 
+        <p class="mb-4">Construimos este espacio para brindarte todo lo que necesitas en tu camino a una alimentación saludable.</p>
+        <p>Si estás buscando comida deliciosa y llena de nutrientes estás en el lugar adecuado. Si te interesa una alimentación basada en plantas, beneficiosa para vos, los animales y el planeta; te estábamos esperando.</p>      
     </div>
 </div>
 
-<div class="col-12 d-flex fondo-gris-claro padding-container-gris__acerca-de container-alternado">
-    <div class="col-12 col-sm-6 text-center center-content-vertically pb-4">
-        <img src="/static/img/acerca2.jpg" class="size-imagen__acerca-de" alt="Index image">
+<div class="col-12 d-flex about__container">
+    <div class="col-12 col-sm-6 text-center about__image__container pb-4">
+        <img src="{% static 'img/acerca2.jpg' %}" alt="About image 2">
     </div>
-    <div class="col-12 col-sm-6" style="margin: auto;">
-        <h3 class="coming-soon size-h4-reenie titulo-inicio__alineacion p-alternado">Aquí encontrarás:</h3> 
-        <p class="arial gris-oscuro p-alternado">
+    <div class="col-12 col-sm-6 about__content__container">
+        <h4>Aquí encontrarás:</h4> 
+        <p>
             - Recetas riquísimas, fáciles, saludables y veganas.<br>
             - Trucos y tips para aprender a cocinar saludable desde 0.<br>
             - Todos los nutrientes de los alimentos y cómo benefician a tu cuerpo.<br>
@@ -32,24 +35,24 @@
     </div>
 </div>
 
-<div class="col-12 d-flex fila-columna-responsive padding-container-blanco__acerca-de">
-    <div class="col-12 col-sm-6 text-center center-content-vertically pb-4">
-        <img src="/static/img/acerca3.jpg" class="size-imagen__acerca-de" alt="Index image">
+<div class="col-12 d-flex about__container">
+    <div class="col-12 col-sm-6 text-center about__image__container pb-4">
+        <img src="{% static 'img/acerca3.jpg' %}" alt="About image 3">
     </div>
-    <div class="col-12 col-sm-6" style="margin: auto;"> 
-        <p class="arial gris-oscuro p-inicio mb-4">Te doy la bienvenida a esta comunidad y te cuento un poco más de mí: Me llamo Margarita, vivo en Argentina y soy médica. Como médica interna he ejercido la clínica durante más de 20 años. Siempre me motivó la alimentación saludable pero mí especialidad no me brindaba herramientas suficientes.</p>
-        <p class="arial gris-oscuro p-inicio">Hace 7 años tuve una grave enfermedad. En ese momento me replanteé mi estilo de vida e inicié profundos cambios. Elegí una alimentación saludable y vegana. Me formé en Buenos Aires, haciendo mi segunda especialidad en nutrición. Allí también realicé posgrado de nutrición vegetariana y vegana en la Universidad de Buenos Aires. Y me formé en nutrición deportiva con un grande, Francis Hollway.
+    <div class="col-12 col-sm-6 about__content__container"> 
+        <p class="mb-4">Te doy la bienvenida a esta comunidad y te cuento un poco más de mí: Me llamo Margarita, vivo en Argentina y soy médica. Como médica interna he ejercido la clínica durante más de 20 años. Siempre me motivó la alimentación saludable pero mí especialidad no me brindaba herramientas suficientes.</p>
+        <p>Hace 7 años tuve una grave enfermedad. En ese momento me replanteé mi estilo de vida e inicié profundos cambios. Elegí una alimentación saludable y vegana. Me formé en Buenos Aires, haciendo mi segunda especialidad en nutrición. Allí también realicé posgrado de nutrición vegetariana y vegana en la Universidad de Buenos Aires. Y me formé en nutrición deportiva con un grande, Francis Hollway.
             Elegí una nueva orientación a mi carrera, que detuve un largo lapso para cumplir mi función humanitaria como médico clínico en pandemia.
         </p>   
     </div>
 </div>
 
-<div class="col-12 d-flex fondo-gris-claro padding-container-gris__acerca-de container-alternado mb-4">
-    <div class="col-12 col-sm-6 text-center center-content-vertically pb-4">
-        <img src="/static/img/acerca4.jpg" class="size-imagen__acerca-de" alt="Index image">
+<div class="col-12 d-flex about__container mb-4">
+    <div class="col-12 col-sm-6 text-center about__image__container pb-4">
+        <img src="{% static 'img/acerca4.jpg' %}" alt="About image 4">
     </div>
-    <div class="col-12 col-sm-6" style="margin: auto;">
-        <p class="arial gris-oscuro p-alternado-r">Hoy regreso desde aquí, para compartir y crecer en este mundo apasionante de la alimentación saludable y respetuosa. Este espacio está realizado con el trabajo conjunto del mejor equipo con el que se puede contar: mis hijos.
+    <div class="col-12 col-sm-6 about__content__container">
+        <p>Hoy regreso desde aquí, para compartir y crecer en este mundo apasionante de la alimentación saludable y respetuosa. Este espacio está realizado con el trabajo conjunto del mejor equipo con el que se puede contar: mis hijos.
             Matías Pendino, desarrollador web y talentoso editor. Ezequiel Pendino, ferviente aprendiz de fotografía y video. Te damos la bienvenida y esperamos te sea útil y entretenido!!
         </p>   
     </div>

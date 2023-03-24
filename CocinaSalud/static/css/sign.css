@@ -1,0 +1,19 @@
+
+.sign__header{
+    background-color: var(--primary-color)!important;
+}
+
+.sign__header h4 {
+    color: white;
+}
+
+.sign__button button {
+    background-color: var(--primary-color);
+    color: white;
+    transition: all .3s ease-in-out;
+}
+
+.sign__button button:hover {
+    background-color: rgba(9, 126, 16, .5)!important;
+    color: white!important;
+}

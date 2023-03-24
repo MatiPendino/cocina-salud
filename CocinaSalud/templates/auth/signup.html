@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block stylesheet %}
+    <link href="{% static 'css/sign.css' %}" rel="stylesheet" >
+{% endblock stylesheet %}
+
 {% block title %}Log up{% endblock title %}
 
 {% block content %}
     <div class="card o-hidden border-0 shadow-lg w-75 mx-auto my-4">
-        <div class="card-header py-3 fondo-verde blanco">
+        <div class="card-header py-3 sign__header">
             <h4 class="m-0 font-weight-bold">Registro de Nuevo Usuario </h4>
         </div>
         <div class="card-body">
@@ -22,9 +26,9 @@
                 <input type="email" id="email" name="email" class="form-control mb-4" placeholder="Correo" required>
                 <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Contraseña" required>
                 <input type="password" id="confirm_password" class="form-control mb-2" name="confirm_password" placeholder="Confirmar contraseña" required>
-                <a href="/signin">¿Ya tienes una cuenta? Inicia sesión haciendo click aquí</a>
-                <div class="d-flex justify-content-center mt-4">
-                    <button type="submit" class="btn fondo-verde blanco text-center">Registrarse</button>
+                <a href="{% url 'signin' %}">¿Ya tienes una cuenta? Inicia sesión haciendo click aquí</a>
+                <div class="d-flex justify-content-center mt-4 sign__button">
+                    <button type="submit" class="btn text-center">Registrarse</button>
                 </div>
             </form>
         </div>

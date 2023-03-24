@@ -13,28 +13,25 @@
 
         <div align="center" class="container-fluid">
 
-            <h1 class="mt-2 raleway">{{receta.titulo}}</h1>
+            <h1 class="mt-2">{{receta.titulo}}</h1>
 
-            <div class="row my-4">
+            <div class="row my-4 hero__container">
 
-                <div class="col-12 col-lg-6">
-
-                    <div class="borde margin-imagen-principal">
+                <div class="col-12 col-lg-6 hero__image">
+                    <div class="borde">
                         <img class="w-100 borde" src="{{MEDIA_URL}}{{receta.imagen_principal}}" alt="Imagen receta {{receta.titulo}}">
                     </div>
-
                 </div>
 
-                <div class="col-12 col-lg-6 text-start">
-
+                <div class="col-12 col-lg-6 text-start hero__content">
                     <div class="mb-4 margin-top-mobile">
-                        <h3 class="raleway mx-2">Resumen introductorio</h3>
-                        <p class="cambria size-texto-cuerpo mx-2">{{receta.resumen}}</p>
+                        <h3 class="mx-2">Resumen introductorio</h3>
+                        <p class="mx-2">{{receta.resumen}}</p>
                     </div>
 
                     <div>
-                        <h3 class="raleway mx-2">Ingredientes</h3>
-                        <p class="cambria size-texto-cuerpo mx-2">{{receta.ingredientes|safe}}</p>
+                        <h3 class="mx-2">Ingredientes</h3>
+                        <p class="mx-2">{{receta.ingredientes|safe}}</p>
                     </div>
 
                     <div class="row mt-4" >
@@ -47,7 +44,7 @@
                                 </a>
                             </div>
                         {% endif %}
-                        <div class="col-3 col-lg-2 btn btn-danger"  data-value="3000">
+                        <div class="col-3 col-lg-2 btn btn-danger" data-value="3000">
                             <p class="mb-0">
                             <svg width=".9em" height=".9em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"></path>
@@ -59,15 +56,14 @@
                     </div>
                     
                 </div>
-
             </div>
             
 
-            <div class="row mb-4 text-center justify-content-center" style="margin: 0 auto auto auto;">
-                <div class="col-11 col-lg-5 text-start p-4 borde margin-bottom-mobile" style="background-color: rgb(240, 240, 240);">
-                    <h3 class="sawarabi-gothic">Instrucciones</h3>
+            <div class="row mb-4 text-center justify-content-center recipe__instructions__container">
+                <div class="col-11 col-lg-5 text-start p-4 borde recipe__instructions">
+                    <h3>Instrucciones</h3>
                     {% for paso in pasos %}
-                        <p class="cambria size-texto-receta">{{paso.numero_paso}}- {{paso.descripcion}}</p>
+                        <p>{{paso.numero_paso}}- {{paso.descripcion}}</p>
                     {% endfor %}
                 </div>
                 <div class="col-12 col-lg-7">
@@ -77,15 +73,12 @@
                 </div>
             </div>
 
-            <div class="borde mb-4 px-4 py-2" style="background-color: #f5f2f0;">
-
-                <h3 class="raleway">Análisis nutricional del plato</h3>
-                <p class="cambria size-texto-cuerpo">{{receta.composicion_nutricional}}</p>
-
+            <div class="borde mb-4 px-4 py-2 recipe__analysis">
+                <h3>Análisis nutricional del plato</h3>
+                <p>{{receta.composicion_nutricional}}</p>
             </div>
 
             <div class="mb-4">
-
                 <div class="col-12 col-lg-6 text-center mb-4">
                     {% if receta.imagen_secundaria_2 %}
                         <img class="w-100 borde" height="800px" src="{{MEDIA_URL}}{{receta.imagen_secundaria_2}}" alt="Imagen receta {{receta.titulo}}">
@@ -97,7 +90,6 @@
                         <img class="w-100 borde" height="800px" src="{{MEDIA_URL}}{{receta.imagen_secundaria_3}}" alt="Imagen receta {{receta.titulo}}">
                     {% endif %}
                 </div>
-
             </div>
 
         </div>

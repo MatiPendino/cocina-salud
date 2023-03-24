@@ -23,3 +23,90 @@
         font-size: 16px;
     }
 }
+
+h1 {
+    font-family: var(--font-raleway);
+}
+
+.hero__image div {
+    margin: 0 5px;
+}
+
+@media(min-width: 768px) {
+    .hero__image div {
+        margin: 0 20px;
+    }
+}
+
+.hero__content div h3 {
+    font-family: var(--font-raleway);
+}
+
+.hero__content div p {
+    font-family: var(--font-cambria);
+    font-size: 17px;
+}
+
+@media(min-width: 768px) {
+    .hero__content div p {
+        font-size: 18px;
+    }
+}
+
+.recipe__instructions__container {
+    margin: 0 auto auto auto;
+}
+
+.recipe__instructions {
+    background-color: rgb(238,238,238);
+}
+
+@media(max-width: 768px){
+    .recipe__instructions {
+        margin-bottom: 15px;
+    }
+}
+
+.recipe__instructions h3 {
+    font-family: var(--font-sawarabi-gothic);
+}
+
+.recipe__instructions p {
+    font-family: var(--font-cambria);
+    font-size: 15px;
+}
+
+@media(min-width: 768px) {
+    .recipe__instructions p {
+        font-size: 16px;
+    }
+}
+
+.recipe__analysis {
+    background-color: #f5f2f0;
+}
+
+.recipe__analysis h3 {
+    font-family: var(--font-raleway);
+}
+
+.recipe__analysis p {
+    font-family: var(--font-cambria);
+    font-size: 17px;
+}
+
+@media(min-width: 768px) {
+    .recipe__analysis p {
+        font-size: 18px;
+    }
+}
+
+.escuela__steps__container p {
+    font-family: var(--font-cambria);
+}
+
+.escuela__steps__container,
+.nutricion__text__container,
+.nutricion__image__container {
+    margin: 0 auto;
+}

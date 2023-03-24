@@ -14,28 +14,25 @@
 
         <div align="center" class="container-fluid">
 
-            <h1 class="mt-2 raleway">{{escuela_cocina.titulo}}</h1>
+            <h1 class="mt-2">{{escuela_cocina.titulo}}</h1>
 
-            <div class="row my-4">
+            <div class="row my-4 hero__container">
 
-                <div class="col-12 col-lg-6">
-
-                    <div class="borde margin-imagen-principal">
+                <div class="col-12 col-lg-6 hero__image">
+                    <div class="borde">
                         <img class="w-100 borde" src="{{MEDIA_URL}}{{escuela_cocina.imagen_principal}}" alt="Imagen técnica de cocina {{escuela_cocina.titulo}}">
                     </div>
-
                 </div>
 
-                <div class="col-12 col-lg-6 text-start">
-
+                <div class="col-12 col-lg-6 text-start hero__content">
                     <div class="mb-4 margin-top-mobile">
-                        <h3 class="raleway mx-2">Introducción</h3>
-                        <p class="cambria size-texto-cuerpo mx-2">{{escuela_cocina.resumen}}</p>
+                        <h3 class="mx-2">Introducción</h3>
+                        <p class="mx-2">{{escuela_cocina.resumen}}</p>
                     </div>
 
                     <div>
-                        <h3 class="raleway mx-2">Ingredientes</h3>
-                        <p class="cambria size-texto-cuerpo mx-2">{{escuela_cocina.ingredientes|safe}}</p>
+                        <h3 class="mx-2">Ingredientes</h3>
+                        <p class="mx-2">{{escuela_cocina.ingredientes|safe}}</p>
                     </div>
 
                     <div class="row mt-4" >
@@ -55,21 +52,18 @@
             </div>
 
 
-
             <div class="row mb-4">
 
                 <h3 class="text-center">Técnica</h3>
 
-                <div class="col-12 col-lg-10 text-start" style="margin: 0 auto;">
+                <div class="col-12 col-lg-10 text-start escuela__steps__container">
                     {% for paso in pasos_escuela %}
-                        <p class="cambria ">{{paso.numero_paso}}- {{paso.descripcion}}</p>
+                        <p>{{paso.numero_paso}}- {{paso.descripcion}}</p>
                     {% endfor %}
                 </div>
 
-                <div class="col-12">
-
+                <div class="col-12 escuela__images__container">
                     <div class="row my-4">
-
                         <div class="col-12 col-lg-6">
                             <img class="w-100 borde" src="{{MEDIA_URL}}{{escuela_cocina.imagen_secundaria_1}}" />
                         </div>
@@ -77,26 +71,20 @@
                         <div class="col-12 col-lg-6 margin-top-mobile">
                             <img class="w-100 borde" src="{{MEDIA_URL}}{{escuela_cocina.imagen_secundaria_2}}" />
                         </div>
-
                     </div>
 
                     <div class="col-12">
                         <img class="w-100 borde" src="{{MEDIA_URL}}{{escuela_cocina.imagen_secundaria_3}}" />
                     </div>
-
                 </div>
                 
             </div>
 
 
-            <div class="col-12 col-lg-10 mb-4">
-
+            <div class="col-12 col-lg-10 mb-4 escuela__conclusion__container">
                 <h3>Conclusión</h3>
-
                 <p class="text-start">{{escuela_cocina.conclusion}}</p>
-
             </div>
-
         </div>
 
     </article>

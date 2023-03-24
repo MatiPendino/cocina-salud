@@ -13,26 +13,24 @@
 
         <div align="center" class="container-fluid">
 
-            <h1 class="mt-2 raleway">{{salud.titulo}}</h1>
+            <h1 class="mt-2">{{salud.titulo}}</h1>
 
-            <div class="row my-4 col-12 col-lg-11">
-                <div class="col-12 col-lg-6">
+            <div class="row my-4 col-12 col-lg-11 hero__container">
 
-                    <div class="borde margin-imagen-principal">
+                <div class="col-12 col-lg-6 hero__image">
+                    <div class="borde">
                         <img class="w-100 borde" src="{{MEDIA_URL}}{{salud.imagen_principal}}" alt="Imagen salud {{salud.titulo}}">
                     </div>
-
                 </div>
 
-                <div class="col-12 col-lg-6 text-start">
+                <div class="col-12 col-lg-6 text-start hero__content">
                     <div class="mb-4 margin-top-mobile">
-                        <h3 class="raleway mx-2">Ítems a tratar</h3>
+                        <h3 class="mx-2">Ítems a tratar</h3>
                         <ul>
                             {% for item in items %}
-                                <li class="cambria size-texto-cuerpo mx-2">{{item.titulo}}</li>
+                                <li class="mx-2">{{item.titulo}}</li>
                             {% endfor %}
                         </ul>
-
                     </div>
 
                     <div class="row mt-4" >
@@ -49,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-lg-11 mb-4">
+            <div class="col-12 col-lg-11 mb-4 salud__items__container">
                 {% for item in items %}
                     <div class="mb-3">
                         <h5 class="text-start">{{item.titulo}}</h5>
@@ -61,17 +59,15 @@
             </div>
 
             <div class="col-12 col-lg-11 mb-4">
-
-                <div class="mb-4">
+                <div class="mb-4 salud__conclusion">
                     <h4>Conclusiones</h4>
                     <p class="text-start">{{salud.conclusion}}</p>
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-4 salud__summary">
                     <h4>Resumen útil</h4>
                     <p class="text-start">{{salud.resumen}}</p>
                 </div>
-
             </div>
 
         </div>

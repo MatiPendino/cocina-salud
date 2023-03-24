@@ -1,62 +1,6 @@
-.size-imagen__inicio{
-    max-width: 80%;
-    padding: 10px 0px;
-}
-
-@media(min-width: 768px){
-    .size-imagen__inicio{
-        max-width: 45%;
-    }
-}
-
-.size-h3-reenie{
-    font-size: 40px;
-}
-
-.size-h4-reenie{
-    font-size: 37px;
-}
-
-@media(min-width: 768px) {
-    .size-h3-reenie{
-        font-size: 50px;
-    }
-}
-
-.p-inicio{
-    font-size: 16px;
-    font-weight: 300;
-    padding-left: 35px;
-    padding-right: 35px;
-    line-height: 25px;
-    letter-spacing: 0.2px;
-    word-spacing: 1px;
-}
-
-@media(min-width:768px){
-    .p-inicio{
-        padding-left: 10px;
-        padding-right: 90px;
-    }
-}
-
-.titulo-inicio__alineacion{
-    text-align: center;
-}
-
-@media(min-width: 768px){
-    .titulo-inicio__alineacion{
-        text-align: left;
-    }
-}
-
-.fondo-boton{
-    background-color: #097C10 !important;
-    transition: background-color .5s!important;
-}
-
-.fondo-boton:hover{
-    background-color: #61CE70!important;
+:root {
+    --welcome-background-color: rgb(238, 238, 238); 
+    --welcome-content-color: rgb(83, 83, 83);
 }
 
 .carousel-item div a {
@@ -82,4 +26,69 @@
     background-image: linear-gradient(to bottom, rgba(173, 216, 230, .2), rgba(9, 124, 16, .55) 70%);
 }
 
+.welcome__container {
+    flex-direction: column;
+    background-color: var(--welcome-background-color);
+}
 
+@media(min-width: 768px) {
+    .welcome__container {
+        flex-direction: row;
+    }
+}
+
+.welcome__image{
+    max-width: 80%;
+    padding: 10px 0px;
+}
+
+@media(min-width: 768px){
+    .welcome__image {
+        max-width: 45%;
+    }
+}
+
+.welcome__content {
+    margin: auto;
+}
+
+.welcome__content h3 {
+    font-family: var(--font-reenie-beanie);
+    font-size: 40px;
+    text-align: center;
+}
+
+.welcome__content p {
+    font-family: var(--font-roboto);
+    color: var(--welcome-content-color);
+    font-size: 16px;
+    font-weight: 300;
+    padding-left: 35px;
+    padding-right: 35px;
+    line-height: 25px;
+    letter-spacing: 0.2px;
+    word-spacing: 1px;
+}
+
+@media(min-width: 768px) {
+    .welcome__content h3 {
+        font-size: 50px;
+        text-align: left;
+    }
+
+    .welcome__content p {
+        padding-left: 10px;
+        padding-right: 90px;
+    }
+}
+
+.welcome__button {
+    background-color: var(--primary-color)!important;
+    color: white!important;
+    font-weight: 600!important;
+    transition: background-color .5s ease-in-out!important;
+}
+
+.welcome__button:hover {
+    background-color: rgb(97, 206, 112)!important;
+}

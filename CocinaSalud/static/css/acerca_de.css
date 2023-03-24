@@ -1,41 +1,95 @@
-.size-imagen__acerca-de{
-    max-width: 80%;
+:root {
+    --even-background-color: rgb(238, 238, 238);
 }
 
-@media(min-width:768px){
-    .size-imagen__acerca-de{
-       max-width: 90%; 
-    }
-}
-
-.padding-container-blanco__acerca-de{
-    padding: 5.2em 0em;
-}
-
-.padding-container-gris__acerca-de{
-    padding: 3em 0em;
-}
-
-.container-alternado{
+.about__container {
     flex-direction: column;
 }
 
-@media(min-width:768px){
-    .container-alternado{
+.about__container:nth-of-type(odd) {
+    padding: 5.2em 0em;
+}
+
+.about__container:nth-of-type(even) {
+    background-color: var(--even-background-color);
+    padding: 3em 0em;
+}
+
+@media(min-width: 768px) {
+    .about__container:nth-of-type(odd) {
+        flex-direction: row;
+    }
+
+    .about__container:nth-of-type(even) {
         flex-direction: row-reverse;
     }
 }
 
-.p-alternado{
-    padding: 0px 35px;
+.about__image__container {
+    margin: auto 0px;
 }
 
-@media(min-width:768px){
-    .p-alternado{
+.about__image__container img {
+    max-width: 80%;
+}
+
+@media(min-width: 768px) {
+    .about__image__container img {
+        max-width: 90%;
+    }
+}
+
+.about__content__container {
+    margin: auto;
+}
+
+.about__content__container h3 {
+    font-size: 40px;
+}
+
+.about__content__container h4 {
+    font-size: 26px;
+}
+
+.about__content__container h3,
+.about__content__container h4 {
+    font-family: var(--font-coming-soon);
+    text-align: center;
+}
+
+@media(min-width: 768px) {
+    .about__content__container h3 {
+        font-size: 50px;
+    }
+
+    .about__content__container h4 {
+        font-size: 35px;
+    }
+
+    .about__content__container h3,
+    .about__content__container h4 {
+        text-align: left;
+    }
+}
+
+.about__content__container p {
+    font-family: var(--font-arial);
+    color: #535353;
+}
+
+.about__content__container:nth-of-type(even) h4,
+.about__content__container:nth-of-type(even) p {
+    padding: 0 35px;
+}
+
+@media(min-width: 768px) {
+    .about__content__container:nth-of-type(even) h4,
+    .about__content__container:nth-of-type(even) p {
         padding-left: 20px;
         padding-right: 20px;
     }
-    .p-alternado-r{
+
+    .about__content__container:last-of-type {
         padding-left: 75px;
         padding-right: 20px;
     }

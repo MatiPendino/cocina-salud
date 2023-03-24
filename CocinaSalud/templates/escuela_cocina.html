@@ -11,17 +11,17 @@
 
 {% block content %}
 
-    <h1 class="reenie-beanie titulo text-center my-2">Escuela de Cocina</h1>
+    <h1 class="text-center my-2">Escuela de Cocina</h1>
 
-    <div class="container-fluid mb-4">
+    <div class="container-fluid mb-4 gallery__container">
         <div class="row d-flex mx-4">
             {% for escuela_cocina in escuelas_cocina %}
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 container-images">
-                    <a href="{% url 'ver_escuela_cocina' escuela_cocina.id %}" class="link black">
-                        <div id="image-{{forloop.counter}}" class="imagebox-container mb-2">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 gallery__box">
+                    <a href="{% url 'ver_escuela_cocina' escuela_cocina.id %}">
+                        <div id="image-{{forloop.counter}}" class="gallery__image__container mb-2">
                             <img alt="Escuela Cocina" class="w-100 " src="{{MEDIA_URL}}{{escuela_cocina.imagen_principal}}">
                         </div>
-                        <p id="titulo-{{forloop.counter}}" class="gloock size-medium-gloock centrar-mobile">{{escuela_cocina.titulo}}</p>
+                        <p id="titulo-{{forloop.counter}}" class="gallery__title centrar-mobile text-center text-uppercase">{{escuela_cocina.titulo}}</p>
                     </a>
                 </div>
             {% endfor %}
