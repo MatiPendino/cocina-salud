@@ -1,14 +1,21 @@
 from .base import *
+from decouple import config
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    '204.48.25.193',
+]
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'CocinaSalud',
+        'USER': 'matias',
+        'PASSWORD': config('DATABASE_PASSWORD')
     }
 }
 
