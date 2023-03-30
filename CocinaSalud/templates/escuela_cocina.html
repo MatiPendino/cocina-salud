@@ -16,7 +16,7 @@
     <div class="container-fluid mb-4 gallery__container">
         <div class="row d-flex mx-4">
             {% for escuela_cocina in escuelas_cocina %}
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 gallery__box">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 gallery__box">
                     <a href="{% url 'ver_escuela_cocina' escuela_cocina.id %}">
                         <div id="image-{{forloop.counter}}" class="gallery__image__container mb-2">
                             <img alt="Escuela Cocina" class="w-100 " src="{{MEDIA_URL}}{{escuela_cocina.imagen_principal}}">

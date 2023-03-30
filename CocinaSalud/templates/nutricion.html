@@ -15,7 +15,7 @@
 <div class="container-fluid mb-4 gallery__container">
     <div class="row d-flex mx-4">
         {% for nutricion in nutricion_posts %}
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 gallery__box">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 gallery__box">
                 <a href="{% url 'ver_nutricion' nutricion.id %}">
                     <div id="image-{{forloop.counter}}" class="gallery__image__container mb-2">
                         <img alt="Nutrición" class="w-100 " src="{{MEDIA_URL}}{{nutricion.imagen_principal}}">
