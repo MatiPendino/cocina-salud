@@ -7,15 +7,14 @@ DEBUG = False
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    '204.48.25.193',
+    '161.35.123.98',
 ]
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'CocinaSalud',
-        'USER': 'matias',
-        'PASSWORD': config('DATABASE_PASSWORD')
+        'USER': 'mati',
     }
 }
 
