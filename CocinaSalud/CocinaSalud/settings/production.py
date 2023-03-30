@@ -14,7 +14,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'CocinaSalud',
-        'USER': 'matias',
+        'USER': 'matiasdb',
         'PASSWORD': config('DATABASE_PASSWORD')
     }
 }
