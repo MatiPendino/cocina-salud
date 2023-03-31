@@ -1,10 +1,11 @@
 from django.urls import path
-from apps.sitio import views
+from django.contrib.auth.decorators import login_required
+from apps.sitio.views import *
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("acerca_de", views.acerca_de, name="acerca_de"),
-    path("signup", views.signup, name="signup"),
-    path("signin", views.signin, name="signin"),
-    path("sign_out", views.sign_out, name="signout")
+    path("", index, name="index"),
+    path("acerca_de", acerca_de, name="acerca_de"),
+    path("signup", signup, name="signup"),
+    path("accounts/login/", signin, name="signin"),
+    path("sign_out", sign_out, name="signout")
 ]

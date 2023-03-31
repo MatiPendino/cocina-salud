@@ -47,7 +47,6 @@ def signup(request):
 
 
 def signin(request):
-
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -55,7 +54,7 @@ def signin(request):
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-            return redirect("/")
+            return redirect("index")
         else:
             return render(request, 'auth/signin.html', {'message': 'Su correo y/o su contraseña son incorrectas.'})
 
