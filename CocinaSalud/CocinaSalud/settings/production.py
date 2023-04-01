@@ -20,7 +20,7 @@ DATABASES = {
     }
 }
 
-'''DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': "localhost",
@@ -32,7 +32,7 @@ DATABASES = {
             "init_command": "SET sql_mode='STRICT_TRANS_TABLES'"
         }
     }
-}'''
+}
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = 'static/'
