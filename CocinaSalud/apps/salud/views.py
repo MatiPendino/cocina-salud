@@ -7,7 +7,7 @@ class SaludIndex(ListView):
     template_name = 'salud.html'
     model = Salud
     context_object_name = 'salud_posts'
-    queryset = Salud.objects.all()
+    queryset = Salud.objects.filter(state=True)
 
 
 def ver_salud(request, salud_id):

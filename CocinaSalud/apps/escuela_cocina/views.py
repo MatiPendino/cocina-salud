@@ -8,7 +8,7 @@ class EscuelaCocinaIndex(ListView):
     template_name = 'escuela_cocina.html'
     model = EscuelaCocina
     context_object_name = 'escuelas_cocina'
-    queryset = EscuelaCocina.objects.all()
+    queryset = EscuelaCocina.objects.filter(state=True)
 
 
 def ver_escuela_cocina(request, escuela_id):

@@ -8,7 +8,7 @@ class RecetasIndex(ListView):
     template_name = 'recetas.html'
     model = Receta
     context_object_name = 'recetas'
-    queryset = Receta.objects.all()
+    queryset = Receta.objects.filter(state=False)
 
 
 def ver_receta(request, receta_id):
