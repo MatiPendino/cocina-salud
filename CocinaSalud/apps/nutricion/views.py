@@ -7,7 +7,7 @@ class NutricionIndex(ListView):
     template_name = 'nutricion.html'
     model = Nutricion
     context_object_name = 'nutricion_posts'
-    queryset = Nutricion.objects.all()
+    queryset = Nutricion.objects.filter(state=True)
 
 
 def ver_nutricion(request, nutricion_id):
