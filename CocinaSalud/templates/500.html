@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Server error{% endblock %}
+
+{% block content %}
+
+    <div id="layoutError">
+        <div id="layoutError_content">
+            <main>
+                <div class="container-xl px-4">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="text-center mt-4">
+                                <img class="img-fluid p-4" src="{% static 'img/500-internal-server-error.svg' %}" alt="Server error image">
+                                <p class="lead">Ups! Ha ocurrido un error. Por favor contacte a cocinasalud2001@gmail.com para más detalles.</p>
+                                <a class="text-arrow-icon" onclick="atras()" style="cursor: pointer;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left ms-0 me-1"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                                    Volver atras
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function atras(){
+            window.history.back();
+        }
+    </script>
+    
+{% endblock %}

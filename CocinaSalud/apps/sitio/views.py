@@ -65,4 +65,16 @@ def sign_out(request):
     logout(request)
     return redirect("/")
 
-# TODO: crear mensajes de error 404 y 500 personalizados
+
+def server_error(request):
+    return render(request, '500.html')
+
+
+def page_not_found_error(request, exception):
+    return render(request, '404.html')
+
+
+def permission_denied_error(request, exception):
+    return render(request, '403.html')
+
+# TODO: migrar a vistas basadas en clases
