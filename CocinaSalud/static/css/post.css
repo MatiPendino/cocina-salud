@@ -4,26 +4,6 @@
     }
 }
 
-.size-texto-cuerpo {
-    font-size: 17px;
-}
-
-@media(min-width: 768px){
-    .size-texto-cuerpo {
-        font-size: 18px;
-    }
-}
-
-.size-texto-receta {
-    font-size: 15px;
-}
-
-@media(min-width: 768px){
-    .size-texto-receta {
-        font-size: 16px;
-    }
-}
-
 h1 {
     font-family: var(--font-raleway);
 }
