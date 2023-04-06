@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Error 404 - Page not found{% endblock title %}
+{% block stylesheet %}
+    <style>
+        body {
+            background: #dedede;
+        }
+        .page-wrap {
+            min-height: 100vh;
+        }
+    </style>
+{% endblock stylesheet %}
+
+{% block content %}
+    <div class="page-wrap d-flex flex-row align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <span class="display-1 d-block">404</span>
+                    <div class="mb-4 lead">La página que estás buscando no fue encontrada.</div>
+                    <a href="{% url 'index' %}" class="btn btn-link">Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% endblock script %}
