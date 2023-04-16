@@ -51,7 +51,7 @@
                 {% for item in items %}
                     <div class="mb-3">
                         <h5 class="text-start">{{item.titulo}}</h5>
-                        <p class="text-start">{{item.descripcion}}</p>
+                        <p class="text-start">{{item.descripcion|safe}}</p>
                     </div>
                 {% endfor %}
 
@@ -61,12 +61,12 @@
             <div class="col-12 col-lg-11 mb-4">
                 <div class="mb-4 salud__conclusion">
                     <h4>Conclusiones</h4>
-                    <p class="text-start">{{salud.conclusion}}</p>
+                    <p class="text-start">{{salud.conclusion|safe}}</p>
                 </div>
 
                 <div class="mb-4 salud__summary">
                     <h4>Resumen útil</h4>
-                    <p class="text-start">{{salud.resumen}}</p>
+                    <p class="text-start">{{salud.resumen|safe}}</p>
                 </div>
             </div>
 

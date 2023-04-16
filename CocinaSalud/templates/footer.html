@@ -5,7 +5,7 @@
         <div class="col-12 col-md-4 footer__pages">
             <h4>PÁGINAS</h4>
             <div class="d-flex flex-column footer__links">
-                <a href="#">INICIO</a>
+                <a href="{% url 'index' %}">INICIO</a>
                 <a href="{% url 'recetas' %}">RECETAS</a>
                 <a href="{% url 'salud' %}">SALUD</a>
                 <a href="{% url 'nutricion' %}">NUTRICIÓN</a>
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="col-12 col-md-4">
-            <a href="/" style="max-width: 15%;"><img src="{% static 'img/logo_footer.png' %}" alt="Logo footer" class="footer__image"></a>
+            <a href="{% url 'index' %}" style="max-width: 15%;"><img src="{% static 'img/logo_footer.png' %}" alt="Logo footer" class="footer__image"></a>
         </div>
         <div class="col-12 col-md-4 footer__us">
             <h4>NOSOTROS</h4>
