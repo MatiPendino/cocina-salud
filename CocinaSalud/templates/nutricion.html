@@ -18,7 +18,11 @@
             <div class="col-12 col-md-6 col-lg-4 col-xl-3 gallery__box">
                 <a href="{% url 'ver_nutricion' nutricion.id %}">
                     <div id="image-{{forloop.counter}}" class="gallery__image__container mb-2">
-                        <img alt="Nutrición" class="w-100 " src="{{MEDIA_URL}}{{nutricion.imagen_principal}}">
+                        {% if nutricion.imagen_miniatura %}
+                            <img alt="Nutrición" class="w-100 " src="{{MEDIA_URL}}{{nutricion.imagen_miniatura}}">
+                        {% else %}
+                            <img alt="No image" class="w-100 " src="{% static 'img/no_image.jpg' %}">
+                        {% endif %}
                     </div>
                     <p id="titulo-{{forloop.counter}}" class="gallery__title centrar-mobile text-center text-uppercase">{{nutricion.titulo}}</p>
                 </a>

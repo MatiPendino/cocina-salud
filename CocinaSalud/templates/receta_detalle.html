@@ -26,7 +26,7 @@
                 <div class="col-12 col-lg-6 text-start hero__content">
                     <div class="mb-4 margin-top-mobile">
                         <h3 class="mx-2">Resumen introductorio</h3>
-                        <p class="mx-2">{{receta.resumen}}</p>
+                        <p class="mx-2">{{receta.resumen|safe}}</p>
                     </div>
 
                     <div>
@@ -63,7 +63,7 @@
                 <div class="col-11 col-lg-5 text-start p-4 borde recipe__instructions">
                     <h3>Instrucciones</h3>
                     {% for paso in pasos %}
-                        <p>{{paso.numero_paso}}- {{paso.descripcion}}</p>
+                        <p>{{paso.numero_paso}}- {{paso.descripcion|safe}}</p>
                     {% endfor %}
                 </div>
                 <div class="col-12 col-lg-7">
@@ -75,7 +75,7 @@
 
             <div class="borde mb-4 px-4 py-2 recipe__analysis">
                 <h3>Análisis nutricional del plato</h3>
-                <p>{{receta.composicion_nutricional}}</p>
+                <p>{{receta.composicion_nutricional|safe}}</p>
             </div>
 
             <div class="mb-4">
