@@ -26,7 +26,7 @@
                 <div class="col-12 col-lg-6 text-start hero__content">
                     <div class="mb-4 margin-top-mobile">
                         <h3 class="mx-2">Introducción</h3>
-                        <p class="mx-2">{{nutricion.intro}}</p>
+                        <p class="mx-2">{{nutricion.intro|safe}}</p>
                     </div>
 
                     <div class="row mt-4" >
@@ -54,13 +54,13 @@
                 </div>
 
                 <div class="col-12 col-lg-5">
-                    <p class="text-start">{{nutricion.texto_explicativo}}</p>
+                    <p class="text-start">{{nutricion.texto_explicativo|safe}}</p>
                 </div>
             </div>
 
             <div class="col-12 col-lg-10 mb-4 nutricion__conclusion__container">
                 <h4>Conclusión</h4>
-                <p class="text-start">{{nutricion.resumen}}</p>
+                <p class="text-start">{{nutricion.resumen|safe}}</p>
             </div>
 
         </div>
