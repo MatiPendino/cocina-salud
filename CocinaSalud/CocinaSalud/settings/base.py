@@ -38,7 +38,10 @@ LOCAL_APPS = [
     'apps.receta',
     'apps.nutricion',
     'apps.escuela_cocina',
-    'apps.salud'
+    'apps.salud',
+    'apps.curso',
+    'apps.usuario_custom',
+    'apps.movimientos',
 ]
 
 THIRD_APPS = [
