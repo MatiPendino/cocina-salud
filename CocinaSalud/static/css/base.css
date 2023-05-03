@@ -63,14 +63,19 @@
 }
 
 .header__nav-items li a,
-.header__nav-items li a:hover {
+.header__nav-items li a:hover,
+.header__nav-items li span {
     font-family: var(--font-roboto);
     font-weight: bold;
     color: white;
     text-decoration: none;
 }
 
-.nav-item{
+.header__nav-items li span {
+    color: white!important;
+}
+
+.nav-item {
     transition: all 0.2s ease-out;
     padding-bottom: 2px;
     border-bottom: 1px solid transparent;
@@ -81,6 +86,18 @@
     background: none !important;
     border-radius: 0;
     border-bottom: 2px solid white;
+}
+
+.dropdown__items .dropdown-menu {
+    --bs-dropdown-min-width: 12rem!important;
+}
+
+.dropdown__items a {
+    font-weight: 400!important;
+}
+
+.dropdown__items a:hover{
+    background-color: rgb(230,230,230);
 }
 
 /* Footer */

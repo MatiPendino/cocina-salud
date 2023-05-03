@@ -14,9 +14,9 @@
       <li class="nav-item active">
         <a href="{% url 'index' %}" class="centrar-mobile nav-link">Inicio</a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a href="{% url 'acerca_de' %}" class="centrar-mobile nav-link">Acerca de</a>
-      </li> <!-- TODO: QUITAR-->
+      </li> -->
       <li class="nav-item">
         <a href="{% url 'recetas' %}" class="centrar-mobile nav-link">Recetas</a>
       </li>
@@ -27,25 +27,27 @@
         <a href="{% url 'nutricion' %}" class="centrar-mobile nav-link">Nutrición</a>
       </li>
       <li class="nav-item">
-        <a href="{% url 'escuela_cocina' %}" class="centrar-mobile nav-link">Escuela de Cocina</a>
+        <a href="{% url 'escuela_cocina' %}" class="centrar-mobile nav-link">Escuela Cocina</a>
       </li>
-      <!-- TODO <li class="nav-item">
-        <a href="/cursos" class="roboto negrita centrar-mobile nav-link">Cursos</a>
+      <li class="nav-item">
+        <a href="/" class="centrar-mobile nav-link">Cursos</a>
       </li> 
       <li class="nav-item espacio-elementos">
         {% if user.is_authenticated %}
-          <div class="dropdown dropleft" onclick="dropdown();" onblur="dropdown();"  >
+          <div class="dropdown dropleft dropdown__items" onclick="dropdown();" onblur="dropdown();"  >
             <div id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="nav-link roboto negrita centrar-mobile blanco" style="text-decoration: none;">{{user.username}}<i class="bi bi-person-fill px-2"></i></span>
+              <span class="nav-link centrar-mobile" style="text-decoration: none;">{{user.username}}<i class="bi bi-person-fill px-2"></i></span>
             </div>
             <div class="dropdown-menu shadow" aria-labelledby="dLabel">
-              <a class="nav-link drop-item text-left mb-2 user-dropdown-option" href="#" data-toggle="modal" data-target="#logoutModal"><i class="bi bi-box-arrow-in-left px-2"></i>Salir</a>
+              <a class="nav-link drop-item text-left user-dropdown-option" href="#"><i class="bi bi-person px-2"></i>Mi perfil</a>
+              <a class="nav-link drop-item text-left user-dropdown-option" href="#"><i class="bi bi-archive px-2"></i>Mis cursos</a>
+              <a class="nav-link drop-item text-left user-dropdown-option" href="#"><i class="bi bi-book px-2"></i>Mis movimientos</a>
+              <a class="nav-link drop-item text-left user-dropdown-option" href="#" data-toggle="modal" data-target="#logoutModal"><i class="bi bi-box-arrow-in-left px-2"></i>Cerrar sesión</a>
             </div>
-
         {% else %}
-          <a class="roboto negrita centrar-mobile blanco nav-link link" href="signin">Log In</a>
+          <a class="centrar-mobile nav-link link" href="/accounts/login">Log In</a>
         {% endif %}
-      </li> -->
+      </li> 
     </ul>    
   </div>
 </nav>
