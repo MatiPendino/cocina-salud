@@ -67,6 +67,20 @@
 
     {% block script %}
     {% endblock script %}
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Base.js -->
     <script src="{% static 'js/base.js' %}"></script>
+    <!-- Display error messages -->
+    <script>
+        {% if messages %}
+            let htmlMessage = '';
+            {% for message in messages %}
+                console.log('{{message}}');
+                htmlMessage += '{{message}}';
+            {% endfor %}
+            notificationError(htmlMessage);
+        {% endif %}
+    </script>
 </body>
 </html>

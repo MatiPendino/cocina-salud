@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Mi perfil{% endblock title %}
+
+{% block stylesheet %}
+    <link href="{% static 'css/user.css' %}" rel="stylesheet" />
+{% endblock stylesheet %}
+
+{% block content %}
+
+    <div class="profile-image__container my-4">
+        {% if profile_image %}
+            <img class="w-100 h-100" src="{{MEDIA_URL}}{{usuario.imagen_perfil}}" alt="Profile image" />
+        {% else %}
+            <img class="w-100 h-100" src="{% static 'img/no_profile_pic.jpg' %}" alt="No profile image" />
+        {% endif %}
+        <div id="camera-icon"><img class="w-100" src="{% static 'img/camera_icon.png' %}" alt="Camera Icon" /></div>
+    </div>
+
+    <div class="profile-settings__container m-auto card border-0 shadow-lg my-4">
+        <div class="card-header py-3 profile__header">
+            <h2 class="h3">Ajustes y perfil</h1>
+        </div>
+
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                <div id="success"></div>
+                {{ form.as_p }}
+                <p>
+                    <label for="password">Contraseña</label>
+                    <input class="form-control" name="password" type="password" id="id_password" placeholder="Introduce tu contraseña..." />
+                </p>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-form">GUARDAR</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- TODO: enviar correos electrónicos al usuario para crear cuenta, y para modificar contraseña -->
+    <!-- TODO: hacer la implementación del cambio de foto de perfil -->
+    <!-- TODO: comentar el código -->
+
+{% endblock content %}
+
+{% block script %}
+    <script>
+        // If the user already has a profile picture, when it is hover show the camera img
+        const cameraIcon = document.getElementById('camera-icon');
+
+        cameraIcon.addEventListener('mouseover', () => {
+            {% if profile_image %}
+                cameraIcon.classList.add('opacity-100');
+            {% endif %}
+        });
+
+        cameraIcon.addEventListener('mouseout', () => {
+            {% if profile_image %}
+                cameraIcon.classList.remove('opacity-100');
+            {% endif %}
+        });
+
+        // If the changes were successful, show a success message
+        {% if success_message %}
+            const successDiv = document.getElementById('success');
+            successDiv.classList.add('alert', 'alert-success');
+            successDiv.appendChild(document.createTextNode('{{success_message}}'));
+        {% endif %}
+    </script>
+{% endblock script %}

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from apps.usuario_custom.models import Usuario
 
 
 def index(request):
@@ -14,9 +15,12 @@ def acerca_de(request):
 
 def signup(request):
 
-    users = User.objects.all()
-
+    if request.user.is_authenticated:
+        return redirect('usuario')
+    
     if request.method == "POST":
+        birthdate = request.POST['birthdate']
+        profile_image_try = request.FILES['profile_image']
         username = request.POST['username']
         first_name = request.POST['name']
         last_name = request.POST['surname']
@@ -36,7 +40,11 @@ def signup(request):
                         first_name=first_name,
                         last_name=last_name
                     )
-                    new_user.save()
+                    new_custom_user = Usuario.objects.create(
+                        user=new_user,
+                        imagen_perfil=profile_image_try,
+                        fecha_nacimiento=birthdate
+                    )
                     return redirect("signin")
                 
                 return render(request, 'auth/signup.html', {'message': 'La contraseña debe ser mayor o igual a 8 caracteres.'})
@@ -47,6 +55,9 @@ def signup(request):
 
 
 def signin(request):
+    if request.user.is_authenticated:
+        return redirect('usuario')
+    
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
