@@ -1,6 +1,8 @@
 :root{
     --primary-color: rgb(9, 124, 16);
     --black: rgb(25, 25, 25);
+    --dark-gray: rgb(60, 60, 60);
+    --golden: rgb(188, 145, 36);
     --font-raleway: "Raleway", sans-serif;
     --font-roboto: "Roboto", sans-serif;
     --font-reenie-beanie: "Reenie Beanie", sans-serif;
@@ -9,6 +11,22 @@
     --font-gloock: "Gloock", "Raleway", sans-serif;
     --font-sawarabi-gothic: "Sawarabi Gothic", sans-serif;
     --font-cambria: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* box-sizing: border-box */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/* Generic styles */
+
+body {
+    font-family: var(--font-roboto);
 }
 
 /* Reusable CSS */
