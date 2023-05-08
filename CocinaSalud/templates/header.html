@@ -30,7 +30,7 @@
         <a href="{% url 'escuela_cocina' %}" class="centrar-mobile nav-link">Escuela Cocina</a>
       </li>
       <li class="nav-item">
-        <a href="/" class="centrar-mobile nav-link">Cursos</a>
+        <a href="{% url 'cursos' %}" class="centrar-mobile nav-link">Cursos</a>
       </li> 
       <li class="nav-item espacio-elementos">
         {% if user.is_authenticated %}
@@ -39,7 +39,7 @@
               <span class="nav-link centrar-mobile" style="text-decoration: none;">{{user.username}}<i class="bi bi-person-fill px-2"></i></span>
             </div>
             <div class="dropdown-menu shadow" aria-labelledby="dLabel">
-              <a class="nav-link drop-item text-left user-dropdown-option" href="#"><i class="bi bi-person px-2"></i>Mi perfil</a>
+              <a class="nav-link drop-item text-left user-dropdown-option" href="{% url 'usuario' %}"><i class="bi bi-person px-2"></i>Mi perfil</a>
               <a class="nav-link drop-item text-left user-dropdown-option" href="#"><i class="bi bi-archive px-2"></i>Mis cursos</a>
               <a class="nav-link drop-item text-left user-dropdown-option" href="#"><i class="bi bi-book px-2"></i>Mis movimientos</a>
               <a class="nav-link drop-item text-left user-dropdown-option" href="#" data-toggle="modal" data-target="#logoutModal"><i class="bi bi-box-arrow-in-left px-2"></i>Cerrar sesión</a>

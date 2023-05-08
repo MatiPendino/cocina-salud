@@ -8,6 +8,7 @@ class Curso(BaseModel):
     nombre = models.CharField('Nombre del curso', max_length=255) 
     imagen_curso = models.ImageField('Imagen del curso', null=True, blank=True, upload_to='curso')
     precio = models.DecimalField('Precio del curso', max_digits=10, decimal_places=2)
+    slug = models.SlugField('Slug del curso', null=True, blank=True, help_text='Debe ser escrito todo en minúsculas y sin espacios')
     publico_dirigido = RichTextField('Público dirigido', null=True, blank=True)
     aprender = RichTextField('Qué aprenderá', null=True, blank=True)
     descripcion_breve = models.CharField('Descripción breve', max_length=255)
@@ -16,6 +17,29 @@ class Curso(BaseModel):
     num_alumnos = models.PositiveIntegerField('Número de alumnos', default=0)
     profesor = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Profesor del curso')
 
+    
+    def get_cantidad_lecciones(self):
+        lecciones = Leccion.objects.filter(seccion__curso__id=self.id)
+        lecciones_count = lecciones.count()
+        return lecciones_count
+    
+    def get_duracion_curso(self):
+        # Obtenemos todas las lecciones del curso actual, y su duración en horas
+        lecciones = Leccion.objects.filter(seccion__curso__id=self.id).values_list('duracion', flat=True)
+        duracion_horas = sum(lecciones) / 60
+        # Separamos en parte decimal y entera
+        decimal_part = duracion_horas % 1
+        integer_part = duracion_horas // 1
+        # Según el valor de la parte decimal, redondeamos la duración total
+        if decimal_part < 0.3:
+            duracion = int(integer_part)
+        elif 0.3 <= decimal_part < 0.7:
+            duracion = integer_part + 0.5
+        else:
+            duracion = int(integer_part + 1)
+        return duracion
+
+    
     def __str__(self):
         return f'{self.nombre} ({self.calificacion}) - {self.profesor.get_username()}'
 

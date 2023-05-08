@@ -21,7 +21,7 @@ urlpatterns = [
     path('escuela_cocina/', include(escuela_urls)),
     path('salud/', include(salud_urls)),
     path('nutricion/', include(nutricion_urls)),
-    path('curso/', include(curso_urls)),
+    path('cursos/', include(curso_urls)),
     path('usuario/', include(usuario_urls)),
     path('movimientos/', include(movimientos_urls))
 ] 
