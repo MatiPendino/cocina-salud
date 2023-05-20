@@ -1,5 +1,6 @@
 :root{
     --primary-color: rgb(9, 124, 16);
+    --lighter-primary-color: rgba(9, 124, 16, .5); 
     --black: rgb(25, 25, 25);
     --dark-gray: rgb(60, 60, 60);
     --golden: rgb(188, 145, 36);
@@ -10,6 +11,7 @@
     --font-arial: Arial, Helvetica, sans-serif;
     --font-gloock: "Gloock", "Raleway", sans-serif;
     --font-sawarabi-gothic: "Sawarabi Gothic", sans-serif;
+    --font-karla: "Karla", sans-serif;
     --font-cambria: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 

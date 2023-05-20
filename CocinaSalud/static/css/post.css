@@ -54,6 +54,7 @@ h1 {
 .recipe__instructions p {
     font-family: var(--font-cambria);
     font-size: 15px;
+    display: inline!important;
 }
 
 @media(min-width: 768px) {
