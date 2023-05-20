@@ -17,7 +17,7 @@ class Curso(BaseModel):
     num_alumnos = models.PositiveIntegerField('Número de alumnos', default=0)
     profesor = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Profesor del curso')
 
-    
+
     def get_cantidad_lecciones(self):
         lecciones = Leccion.objects.filter(seccion__curso__id=self.id)
         lecciones_count = lecciones.count()
@@ -38,7 +38,9 @@ class Curso(BaseModel):
         else:
             duracion = int(integer_part + 1)
         return duracion
-
+    
+    def get_secciones(self):
+        return Seccion.objects.filter(curso__id=self.id, state=True)
     
     def __str__(self):
         return f'{self.nombre} ({self.calificacion}) - {self.profesor.get_username()}'
@@ -53,8 +55,12 @@ class Seccion(BaseModel):
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE, verbose_name='Curso de la sección')
     orden = models.PositiveSmallIntegerField('Orden de la sección')
 
+
     def get_curso_nombre(self):
         return self.curso.nombre
+    
+    def get_lecciones(self):
+        return Leccion.objects.filter(seccion__id=self.id, state=True)
     
     def __str__(self):
         return f'{self.nombre} - {self.curso.nombre}'

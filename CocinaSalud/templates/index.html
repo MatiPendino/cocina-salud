@@ -7,12 +7,13 @@
 
 {% block content %}
 
-<div id="carouselDesktop" class="carousel slide d-none d-md-block" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carouselDesktop" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselDesktop" data-slide-to="1"></li>
-      <li data-target="#carouselDesktop" data-slide-to="2"></li>
-    </ol>
+<div id="carouselDesktop" class="carousel slide d-none d-md-block" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselDesktop" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselDesktop" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselDesktop" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselDesktop" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img class="d-block w-100" src="{% static 'img/banner_cocina.jpg' %}" alt="Cocina slide">
@@ -43,22 +44,23 @@
         </div>
       </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselDesktop" role="button" data-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselDesktop" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only"></span>
-    </a>
-    <a class="carousel-control-next" href="#carouselDesktop" role="button" data-slide="next">
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselDesktop" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only"></span>
-    </a>
+      <span class="visually-hidden">Next</span>
+    </button>
 </div>
 
-<div id="carouselMobile" class="carousel slide d-block d-md-none" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselMobile" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselMobile" data-slide-to="1"></li>
-    <li data-target="#carouselMobile" data-slide-to="2"></li>
-  </ol>
+<div id="carouselMobile" class="carousel slide d-block d-md-none" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselMobile" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselMobile" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselMobile" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselMobile" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img class="d-block w-100" src="{% static 'img/banner_cocina_mobile.jpg' %}" alt="Cocina mobile slide">
@@ -89,14 +91,14 @@
       </div>
     </div>
   </div>
-  <a class="carousel-control-prev" href="#carouselMobile" role="button" data-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselMobile" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only"></span>
-  </a>
-  <a class="carousel-control-next" href="#carouselMobile" role="button" data-slide="next">
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselMobile" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only"></span>
-  </a>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 
 <div class="col-12 d-flex welcome__container">
@@ -120,8 +122,10 @@
 </div>
 
 <script>
-  $('.carousel').carousel({
-    interval: 6000
+  $(document).ready(function() {
+    $('.carousel').carousel({
+      interval: 6000
+    });
   });
 </script>
 
