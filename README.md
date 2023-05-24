@@ -47,24 +47,12 @@ To access into the Shell, you have to run the following command in the terminal 
 SECRET_KEY = 'your_secret_key'
 ```
 
-6. Modify the settings point:
-
-For this, you have to open the files manage.py, CocinaSalud/asgi.py and CocinaSalud/wsgi.py to change this line:
-```
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CocinaSalud.settings.production')
-```
-
-By this one:
-```
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CocinaSalud.settings.local')
-```
-
-7. Install libraries:
+6. Install libraries:
 ```
 (venv) pip install -r requirements.txt
 ```
 
-8. Run server:
+7. Run server:
 ```
 (venv) python manage.py runserver
 ```
