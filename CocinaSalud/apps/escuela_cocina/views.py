@@ -5,7 +5,7 @@ from apps.escuela_cocina.models import EscuelaCocina, PasoTecnica
 
 
 class EscuelaCocinaIndex(ListView):
-    template_name = 'escuela_cocina.html'
+    template_name = 'blog/escuela_cocina.html'
     model = EscuelaCocina
     context_object_name = 'escuelas_cocina'
     queryset = EscuelaCocina.objects.filter(state=True)
@@ -23,4 +23,4 @@ def ver_escuela_cocina(request, escuela_id):
         'pasos_escuela': pasos_escuela
     }
 
-    return render(request, 'escuela_cocina_detalle.html', context)
+    return render(request, 'blog/escuela_cocina_detalle.html', context)

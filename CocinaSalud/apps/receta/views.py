@@ -5,7 +5,7 @@ from .models import *
 
 
 class RecetasIndex(ListView):
-    template_name = 'recetas.html'
+    template_name = 'blog/recetas.html'
     model = Receta
     context_object_name = 'recetas'
     queryset = Receta.objects.filter(state=True)
@@ -30,4 +30,4 @@ def ver_receta(request, receta_id):
         'posicion_imagen': posicion_imagen
     }
 
-    return render(request, 'receta_detalle.html', context)
+    return render(request, 'blog/receta_detalle.html', context)

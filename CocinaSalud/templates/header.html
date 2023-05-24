@@ -5,7 +5,7 @@
     <a href="/" class="navbar-brand header__image"><img src="{% static '/img/logo.png' %}" class="px-4 pt-2 w-100" alt="Logo"></a>
   </div>
 
-  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#toggleCollapse" aria-controls="toggleCollapse" aria-expanded="false" aria-label="Toggle navigation" style="border-color: rgba(255,255,255,0);">
+  <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#toggleCollapse" aria-controls="toggleCollapse" aria-expanded="false" aria-label="Toggle navigation" style="border-color: rgba(255,255,255,0);">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -14,9 +14,9 @@
       <li class="nav-item active">
         <a href="{% url 'index' %}" class="centrar-mobile nav-link">Inicio</a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a href="{% url 'acerca_de' %}" class="centrar-mobile nav-link">Acerca de</a>
-      </li> <!-- TODO: QUITAR-->
+      </li> -->
       <li class="nav-item">
         <a href="{% url 'recetas' %}" class="centrar-mobile nav-link">Recetas</a>
       </li>
@@ -27,25 +27,27 @@
         <a href="{% url 'nutricion' %}" class="centrar-mobile nav-link">Nutrición</a>
       </li>
       <li class="nav-item">
-        <a href="{% url 'escuela_cocina' %}" class="centrar-mobile nav-link">Escuela de Cocina</a>
+        <a href="{% url 'escuela_cocina' %}" class="centrar-mobile nav-link">Escuela Cocina</a>
       </li>
-      <!-- TODO <li class="nav-item">
-        <a href="/cursos" class="roboto negrita centrar-mobile nav-link">Cursos</a>
+      <li class="nav-item">
+        <a href="{% url 'cursos' %}" class="centrar-mobile nav-link">Cursos</a>
       </li> 
       <li class="nav-item espacio-elementos">
         {% if user.is_authenticated %}
-          <div class="dropdown dropleft" onclick="dropdown();" onblur="dropdown();"  >
-            <div id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="nav-link roboto negrita centrar-mobile blanco" style="text-decoration: none;">{{user.username}}<i class="bi bi-person-fill px-2"></i></span>
+          <div class="dropdown dropleft dropdown__items"  >
+            <div id="dLabel" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="nav-link centrar-mobile" style="text-decoration: none;">{{user.username}}<i class="bi bi-person-fill px-2"></i></span>
             </div>
             <div class="dropdown-menu shadow" aria-labelledby="dLabel">
-              <a class="nav-link drop-item text-left mb-2 user-dropdown-option" href="#" data-toggle="modal" data-target="#logoutModal"><i class="bi bi-box-arrow-in-left px-2"></i>Salir</a>
+              <a class="nav-link drop-item text-left user-dropdown-option" href="{% url 'usuario' %}"><i class="bi bi-person px-2"></i>Mi perfil</a>
+              <a class="nav-link drop-item text-left user-dropdown-option" href="{% url 'mis_cursos' %}"><i class="bi bi-archive px-2"></i>Mis cursos</a>
+              <a class="nav-link drop-item text-left user-dropdown-option" href="#"><i class="bi bi-book px-2"></i>Mis movimientos</a>
+              <a class="nav-link drop-item text-left user-dropdown-option" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="bi bi-box-arrow-in-left px-2"></i>Cerrar sesión</a>
             </div>
-
         {% else %}
-          <a class="roboto negrita centrar-mobile blanco nav-link link" href="signin">Log In</a>
+          <a class="centrar-mobile nav-link link" href="/accounts/login">Log In</a>
         {% endif %}
-      </li> -->
+      </li> 
     </ul>    
   </div>
 </nav>

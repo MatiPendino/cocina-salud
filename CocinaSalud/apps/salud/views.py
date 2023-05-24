@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from .models import Salud, ItemSalud
 
 class SaludIndex(ListView):
-    template_name = 'salud.html'
+    template_name = 'blog/salud.html'
     model = Salud
     context_object_name = 'salud_posts'
     queryset = Salud.objects.filter(state=True)
@@ -22,4 +22,4 @@ def ver_salud(request, salud_id):
         'items': items_salud,
     }
 
-    return render(request, 'salud_detalle.html', context)
+    return render(request, 'blog/salud_detalle.html', context)

@@ -1,0 +1,413 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{course.nombre}}{% endblock title %}
+
+{% block stylesheet %}
+    <link href="{% static 'css/curso_detalle.css' %}" rel="stylesheet" />
+{% endblock stylesheet %}
+
+{% block content %}
+    <div class="w-100 mx-0" style="overflow-x: hidden;">
+        <div class="">
+            <div class="course-image d-block d-md-none">
+                <img class="w-100" src="{{MEDIA_URL}}{{course.imagen_curso}}" alt="Imagen curso" />
+            </div>
+            <section id="course-description">
+                <div class="col-12 col-md-8 course-content__container">
+                    <h1 class="my-0">{{course.nombre}}</h1>
+                    <p>{{course.descripcion_extensa|safe}}</p>
+                    <div class="row mb-3">
+                        <div class="w-auto course-calification fw-bold">{{course.calificacion}}</div>
+                        <div class="w-auto course-stars">
+                            {% if course.calificacion == 0 %}
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            {% elif course.calificacion <= 1.2 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            {% elif 1.3 <= course.calificacion and course.calificacion <= 1.7 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            {% elif 1.8 <= course.calificacion and course.calificacion <= 2.2 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            {% elif 2.3 <= course.calificacion and course.calificacion <= 2.7 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            {% elif 2.8 <= course.calificacion and course.calificacion <= 3.2 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            {% elif 3.3 <= course.calificacion and course.calificacion <= 3.7 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                                <i class="bi bi-star"></i>
+                            {% elif 3.8 <= course.calificacion and course.calificacion <= 4.2 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                            {% elif 4.3 <= course.calificacion and course.calificacion <= 4.7 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                            {% elif 4.8 <= course.calificacion %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            {% endif %}
+                        </div>
+                        <div class="w-auto course-nstudents">({{course.num_alumnos}} estudiantes)</div>
+                    </div>
+
+                    <div class="row">
+                        <p class="w-auto my-auto fw-bold h5">Profesor:</p>
+                        <div class="profile-image__container">
+                            <img src="{{MEDIA_URL}}{{course.profesor.imagen_perfil}}" alt="Profile Image" />
+                        </div>
+                        <div class="w-auto profile-user__container">
+                            <p>{{course.profesor.user.get_full_name}}</p>
+                            {% if course.profesor.profesion %}
+                                <p>{{course.profesor.profesion}}</p>
+                            {% else %}
+                                <p>Prueba</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pt-4">
+                <div class="col-12 col-md-8 course-content__container">
+                    <h3>Qué aprenderás</h3>
+                    <div>
+                        <p>{{course.aprender|safe}}</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pt-4">
+                <div class="col-12 col-md-8 course-content__container">
+                    <h3>Temario</h3>
+                    {% for seccion in course.get_secciones %}
+                        <div class="mt-2">
+                            <button class="btn btn-success text-start w-100 rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{forloop.counter}}" aria-expanded="false" aria-controls="collapse-{{forloop.counter}}"><i class="bi bi-caret-down-fill mx-2"></i>{{seccion.nombre}}</button>
+                        </div>
+                        <div class="collapse multi-collapse" id="collapse-{{forloop.counter}}">
+                            <ul class="list-group rounded-0">
+                                {% for leccion in seccion.get_lecciones %}
+                                    <li class="list-group-item">{{leccion.nombre}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="pt-4">
+                <div class="col-12 col-md-8 course-content__container">
+                    <h3>A quién va dirigido</h3>
+                    <div>
+                        <p>{{course.publico_dirigido|safe}}</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pt-4">
+                <div class="col-12 col-md-8 course-content__container">
+                    <h3>Opiniones del curso</h3>
+                    <div class="row mt-4 mx-0">
+                        <div class="col-md-3 opinion__container pt-3">
+                            <div class="w-auto">
+                                <p class="h1 text-center course-calification">{{course.calificacion}}</p>
+                            </div>
+                            <div class="w-auto course-stars text-center">
+                                {% if course.calificacion == 0 %}
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                {% elif course.calificacion <= 1.2 %}
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                {% elif 1.3 <= course.calificacion and course.calificacion <= 1.7 %}
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                {% elif 1.8 <= course.calificacion and course.calificacion <= 2.2 %}
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                {% elif 2.3 <= course.calificacion and course.calificacion <= 2.7 %}
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                {% elif 2.8 <= course.calificacion and course.calificacion <= 3.2 %}
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                {% elif 3.3 <= course.calificacion and course.calificacion <= 3.7 %}
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <i class="bi bi-star"></i>
+                                {% elif 3.8 <= course.calificacion and course.calificacion <= 4.2 %}
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                {% elif 4.3 <= course.calificacion and course.calificacion <= 4.7 %}
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                {% elif 4.8 <= course.calificacion %}
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                {% endif %}
+                            </div>
+                            <div class="">
+                                <p class="text-center course-num_alumnos">{{num_ratings}} valoraciones</p>
+                            </div>
+                        </div>
+                        <div class="expansion-stars__container col-md-9">
+                            <div class="course-stars expansion-stars row">
+                                <div class="col-6 bar__container">
+                                    <div class="progress-bar">
+                                        <div class="progress" id="bar-five"></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <p class="d-inline">{{five_stars}} ({{five_stars_p}}%)</p>
+                                </div>
+                            </div>
+                            <div class="course-stars expansion-stars row">
+                                <div class="col-6 bar__container">
+                                    <div class="progress-bar">
+                                        <div class="progress" id="bar-four"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <p class="d-inline">{{four_stars}} ({{four_stars_p}}%)</p>
+                                </div>
+                            </div>
+                            <div class="course-stars expansion-stars row">
+                                <div class="col-6 bar__container">
+                                    <div class="progress-bar">
+                                        <div class="progress" id="bar-three"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <p class="d-inline">{{three_stars}} ({{three_stars_p}}%)</p>
+                                </div>
+                            </div>
+                            <div class="course-stars expansion-stars row">
+                                <div class="col-6 bar__container">
+                                    <div class="progress-bar">
+                                        <div class="progress" id="bar-two"></div>
+                                    </div>
+                                </div>
+                
+                                <div class="col-6">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <p class="d-inline">{{two_stars}} ({{two_stars_p}}%)</p>
+                                </div>
+                                
+                            </div>
+                            <div class="course-stars expansion-stars row">
+                                <div class="col-6 bar__container">
+                                    <div class="progress-bar">
+                                        <div class="progress" id="bar-one"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <p class="d-inline">{{one_star}} ({{one_star_p}}%)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="comments__container my-3 mx-2">
+                        <ul class="list-group">
+                            {% for curso_usuario in cursos_usuarios %}
+                                <li class="row list-group-item" style="display: flex!important;">
+                                    <div class="profile-image__container col-3 mt-4">
+                                        <img class="w-100 h-100" src="{{MEDIA_URL}}{{curso_usuario.usuario.imagen_perfil}}" alt="User Profile Image" />
+                                    </div>
+                                    <div class="col-9">
+                                        <p class="my-0">{{curso_usuario.usuario.get_username}}</p>
+                                        <div class="course-stars">
+                                            {% if curso_usuario.calificacion == 1 %}
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
+                                            {% elif curso_usuario.calificacion == 2 %}
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
+                                            {% elif curso_usuario.calificacion == 3 %}
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star"></i>
+                                                <i class="bi bi-star"></i>
+                                            {% elif curso_usuario.calificacion == 4 %}
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star"></i>
+                                            {% elif curso_usuario.calificacion == 5 %}
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                            {% endif %}
+                                        </div>
+                                        <div>
+                                            <span>{{curso_usuario.opinion|safe}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="course-buy__desktop d-none d-md-block" id="course-buy__desktop">
+            <div class="course-image">
+                <img class="w-100 borde" src="{{MEDIA_URL}}{{course.imagen_curso}}" alt="Imagen curso" />
+            </div>
+            <div class="p-3">
+                <p class="course-price mb-2">${{course.precio}}</p>
+                <button type="button" class="btn btn-success w-100 mb-3">COMPRAR CURSO</button>
+                <div>
+                    <p class="h5">Este curso incluye:</p>
+                    <ul>
+                        <li>Acceso de por vida</li>
+                        <li>Recursos descargables</li>
+                        <li>{{course.get_duracion_curso}} horas de contenido</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="course-buy__mobile d-flex d-md-none row w-100 text-center align-items-center py-3 m-0">
+            <div class="col-3">
+                <span class="course-price">${{course.precio}}</span>
+            </div>
+            <div class="col-9">
+                <button type="button" class="btn btn-success w-100">COMPRAR CURSO</button>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block script %}
+    <script>
+        // Display bar
+        function updateBar(elementId, percentage) {
+            let bar = document.getElementById(elementId);
+            bar.style.width = percentage + '%';
+        }
+        updateBar('bar-five', {{five_stars_p}});
+        updateBar('bar-four', {{four_stars_p}});
+        updateBar('bar-three', {{three_stars_p}});
+        updateBar('bar-two', {{two_stars_p}});
+        updateBar('bar-one', {{one_star_p}});
+
+        window.addEventListener('scroll', () => {
+            const desktopDiv = document.getElementById('course-buy__desktop');
+            let scrollPosition = window.scrollY;
+            console.log(scrollPosition);
+            if (scrollPosition > 100 && scrollPosition < 1650) {
+                desktopDiv.classList.add('desktop-top');
+                desktopDiv.classList.remove('d-md-none');
+            }
+            else if (scrollPosition > 1650) {
+                desktopDiv.classList.remove('desktop-top');
+                desktopDiv.classList.add('d-md-none');
+            }
+            else {
+                desktopDiv.classList.remove('desktop-top');
+                desktopDiv.classList.remove('d-md-none');
+            }
+        })
+    </script>
+{% endblock script %}

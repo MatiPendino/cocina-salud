@@ -1,0 +1,76 @@
+
+h1 {
+    font-family: var(--font-sawarabi-gothic);
+    font-size: 2.3rem;
+}
+
+@media(min-width: 768px) {
+    h1 {
+        font-size: 2.7rem;
+    }
+}
+
+@media(max-width: 768px) {
+    .course__box div {
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
+}
+
+.course__box:not(:last-child) {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+@media(min-width: 768px) {
+    .course__box:not(:last-child) {
+        padding-bottom: 1.5rem;
+    }
+}
+
+.course-content h3 {
+    font-size: 1.15rem;
+    margin-bottom: .25rem;
+}
+
+@media(min-width: 768px) {
+    .course-content h3 {
+        font-size: 1.4rem;
+        margin-bottom: .5rem;
+    }
+}
+
+.course-teacher {
+    font-size: .9rem;
+    color: var(--dark-gray);
+    margin-bottom: .25rem;
+}
+
+@media(min-width: 768px) {
+    .course-teacher {
+        margin-bottom: .5rem;
+    }
+}
+
+.course-calification {
+    color: var(--golden);
+    font-weight: 600;
+    padding-right: 0;
+}
+
+.course-nstudents {
+    color: var(--dark-gray);
+}
+
+.course-price {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.course-stars {
+    padding-right: 0;
+}
+
+.course-stars i {
+    color: var(--golden);
+}

@@ -34,3 +34,13 @@ const mailIcon = document.getElementById('mail-icon');
 const mailText = document.getElementById('mail-text');
 mouseOverAndOut(mailIcon, mailText, 'footer__redes-hover');
 mouseOverAndOut(mailText, mailIcon, 'footer__redes-hover');
+
+
+// Function to display error message
+function notificationError(message){
+    Swal.fire({
+        title: 'Error!',
+        html: message,
+        icon: 'error'
+    })
+}

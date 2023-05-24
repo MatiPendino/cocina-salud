@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Nutrición{% endblock title %}
+
+{% block stylesheet %}
+    <link href="{% static 'css/galeria_posts.css' %}" rel="stylesheet">
+{% endblock stylesheet%}
+
+
+{% block content %}
+
+<h1 class="text-center my-2">Nutrición</h1>
+
+<div class="container-fluid mb-4 gallery__container">
+    <div class="row d-flex mx-4">
+        {% for nutricion in nutricion_posts %}
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 gallery__box">
+                <a href="{% url 'ver_nutricion' nutricion.id %}">
+                    <div id="image-{{forloop.counter}}" class="gallery__image__container mb-2">
+                        {% if nutricion.imagen_miniatura %}
+                            <img alt="Nutrición" class="w-100 " src="{{MEDIA_URL}}{{nutricion.imagen_miniatura}}">
+                        {% else %}
+                            <img alt="No image" class="w-100 " src="{% static 'img/no_image.jpg' %}">
+                        {% endif %}
+                    </div>
+                    <p id="titulo-{{forloop.counter}}" class="gallery__title centrar-mobile text-center text-uppercase">{{nutricion.titulo}}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% block script %}
+    <script>
+        $( document ).ready(function() {
+            let titles = [];
+            let images = [];
+            for (let i = 1; i <= {{nutricion_posts|length}}; i++){
+                const title = document.getElementById(`titulo-${i}`);
+                const image = document.getElementById(`image-${i}`);
+                titles.push(title);
+                images.push(image);
+            }
+
+            for (let j = 0; j < titles.length; j++){
+                titles[j].addEventListener('mouseover', function() {
+                    images[j].classList.add('imagebox-container-hover');
+                });
+
+                titles[j].addEventListener('mouseout', function() {
+                    images[j].classList.remove('imagebox-container-hover');
+                });
+            }
+        });
+    </script>
+{% endblock script %}
+
+
+{% endblock %}

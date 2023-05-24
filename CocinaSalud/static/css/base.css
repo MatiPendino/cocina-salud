@@ -1,6 +1,9 @@
 :root{
     --primary-color: rgb(9, 124, 16);
+    --lighter-primary-color: rgba(9, 124, 16, .5); 
     --black: rgb(25, 25, 25);
+    --dark-gray: rgb(60, 60, 60);
+    --golden: rgb(188, 145, 36);
     --font-raleway: "Raleway", sans-serif;
     --font-roboto: "Roboto", sans-serif;
     --font-reenie-beanie: "Reenie Beanie", sans-serif;
@@ -8,7 +11,25 @@
     --font-arial: Arial, Helvetica, sans-serif;
     --font-gloock: "Gloock", "Raleway", sans-serif;
     --font-sawarabi-gothic: "Sawarabi Gothic", sans-serif;
+    --font-karla: "Karla", sans-serif;
     --font-cambria: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    --font-helvetica: Helvetica, sans-serif;
+}
+
+/* box-sizing: border-box */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/* Generic styles */
+
+body {
+    font-family: var(--font-roboto);
 }
 
 /* Reusable CSS */
@@ -63,14 +84,19 @@
 }
 
 .header__nav-items li a,
-.header__nav-items li a:hover {
+.header__nav-items li a:hover,
+.header__nav-items li span {
     font-family: var(--font-roboto);
     font-weight: bold;
     color: white;
     text-decoration: none;
 }
 
-.nav-item{
+.header__nav-items li span {
+    color: white!important;
+}
+
+.nav-item {
     transition: all 0.2s ease-out;
     padding-bottom: 2px;
     border-bottom: 1px solid transparent;
@@ -81,6 +107,18 @@
     background: none !important;
     border-radius: 0;
     border-bottom: 2px solid white;
+}
+
+.dropdown__items .dropdown-menu {
+    --bs-dropdown-min-width: 12rem!important;
+}
+
+.dropdown__items a {
+    font-weight: 400!important;
+}
+
+.dropdown__items a:hover{
+    background-color: rgb(230,230,230);
 }
 
 /* Footer */
