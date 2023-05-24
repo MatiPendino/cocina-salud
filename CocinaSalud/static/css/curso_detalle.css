@@ -1,3 +1,5 @@
+
+/* General */
 h1 {
     font-family: var(--font-karla);
     font-size: 1.7rem;
@@ -9,6 +11,26 @@ h1 {
     }
 }
 
+
+/* Course stars */
+.course-stars i,
+.course-calification {
+    color: var(--golden);
+}
+
+.course-stars,
+.course-calification {
+    padding-right: 0;
+}
+
+@media(max-width: 768px){
+    .h1.course-calification {
+        font-size: 7rem;
+    }
+}
+
+
+/* Course Content */
 .course-content__container {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -19,6 +41,15 @@ h1 {
         padding-right: 6rem;
     }    
 }
+
+.course-content__container h3::after {
+    content: "";
+    display: block;
+    margin-top: .5rem;
+    width: 46px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
 
 /* Course description */
 #course-description {
@@ -59,30 +90,8 @@ h1 {
     margin-bottom: 0;
 }
 
-.course-stars i,
-.course-calification {
-    color: var(--golden);
-}
 
-.course-stars,
-.course-calification {
-    padding-right: 0;
-}
-
-@media(max-width: 768px){
-    .h1.course-calification {
-        font-size: 7rem;
-    }
-}
-
-.course-content__container h3::after {
-    content: "";
-    display: block;
-    margin-top: .5rem;
-    width: 46px;
-    border-bottom: 2px solid var(--primary-color);
-}
-
+/* Opinion */
 .opinion__container {
     border: 1px solid var(--golden);
     border-radius: .2rem;
@@ -98,31 +107,22 @@ h1 {
     }
 }
 
-.course-price {
-    font-size: 1.5rem;
-    font-weight: 500;
+@media(max-width: 768px) {
+    .expansion-stars__container {
+        margin-top: 20px;
+    }
 }
 
-.course-buy__desktop {
-    width: 410px; 
-    position: fixed; 
-    left: 63%; 
-    top: 20%;
-    transition: top .3s ease-in-out;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 1rem 3rem rgba(0,0,0,.45);
+.expansion-stars {
+    font-size: 15px;
+    margin-bottom: 7px;
 }
 
-.desktop-top {
-    top: 5%;
-}
-
-.course-buy__mobile {
-    position: fixed; 
-    top: 91%; 
-    background-color: white;
-    box-shadow: 0 1rem 3rem rgba(0,0,0,.45);
+@media(min-width: 768px) {
+    .expansion-stars {
+        font-size: 18px;
+        margin-bottom: 0;
+    }
 }
 
 .bar__container {
@@ -152,20 +152,31 @@ h1 {
     transition: width 0.3s ease;
 }
 
-@media(max-width: 768px) {
-    .expansion-stars__container {
-        margin-top: 20px;
-    }
+
+/* Buy card */
+.course-buy__desktop {
+    width: 410px; 
+    position: fixed; 
+    left: 63%; 
+    top: 20%;
+    transition: top .3s ease-in-out;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.45);
 }
 
-.expansion-stars {
-    font-size: 15px;
-    margin-bottom: 7px;
+.desktop-top {
+    top: 5%;
 }
 
-@media(min-width: 768px) {
-    .expansion-stars {
-        font-size: 18px;
-        margin-bottom: 0;
-    }
+.course-buy__mobile {
+    position: fixed; 
+    top: 91%; 
+    background-color: white;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.45);
+}
+
+.course-price {
+    font-size: 1.5rem;
+    font-weight: 500;
 }
