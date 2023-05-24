@@ -19,8 +19,7 @@ class Curso(BaseModel):
 
 
     def get_cantidad_lecciones(self):
-        lecciones = Leccion.objects.filter(seccion__curso__id=self.id)
-        lecciones_count = lecciones.count()
+        lecciones_count = Leccion.objects.filter(seccion__curso__id=self.id).count()
         return lecciones_count
     
     def get_duracion_curso(self):
@@ -41,6 +40,10 @@ class Curso(BaseModel):
     
     def get_secciones(self):
         return Seccion.objects.filter(curso__id=self.id, state=True)
+    
+    def get_porcentaje_completado_curso(self, user):
+        lecciones_usuario = LeccionUsuario.objects.filter(usuario__user=user, leccion__seccion__curso=self, completada=True).count()
+        return int(lecciones_usuario / self.get_cantidad_lecciones() * 100)
     
     def __str__(self):
         return f'{self.nombre} ({self.calificacion}) - {self.profesor.get_username()}'
@@ -110,6 +113,7 @@ class LeccionUsuario(BaseModel):
     leccion = models.ForeignKey(Leccion, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     completada = models.BooleanField('Lección completada', default=False)
+    ultima = models.BooleanField('Última lección vista por el usuario', default=False)
 
     def __str__(self):
         return f'{self.leccion.nombre} ({self.leccion.get_curso_nombre()}) - {self.usuario.get_username()}'

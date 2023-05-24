@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}{{lesson.get_curso_nombre}}{% endblock title %}
+{% load static %}
+
+{% block stylesheet %}
+    <link href="{% static 'css/leccion.css' %}" rel="stylesheet" />
+{% endblock stylesheet %}
+
+{% block content %}
+    <h1 class="my-2 text-center">{{lesson.get_curso_nombre}}</h1>
+
+    
+
+{% endblock content %}

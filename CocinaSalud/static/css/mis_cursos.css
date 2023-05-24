@@ -1,0 +1,102 @@
+
+/* General */
+h1 {
+    font-family: var(--font-karla);
+    font-size: 2.3rem;
+}
+
+@media(min-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+h3 {
+    font-size: 1.3rem;
+}
+
+@media(min-width: 768px) {
+    h3 {
+        font-size: 1.2rem;
+    }
+}
+
+
+.my-courses {
+    padding: .5rem 3rem;
+}
+
+@media(min-width: 768px) {
+    .my-courses {
+        padding: 1rem 2rem .5rem 2rem;
+    }
+}
+
+.bar__container {
+    padding-right: 0; 
+    margin-top: auto; 
+    margin-bottom: auto;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+@media(min-width: 768px) {
+    .progress-bar {
+        height: 10px;
+    }
+}
+  
+.progress {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.course-stars i {
+    color: var(--golden);
+}
+
+.course-stars {
+    padding-right: 0;
+}
+
+
+.course-details {
+    justify-content: space-around;
+}
+
+@media(min-width: 768px) {
+    .course-details {
+        justify-content: center;
+    }
+}
+
+.course-teacher {
+    font-size: .9rem;
+    color: var(--dark-gray);
+    margin-bottom: .25rem;
+}
+
+.calification-text {
+    font-size: .8rem;
+    text-align: center;
+    font-family: var(--font-arial);
+}
+
+.completed-text {
+    font-family: var(--font-helvetica);
+    font-size: 1rem;
+}
+
+@media(min-width: 768px) {
+    .completed-text {
+        font-size: .9rem;
+    }
+}
