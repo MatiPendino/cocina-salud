@@ -44,7 +44,7 @@
             </div>
 
             <div class="col-12 col-lg-10 mb-4 nutricion__text__container">
-                <p class="text-start">{{nutricion.texto_cuerpo}}</p>
+                <p class="text-start">{{nutricion.texto_cuerpo|safe}}</p>
                 <img class="w-100 borde" src="{{MEDIA_URL}}{{nutricion.imagen_secundaria_1}}" alt="Imagen secundaria nutrición {{nutricion.titulo}}" />
             </div>
 
