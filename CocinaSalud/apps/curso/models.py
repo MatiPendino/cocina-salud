@@ -83,7 +83,6 @@ class Leccion(BaseModel):
     duracion = models.PositiveSmallIntegerField('Duración de lección', help_text='Duración de la lección (en minutos)', default=0)
     video = models.URLField('Video de la lección', help_text='Insertar la URL del video de la lección', null=True, blank=True)
     orden = models.PositiveSmallIntegerField('Orden de la lección')
-    slug = models.SlugField('Slug de la lección', help_text='Debe ser escrito todo en minúsculas y sin espacios', default='')
 
     def get_seccion_nombre(self):
         return self.seccion.nombre

@@ -52,27 +52,27 @@ def leave_review(curso_usuario_id, rating, comment):
     curso.save()
 
 
-def complete_lesson(lesson_slug, user):
+def complete_lesson(lesson_id, user):
     user_lesson = LeccionUsuario.objects.filter(
         usuario__user=user,
-        leccion__slug=lesson_slug
+        leccion__id=lesson_id
     ).first()
     user_lesson.completada = True
     user_lesson.save()
 
 
-def get_slug_lesson_to_pass(lesson, direction):
+def get_id_lesson_to_pass(lesson, direction):
     if direction == 'next':
-        # If there is a following lesson in the section, return its slug. Otherwise,
+        # If there is a following lesson in the section, return its id. Otherwise,
         # pass to the next section.
         next_lesson = Leccion.objects.filter(
             seccion=lesson.seccion,
             orden=lesson.orden+1
         ).first()
         if next_lesson:
-            return next_lesson.slug
+            return next_lesson.id
         else:
-            # If there is a following section in the course, return the slug of its first
+            # If there is a following section in the course, return the id of its first
             # lesson. Otherwise, we reached the final of the course
             next_lesson = Leccion.objects.filter(
                 seccion__orden=lesson.seccion.orden+1,
@@ -80,27 +80,27 @@ def get_slug_lesson_to_pass(lesson, direction):
                 orden=1
             ).first()
             if next_lesson:
-                return next_lesson.slug
+                return next_lesson.id
             else:
-                return lesson.slug
+                return lesson.id
             
     elif direction == 'previous':
-        # If there is a previous lesson in the section, return its slug. Otherwise,
+        # If there is a previous lesson in the section, return its id. Otherwise,
         # come back to the previous section.
         previous_lesson = Leccion.objects.filter(
             seccion=lesson.seccion,
             orden=lesson.orden-1
         ).first()
         if previous_lesson:
-            return previous_lesson.slug
+            return previous_lesson.id
         else:
-            # If there is a previous section in the course, return the slug of its last
+            # If there is a previous section in the course, return the id of its last
             # lesson. Otherwise, we reached the beginning of the course
             previous_lesson = Leccion.objects.filter(
                 seccion__orden=lesson.seccion.orden-1,
                 seccion__curso=lesson.seccion.curso
             ).order_by('-orden').first()
             if previous_lesson:
-                return previous_lesson.slug
+                return previous_lesson.id
             else:
-                return lesson.slug
+                return lesson.id

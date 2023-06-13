@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Curso, CursoUsuario, Leccion, LeccionUsuario
-from .utils import get_slug_lesson_to_pass, get_percentage_rating \
+from .utils import get_id_lesson_to_pass, get_percentage_rating \
     , get_lessons_for_section, update_last_seen_user_lesson, leave_review, complete_lesson
 
 
@@ -124,7 +124,7 @@ class LeccionDetailView(DetailView):
         return response
     
     def post(self, request, *args, **kwargs):
-        lesson_slug = request.POST['lesson']
+        lesson_id = request.POST['lesson']
 
         # In the HTML there are two forms, one for leaving a review and the other to mark
         # the lesson as completed.
@@ -136,16 +136,16 @@ class LeccionDetailView(DetailView):
                 request.POST['comment']
             )
         elif request.POST['action'] == 'completed':
-            complete_lesson(lesson_slug, request.user)
+            complete_lesson(lesson_id, request.user)
 
-        return redirect('leccion_detalle', slug=lesson_slug)
+        return redirect('leccion_detalle', pk=lesson_id)
     
 
-def pass_lesson(request, current_lesson_slug, direction):
-    lesson = Leccion.objects.filter(slug=current_lesson_slug).first()
-    slug_lesson_to_pass = get_slug_lesson_to_pass(lesson, direction)
+def pass_lesson(request, current_lesson_id, direction):
+    lesson = Leccion.objects.filter(id=current_lesson_id).first()
+    id_lesson_to_pass = get_id_lesson_to_pass(lesson, direction)
     
-    return redirect('leccion_detalle', slug=slug_lesson_to_pass)
+    return redirect('leccion_detalle', pk=id_lesson_to_pass)
 
 
 def last_seen_user_lesson(request, course_slug):
@@ -157,7 +157,7 @@ def last_seen_user_lesson(request, course_slug):
     ).first()
 
     if user_lesson:
-        return redirect('leccion_detalle', slug=user_lesson.leccion.slug)
+        return redirect('leccion_detalle', pk=user_lesson.leccion.id)
     
     first_course_lesson = Leccion.objects.filter(
         seccion__curso__slug=course_slug,
@@ -165,5 +165,5 @@ def last_seen_user_lesson(request, course_slug):
         orden=1,
         state=True
     ).first()
-    return redirect('leccion_detalle', slug=first_course_lesson.slug)
+    return redirect('leccion_detalle', pk=first_course_lesson.id)
     
