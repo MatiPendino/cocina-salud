@@ -20,7 +20,10 @@ def signup(request):
     
     if request.method == "POST":
         birthdate = request.POST['birthdate']
-        profile_image_try = request.FILES['profile_image']
+        try:
+            profile_image = request.FILES['profile_image']
+        except:
+            profile_image = None
         username = request.POST['username']
         first_name = request.POST['name']
         last_name = request.POST['surname']
@@ -42,7 +45,7 @@ def signup(request):
                     )
                     new_custom_user = Usuario.objects.create(
                         user=new_user,
-                        imagen_perfil=profile_image_try,
+                        imagen_perfil=profile_image,
                         fecha_nacimiento=birthdate
                     )
                     return redirect("signin")

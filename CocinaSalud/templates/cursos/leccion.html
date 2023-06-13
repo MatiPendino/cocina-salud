@@ -7,8 +7,273 @@
 {% endblock stylesheet %}
 
 {% block content %}
-    <h1 class="my-2 text-center">{{lesson.get_curso_nombre}}</h1>
+    <div class="w-100 mx-0" style="overflow-x: hidden;">
+        <div class="lesson-content__container">
+            <div class="col-12 col-md-8">
+                <h1 class="my-2">{{lesson.nombre}}</h1>
+                <iframe width="560" height="315"
+                    id="youtube-video"
+                    src="{{lesson.video}}?controls=0&amp;rel=1&amp;showinfo=0&amp;modestbranding=1"
+                    title="{{lesson.nombre}}" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                </iframe>
+                <!-- <iframe src="https://player.vimeo.com/video/823068139?h=74e6936594" 
+                    width="640" height="360" frameborder="0" 
+                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                </iframe>
+                <p><a href="https://vimeo.com/823068139">Simple Days</a> from <a href="https://vimeo.com/wastedtalent">WASTED TALENT</a> on <a href="https://vimeo.com">Vimeo</a>.</p> -->
+                <p>{{lesson.descripcion|safe}}</p>
 
-    
+                <div class="row">
+                    <a class="btn btn-lesson__pass col-12 col-md-3 mb-3" href="{% url 'pass_lesson' lesson.slug 'previous' %}"><i class="left-arrow bi bi-arrow-left me-2" style="font-size: 16px;"></i>Anterior lección</a>
+                    
+                    <div class="completed__container col-12 col-md-5 mb-3">
+                        {% if leccion_usuario.completada %}
+                            <div class="btn btn-lesson__completed w-100">Lección completada</div>
+                        {% else %}
+                            <form method="post">
+                            {% csrf_token %}
+                                <input type="hidden" name="action" id="action" value="completed" />
+                                <input type="hidden" id="lesson" name="lesson" value="{{lesson.slug}}" />
+                                <button type="submit" class="btn btn-lesson__check w-100">Marcar como completada</button>
+                            </form>
+                        {% endif %}
+                    </div>
 
+                    <a class="btn btn-lesson__pass col-12 col-md-3 mb-3" href="{% url 'pass_lesson' lesson.slug 'next' %}">Siguiente lección<i class="right-arrow bi bi-arrow-right ms-2" style="font-size: 16px;"></i></a>
+                </div>
+
+                <div class="lessons-menu__mobile d-flex d-md-none row w-100 text-center align-items-center py-3 m-0">
+                    <h3 class="py-3 ps-4 h5 m-0">Contenido del curso</h3>
+                    <div class="sections-mobile__container">
+                        {% for seccion, lecciones_usuario in secciones_lecciones_usuario.items %}
+                            <div class="btn-seccion">
+                                <button class="btn btn-success text-start w-100 rounded-0 py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{forloop.counter}}" aria-expanded="false" aria-controls="collapse-{{forloop.counter}}"><i class="bi bi-caret-down-fill mx-2"></i>{{seccion}}</button>
+                            </div>
+                            {% if lesson.seccion.nombre == seccion %}
+                                <div class="collapse multi-collapse show" id="collapse-{{forloop.counter}}">
+                            {% else %}
+                                <div class="collapse multi-collapse" id="collapse-{{forloop.counter}}">
+                            {% endif %}
+                                <ul class="lessons-list__container list-group rounded-0">
+                                    {% for leccion_usuario in lecciones_usuario %}
+                                        {% if leccion_usuario.completada %}
+                                            <li class="list-group-item"><a class="btn" href="{% url 'leccion_detalle' leccion_usuario.leccion.slug %}"><i class="bi bi-check-circle-fill me-2"></i>{{leccion_usuario.get_leccion_nombre}}</a></li>
+                                        {% else %}
+                                            <li class="list-group-item"><a class="btn" href="{% url 'leccion_detalle' leccion_usuario.leccion.slug %}"><i class="bi bi-circle me-2"></i>{{leccion_usuario.get_leccion_nombre}}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="stars__container my-3">
+                    {% if curso_usuario.calificacion %}
+                        <h3>Tu reseña</h3>
+                        <div class="course-stars">
+                            {% if curso_usuario.calificacion == 1 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            {% elif curso_usuario.calificacion == 2 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            {% elif curso_usuario.calificacion == 3 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            {% elif curso_usuario.calificacion == 4 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                            {% elif curso_usuario.calificacion == 5 %}
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            {% endif %}
+                        </div>
+                        <p class="m-0 h6">Tu comentario:</p>
+                        <p class="m-0">{{curso_usuario.opinion|safe}}
+                    {% else %}
+                        <h3>Deja tu reseña</h3>
+                        <form method="post">
+                        {% csrf_token %}
+                            <div class="course-stars">
+                                <i class="bi bi-star" id="star-one" onclick="selectRating(1)"></i>
+                                <i class="bi bi-star" id="star-two" onclick="selectRating(2)"></i>
+                                <i class="bi bi-star" id="star-three" onclick="selectRating(3)"></i>
+                                <i class="bi bi-star" id="star-four" onclick="selectRating(4)"></i>
+                                <i class="bi bi-star" id="star-five" onclick="selectRating(5)"></i>
+                            </div>
+                            <input type="hidden" id="rating" name="rating" />
+                            <input type="hidden" name="action" id="action" value="review" />
+                            <input type="hidden" id="curso_usuario" name="curso_usuario" value="{{curso_usuario.id}}" />
+                            <input type="hidden" id="lesson" name="lesson" value="{{lesson.slug}}" />
+                            <p class="m-0 h6" for="comment">Comentario (opcional):</p>
+                            <textarea id="comment" name="comment" class="form-control" rows="10" placeholder="Tu comentario"></textarea>
+                            <button type="submit" class="btn btn-success mt-2">Enviar reseña</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="lessons-menu__desktop d-none d-md-block" id="lessons-menu__desktop">
+            <h3 class="py-3 ps-4 h5 m-0">Contenido del curso</h3>
+            <div id="sections-container" class="sections-desktop__container">
+                {% for seccion, lecciones_usuario in secciones_lecciones_usuario.items %}
+                    <div class="btn-seccion">
+                        <button class="btn btn-success text-start w-100 rounded-0 py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{forloop.counter}}" aria-expanded="false" aria-controls="collapse-{{forloop.counter}}"><i class="bi bi-caret-down-fill mx-2"></i>{{seccion}}</button>
+                    </div>
+                    {% if lesson.seccion.nombre == seccion %}
+                        <div class="collapse multi-collapse show" id="collapse-{{forloop.counter}}">
+                    {% else %}
+                        <div class="collapse multi-collapse" id="collapse-{{forloop.counter}}">
+                    {% endif %}
+                        <ul class="lessons-list__container list-group rounded-0">
+                            {% for leccion_usuario in lecciones_usuario %}
+                                {% if leccion_usuario.completada %}
+                                    <li class="list-group-item"><a class="btn" href="{% url 'leccion_detalle' leccion_usuario.leccion.slug %}"><i class="bi bi-check-circle-fill me-2"></i>{{leccion_usuario.get_leccion_nombre}}</a></li>
+                                {% else %}
+                                    <li class="list-group-item"><a class="btn" href="{% url 'leccion_detalle' leccion_usuario.leccion.slug %}"><i class="bi bi-circle me-2"></i>{{leccion_usuario.get_leccion_nombre}}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
 {% endblock content %}
+
+
+{% block script %}
+    <script>
+        window.addEventListener('scroll', () => {
+            const desktopDiv = document.getElementById('lessons-menu__desktop');
+            const sectionsContainer = document.getElementById('sections-container');
+            let scrollPosition = window.scrollY;
+            if (scrollPosition > 100 && scrollPosition < 800) {
+                desktopDiv.classList.add('desktop-top');
+                desktopDiv.classList.remove('d-md-none');
+                sectionsContainer.setAttribute('style', 'height: 400px');
+            }
+            else if (scrollPosition > 800) {
+                desktopDiv.classList.remove('desktop-top');
+                desktopDiv.classList.add('d-md-none');
+                sectionsContainer.setAttribute('style', 'height: 350px');
+            }
+            else {
+                desktopDiv.classList.remove('desktop-top');
+                desktopDiv.classList.remove('d-md-none');
+                sectionsContainer.setAttribute('style', 'height: 350px');
+            }
+        });
+
+        const oneStar = document.getElementById('star-one');
+        const twoStars = document.getElementById('star-two');
+        const threeStars = document.getElementById('star-three');
+        const fourStars = document.getElementById('star-four');
+        const fiveStars = document.getElementById('star-five');
+        const ratingInput = document.getElementById('rating');
+        function selectRating(rating) {
+            ratingInput.value = rating;
+            switch (rating) {
+                case 1:
+                    // Limpiamos las demás estrellas
+                    twoStars.classList.remove('bi-star-fill');
+                    threeStars.classList.remove('bi-star-fill');
+                    fourStars.classList.remove('bi-star-fill');
+                    fiveStars.classList.remove('bi-star-fill');
+                    twoStars.classList.add('bi-star');
+                    threeStars.classList.add('bi-star');
+                    fourStars.classList.add('bi-star');
+                    fiveStars.classList.add('bi-star');
+                    // Rellenamos la estrella actual
+                    oneStar.classList.remove('bi-star');
+                    oneStar.classList.add('bi-star-fill');
+                    break;
+                case 2:
+                    // Limpiamos las demás estrellas 
+                    threeStars.classList.remove('bi-star-fill');
+                    fourStars.classList.remove('bi-star-fill');
+                    fiveStars.classList.remove('bi-star-fill');
+                    threeStars.classList.add('bi-star');
+                    fourStars.classList.add('bi-star');
+                    fiveStars.classList.add('bi-star');
+                    // Rellenamos las estrella actuales
+                    oneStar.classList.remove('bi-star');
+                    twoStars.classList.remove('bi-star');
+                    oneStar.classList.add('bi-star-fill');
+                    twoStars.classList.add('bi-star-fill');
+                    break;
+                case 3:
+                    fourStars.classList.remove('bi-star-fill');
+                    fiveStars.classList.remove('bi-star-fill');
+                    fourStars.classList.add('bi-star');
+                    fiveStars.classList.add('bi-star');
+
+                    oneStar.classList.remove('bi-star');
+                    twoStars.classList.remove('bi-star');
+                    threeStars.classList.remove('bi-star');
+                    oneStar.classList.add('bi-star-fill');
+                    twoStars.classList.add('bi-star-fill');
+                    threeStars.classList.add('bi-star-fill');
+                    break;
+                case 4:
+                    fiveStars.classList.remove('bi-star-fill');
+                    fiveStars.classList.add('bi-star');
+
+                    oneStar.classList.remove('bi-star');
+                    twoStars.classList.remove('bi-star');
+                    threeStars.classList.remove('bi-star');
+                    fourStars.classList.remove('bi-star');
+                    oneStar.classList.add('bi-star-fill');
+                    twoStars.classList.add('bi-star-fill');
+                    threeStars.classList.add('bi-star-fill');
+                    fourStars.classList.add('bi-star-fill');
+                    break;
+                case 5:
+                    oneStar.classList.remove('bi-star');
+                    twoStars.classList.remove('bi-star');
+                    threeStars.classList.remove('bi-star');
+                    fourStars.classList.remove('bi-star');
+                    fiveStars.classList.remove('bi-star');
+                    oneStar.classList.add('bi-star-fill');
+                    twoStars.classList.add('bi-star-fill');
+                    threeStars.classList.add('bi-star-fill');
+                    fourStars.classList.add('bi-star-fill');
+                    fiveStars.classList.add('bi-star-fill');
+                    break;
+                default:
+                    console.log('Oops');
+            }
+        }
+
+        const youtubeVideo = document.getElementById('youtube-video');
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            youtubeVideo.width = 560;
+            youtubeVideo.height = 315;
+          } else {
+            youtubeVideo.width = 350;
+            youtubeVideo.height = 200;
+          }
+    </script>
+{% endblock script %}
