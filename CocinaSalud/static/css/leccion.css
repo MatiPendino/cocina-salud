@@ -1,0 +1,137 @@
+
+/* General */
+h1 {
+    font-family: var(--font-karla);
+    font-size: 1.7rem;
+}
+
+@media(min-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Lesson content container */
+.lesson-content__container {
+    padding-left: .75rem;
+    padding-right: .75rem;
+}
+
+@media(min-width: 768px) {
+    .lesson-content__container {
+        padding-left: 1.5rem;
+        padding-right: 6rem;
+    }    
+}
+
+/* Button pass and button completed lesson */
+.btn-lesson__pass,
+.btn-lesson__check,
+.btn-lesson__completed {
+    color: white;
+    border-radius: 10px;
+}
+
+.btn-lesson__pass {
+    background-color: var(--golden);
+}
+
+.btn-lesson__check {
+    background-color: var(--primary-color);
+    transition: all .3s ease-in-out;
+}
+
+.btn-lesson__completed {
+    background-color: var(--lighter-primary-color);
+}
+
+@media(max-width: 768px) {
+    .btn-lesson__check {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.btn-lesson__pass:hover,
+.btn-lesson__check:hover,
+.btn-lesson__completed:hover {
+    color: white;
+    border-radius: 10px;
+}
+
+.btn-lesson__pass:hover {
+    background-color: var(--golden);
+}
+
+.btn-lesson__check:hover {
+    background-color: var(--lighter-primary-color);
+}
+
+.btn-lesson__completed:hover {
+    background-color: var(--lighter-primary-color);
+}
+
+.btn-lesson__pass:hover .left-arrow,
+.btn-lesson__pass:hover .right-arrow {
+    transition: all .3s ease-in-out;
+}
+
+.btn-lesson__pass:hover .left-arrow {
+    margin-right: 1rem!important;
+}
+
+.btn-lesson__pass:hover .right-arrow {
+    margin-left: 1rem!important;
+}
+
+@media(max-width: 768px) {
+    .completed__container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.btn-lesson__completed {
+    pointer-events: none;
+}
+
+
+/* Lessons menu */
+.lessons-list__container i {
+    color: var(--primary-color)!important;
+}
+
+.btn-seccion {
+    border-bottom: 1px solid white;
+}
+
+/* Lessons menu desktop */
+.lessons-menu__desktop {
+    width: 445px; 
+    position: fixed; 
+    left: 62%; 
+    top: 20%;
+    transition: top .3s ease-in-out;
+    background-color: white;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.45);
+}
+
+.sections-desktop__container {
+    height: 350px;
+    overflow-y: auto;
+}
+
+.lessons-menu__desktop h3 {
+    border-bottom: 1px solid black;
+}
+
+/* Review */
+.course-stars i {
+    color: var(--golden);
+    font-size: 2rem;
+}
+
+/* Utils */
+.desktop-top {
+    top: 2%;
+}

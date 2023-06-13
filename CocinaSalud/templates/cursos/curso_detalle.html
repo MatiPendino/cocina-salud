@@ -88,7 +88,7 @@
                     <div class="row">
                         <p class="w-auto my-auto fw-bold h5">Profesor:</p>
                         <div class="profile-image__container">
-                            <img src="{{MEDIA_URL}}{{course.profesor.imagen_perfil}}" alt="Profile Image" />
+                            <img class="w-100 h-100" src="{{MEDIA_URL}}{{course.profesor.imagen_perfil}}" alt="Profile Image" />
                         </div>
                         <div class="w-auto profile-user__container">
                             <p>{{course.profesor.user.get_full_name}}</p>
@@ -377,6 +377,8 @@
             </div>
         </div>
     </div>
+    <!-- TODO: verificar que solamente aparezcan reseñas con algún comentario -->
+    <!-- TODO: agregar una imagen por default en caso de que el usuario no tenga -->
 {% endblock content %}
 
 {% block script %}
@@ -408,6 +410,6 @@
                 desktopDiv.classList.remove('desktop-top');
                 desktopDiv.classList.remove('d-md-none');
             }
-        })
+        });
     </script>
 {% endblock script %}

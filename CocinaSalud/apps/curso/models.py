@@ -65,6 +65,9 @@ class Seccion(BaseModel):
     def get_lecciones(self):
         return Leccion.objects.filter(seccion__id=self.id, state=True)
     
+    def get_lecciones_usuario(self):
+        return LeccionUsuario.objects.filter(leccion__seccion__id=self.id, state=True)
+    
     def __str__(self):
         return f'{self.nombre} - {self.curso.nombre}'
     
@@ -80,12 +83,17 @@ class Leccion(BaseModel):
     duracion = models.PositiveSmallIntegerField('Duración de lección', help_text='Duración de la lección (en minutos)', default=0)
     video = models.URLField('Video de la lección', help_text='Insertar la URL del video de la lección', null=True, blank=True)
     orden = models.PositiveSmallIntegerField('Orden de la lección')
+    slug = models.SlugField('Slug de la lección', help_text='Debe ser escrito todo en minúsculas y sin espacios')
 
     def get_seccion_nombre(self):
         return self.seccion.nombre
     
     def get_curso_nombre(self):
         return self.seccion.curso.nombre
+    
+    def get_secciones_curso(self):
+        curso = Curso.objects.filter(id=self.seccion.curso.id).first()
+        return curso.get_secciones()
     
     def __str__(self):
         return f'{self.get_curso_nombre()} - {self.nombre}'
@@ -114,6 +122,9 @@ class LeccionUsuario(BaseModel):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     completada = models.BooleanField('Lección completada', default=False)
     ultima = models.BooleanField('Última lección vista por el usuario', default=False)
+
+    def get_leccion_nombre(self):
+        return self.leccion.nombre
 
     def __str__(self):
         return f'{self.leccion.nombre} ({self.leccion.get_curso_nombre()}) - {self.usuario.get_username()}'

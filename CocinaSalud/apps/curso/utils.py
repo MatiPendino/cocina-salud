@@ -1,3 +1,106 @@
+from apps.curso.models import Leccion, LeccionUsuario, CursoUsuario
 
-def get_len_number_stars(ratings, filter_rating):
-    return len([rating for rating in ratings if rating == filter_rating])
+
+def get_percentage_rating(rating, num_ratings):
+    return round(rating / num_ratings * 100, 2) if num_ratings > 0 else 0
+
+
+def get_lessons_for_section(lecciones_usuario, seccion):
+    return [
+        leccion_usuario for leccion_usuario in lecciones_usuario
+        if leccion_usuario.leccion.seccion == seccion
+    ]
+
+
+def update_last_seen_user_lesson(instance):
+    # Remove the "last" check in the previous seen user lesson
+    last_seen_user_lesson = LeccionUsuario.objects.filter(
+        usuario__user=instance.request.user,
+        leccion__seccion__curso=instance.object.seccion.curso,
+        ultima=True
+    ).first()
+    if last_seen_user_lesson:
+        last_seen_user_lesson.ultima = False
+        last_seen_user_lesson.save()
+
+    # Add the "last" check in the current user lesson
+    current_user_lesson = LeccionUsuario.objects.filter(
+        usuario__user=instance.request.user,
+        leccion=instance.object,
+        state=True
+    ).first()
+    current_user_lesson.ultima = True
+    current_user_lesson.save()
+
+
+def leave_review(curso_usuario_id, rating, comment):
+    # If the user leaves a review, will update curso_usuario object 
+    # and course average qualification
+    curso_usuario = CursoUsuario.objects.filter(id=curso_usuario_id).first()
+    curso = curso_usuario.curso
+    rating = rating
+    opinion = comment
+    if curso_usuario:
+        curso_usuario.calificacion = rating
+        curso_usuario.opinion = opinion
+        curso_usuario.save()
+
+    cursos_usuarios = CursoUsuario.objects.filter(state=True, curso=curso, calificacion__gte=1)
+    sum_stars = sum([curso_usuario.calificacion for curso_usuario in cursos_usuarios])
+    average_calification = sum_stars / len(cursos_usuarios)
+    curso.calificacion = average_calification
+    curso.save()
+
+
+def complete_lesson(lesson_slug, user):
+    user_lesson = LeccionUsuario.objects.filter(
+        usuario__user=user,
+        leccion__slug=lesson_slug
+    ).first()
+    user_lesson.completada = True
+    user_lesson.save()
+
+
+def get_slug_lesson_to_pass(lesson, direction):
+    if direction == 'next':
+        # If there is a following lesson in the section, return its slug. Otherwise,
+        # pass to the next section.
+        next_lesson = Leccion.objects.filter(
+            seccion=lesson.seccion,
+            orden=lesson.orden+1
+        ).first()
+        if next_lesson:
+            return next_lesson.slug
+        else:
+            # If there is a following section in the course, return the slug of its first
+            # lesson. Otherwise, we reached the final of the course
+            next_lesson = Leccion.objects.filter(
+                seccion__orden=lesson.seccion.orden+1,
+                seccion__curso=lesson.seccion.curso,
+                orden=1
+            ).first()
+            if next_lesson:
+                return next_lesson.slug
+            else:
+                return lesson.slug
+            
+    elif direction == 'previous':
+        # If there is a previous lesson in the section, return its slug. Otherwise,
+        # come back to the previous section.
+        previous_lesson = Leccion.objects.filter(
+            seccion=lesson.seccion,
+            orden=lesson.orden-1
+        ).first()
+        if previous_lesson:
+            return previous_lesson.slug
+        else:
+            # If there is a previous section in the course, return the slug of its last
+            # lesson. Otherwise, we reached the beginning of the course
+            previous_lesson = Leccion.objects.filter(
+                seccion__orden=lesson.seccion.orden-1,
+                seccion__curso=lesson.seccion.curso
+            ).order_by('-orden').first()
+            if previous_lesson:
+                return previous_lesson.slug
+            else:
+                return lesson.slug

@@ -1,9 +1,8 @@
-from typing import Any, Dict
-from django.db.models.query import QuerySet
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Curso, CursoUsuario, Leccion, LeccionUsuario
-from .utils import get_len_number_stars
+from .utils import get_slug_lesson_to_pass, get_percentage_rating \
+    , get_lessons_for_section, update_last_seen_user_lesson, leave_review, complete_lesson
 
 
 class CursosListView(ListView):
@@ -20,31 +19,34 @@ class CursoDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cursos_usuarios = CursoUsuario.objects.filter(curso=context['course'], state=True)
-        # Receive all the course ratings, and convert them in a list
+
+        cursos_usuarios = CursoUsuario.objects.filter(
+            curso=context['course'], 
+            state=True, 
+            calificacion__gte=1
+        )
+        context['cursos_usuarios'] = cursos_usuarios
+
         ratings = list(cursos_usuarios.values_list('calificacion', flat=True))
-        # Obtain the length of each rating, and unpack the list in their varibles
-        one_star, two_stars, three_stars, four_stars, five_stars = [get_len_number_stars(ratings, rating) for rating in range(1, 6)]
+        # Obtain how many qualifications each rating has
+        one_star, two_stars, three_stars, four_stars, five_stars = [
+            ratings.count(rating) for rating in range(1, 6)
+        ]
         context['one_star'] = one_star
         context['two_stars'] = two_stars
         context['three_stars'] = three_stars
         context['four_stars'] = four_stars
         context['five_stars'] = five_stars
-        context['cursos_usuarios'] = cursos_usuarios
-        quantity_ratings = sum([one_star, two_stars, three_stars, four_stars, five_stars])
-        context['num_ratings'] = quantity_ratings
-        if quantity_ratings > 0:
-            context['one_star_p'] = one_star / quantity_ratings * 100
-            context['two_stars_p'] = two_stars / quantity_ratings * 100
-            context['three_stars_p'] = three_stars / quantity_ratings * 100
-            context['four_stars_p'] = four_stars / quantity_ratings * 100
-            context['five_stars_p'] = five_stars / quantity_ratings * 100
-        else:
-            context['one_star_p'] = 0
-            context['two_stars_p'] = 0
-            context['three_stars_p'] = 0
-            context['four_stars_p'] = 0
-            context['five_stars_p'] = 0
+
+        num_ratings = sum([one_star, two_stars, three_stars, four_stars, five_stars])
+        context['num_ratings'] = num_ratings
+
+        context['one_star_p'] = get_percentage_rating(one_star, num_ratings)
+        context['two_stars_p'] = get_percentage_rating(two_stars, num_ratings)
+        context['three_stars_p'] = get_percentage_rating(three_stars, num_ratings)
+        context['four_stars_p'] = get_percentage_rating(four_stars, num_ratings)
+        context['five_stars_p'] = get_percentage_rating(five_stars, num_ratings)
+
         return context
     
 
@@ -59,11 +61,17 @@ class MisCursosListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         # Make a list with the complete percentage of the user courses
-        cursos_porc_completado = [user_course.curso.get_porcentaje_completado_curso(self.request.user) for user_course in context['user_courses']]
+        cursos_porc_completado = [
+            user_course.curso.get_porcentaje_completado_curso(self.request.user) 
+            for user_course in context['user_courses']
+        ]
+
         # Override context['user_courses']. Zip the queryset (converted to list) user_courses
         # and the complete percentage list built above. Convert the outcome to dict
         context['user_courses'] = dict(zip(list(context['user_courses']), cursos_porc_completado))
+
         return context
     
 
@@ -77,5 +85,85 @@ class LeccionDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(context)
+        curso = context['lesson'].seccion.curso
+
+        curso_usuario = CursoUsuario.objects.filter(
+            curso__id=curso.id,
+            usuario__user=self.request.user
+        ).first()
+        context['curso_usuario'] = curso_usuario
+
+        # Obtain all the course sections and the user lessons
+        secciones = list(context['lesson'].get_secciones_curso())
+        lecciones_usuario = LeccionUsuario.objects.filter(
+            usuario__user=self.request.user, 
+            leccion__seccion__curso=curso, 
+            state=True
+        ).order_by('leccion__orden')
+
+        # Creation of a dictionary where the keys are the section names, and values
+        # their corresponding list of user lessons
+        secciones_lecciones_usuario = {
+            seccion.nombre: get_lessons_for_section(lecciones_usuario, seccion)
+            for seccion in secciones
+        }
+        context['secciones_lecciones_usuario'] = secciones_lecciones_usuario
+
+        current_user_lesson = LeccionUsuario.objects.filter(
+            usuario__user=self.request.user,
+            leccion=context['lesson']
+        ).first()
+        context['leccion_usuario'] = current_user_lesson
+
         return context
+    
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        update_last_seen_user_lesson(self)
+
+        return response
+    
+    def post(self, request, *args, **kwargs):
+        lesson_slug = request.POST['lesson']
+
+        # In the HTML there are two forms, one for leaving a review and the other to mark
+        # the lesson as completed.
+        # In both forms, created a flag variable "action", to control which action we will apply
+        if request.POST['action'] == 'review':
+            leave_review(
+                request.POST['curso_usuario'],
+                request.POST['rating'],
+                request.POST['comment']
+            )
+        elif request.POST['action'] == 'completed':
+            complete_lesson(lesson_slug, request.user)
+
+        return redirect('leccion_detalle', slug=lesson_slug)
+    
+
+def pass_lesson(request, current_lesson_slug, direction):
+    lesson = Leccion.objects.filter(slug=current_lesson_slug).first()
+    slug_lesson_to_pass = get_slug_lesson_to_pass(lesson, direction)
+    
+    return redirect('leccion_detalle', slug=slug_lesson_to_pass)
+
+
+def last_seen_user_lesson(request, course_slug):
+    user_lesson = LeccionUsuario.objects.filter(
+        usuario__user=request.user,
+        leccion__seccion__curso__slug=course_slug,
+        ultima=True,
+        state=True
+    ).first()
+
+    if user_lesson:
+        return redirect('leccion_detalle', slug=user_lesson.leccion.slug)
+    
+    first_course_lesson = Leccion.objects.filter(
+        seccion__curso__slug=course_slug,
+        seccion__orden=1,
+        orden=1,
+        state=True
+    ).first()
+    return redirect('leccion_detalle', slug=first_course_lesson.slug)
+    
