@@ -300,9 +300,15 @@
                         <ul class="list-group">
                             {% for curso_usuario in cursos_usuarios %}
                                 <li class="row list-group-item" style="display: flex!important;">
-                                    <div class="profile-image__container col-3 mt-4">
-                                        <img class="w-100 h-100" src="{{MEDIA_URL}}{{curso_usuario.usuario.imagen_perfil}}" alt="User Profile Image" />
-                                    </div>
+                                    {% if curso_usuario.usuario.imagen_perfil %}
+                                        <div class="profile-image__container col-3 mt-3">
+                                            <img class="w-100 h-100" src="{{MEDIA_URL}}{{curso_usuario.usuario.imagen_perfil}}" alt="User Profile Image" />
+                                        </div>
+                                    {% else %}
+                                        <div class="profile-image__container col-3 mt-3">
+                                            <img class="w-100 h-100" src="{% static 'img/no_profile_pic.jpg' %}" alt="User Profile Image" />
+                                        </div>
+                                    {% endif %}
                                     <div class="col-9">
                                         <p class="my-0">{{curso_usuario.usuario.get_username}}</p>
                                         <div class="course-stars">
@@ -377,8 +383,6 @@
             </div>
         </div>
     </div>
-    <!-- TODO: verificar que solamente aparezcan reseñas con algún comentario -->
-    <!-- TODO: agregar una imagen por default en caso de que el usuario no tenga -->
 {% endblock content %}
 
 {% block script %}

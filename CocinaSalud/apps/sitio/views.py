@@ -1,20 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
 from apps.usuario_custom.models import Usuario
 
 
-def index(request):
-    return render(request, "index.html")
-
-
-def acerca_de(request):
-    return render(request, "acerca_de.html")
-
-
 def signup(request):
-
     if request.user.is_authenticated:
         return redirect('usuario')
     
@@ -90,5 +80,3 @@ def page_not_found_error(request, exception):
 
 def permission_denied_error(request, exception):
     return render(request, '403.html')
-
-# TODO: migrar a vistas basadas en clases

@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Curso, CursoUsuario, Leccion, LeccionUsuario
 from .utils import get_id_lesson_to_pass, get_percentage_rating \
-    , get_lessons_for_section, update_last_seen_user_lesson, leave_review, complete_lesson
+    , get_lessons_for_section, update_last_seen_user_lesson, leave_review, complete_lesson \
+    , has_user_course
 
 
 class CursosListView(ListView):
@@ -51,7 +52,6 @@ class CursoDetailView(DetailView):
     
 
 class MisCursosListView(ListView):
-    # TODO: ver cómo meterle login_required
     model = CursoUsuario
     context_object_name = 'user_courses'
     template_name = 'cursos/mis_cursos.html'
@@ -119,6 +119,9 @@ class LeccionDetailView(DetailView):
     
     def get(self, request, *args, **kwargs):
         response = super().get(request, *args, **kwargs)
+        if not has_user_course(self):
+            return redirect('curso_detalle', slug=self.object.seccion.curso.slug)
+        
         update_last_seen_user_lesson(self)
 
         return response
