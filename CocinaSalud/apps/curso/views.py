@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
+from apps.usuario_custom.models import Usuario
+from apps.movimientos.models import MedioDePago, Movimiento
+from apps.movimientos.utils import generate_unique_code
 from .models import Curso, CursoUsuario, Leccion, LeccionUsuario
 from .utils import get_id_lesson_to_pass, get_percentage_rating \
     , get_lessons_for_section, update_last_seen_user_lesson, leave_review, complete_lesson \
@@ -169,4 +172,39 @@ def last_seen_user_lesson(request, course_slug):
         state=True
     ).first()
     return redirect('leccion_detalle', pk=first_course_lesson.id)
+
+
+def comprar_curso(request, course_slug):
+    course = Curso.objects.filter(slug=course_slug, state=True).first()
+    precio = str(course.precio).replace(',', '.')
+    codigo_operacion = generate_unique_code()
+    usuario = Usuario.objects.filter(user=request.user, state=True).first()
+    # TODO: cuando tenga más medios de pago, modificar la lógica del proceso de 
+    # compra. Una idea sería agregar un paso anterior donde el usuario especifique que
+    # medio de pago desea utilizar
+    paypal_mdp = MedioDePago.objects.filter(
+        test=True, 
+        tipo=MedioDePago.TIPO_PAYPAL, 
+        state=True
+    ).first()
+
+
+    movimiento = Movimiento.objects.create(
+        usuario=usuario,
+        curso=course,
+        medio_de_pago=paypal_mdp,
+        importe=course.precio,
+        descripcion=f'Compra curso {course.nombre} por parte de {usuario.get_username()} a través de {paypal_mdp.nombre}',
+        condicion=Movimiento.ESTADO_INICIADA,
+        codigo_operacion=codigo_operacion
+    )
+
+    context = {
+        'course': course,
+        'paypal_mdp': paypal_mdp,
+        'movimiento': movimiento,
+        'precio': precio
+    }
+
+    return render(request, 'cursos/comprar_curso.html', context)
     

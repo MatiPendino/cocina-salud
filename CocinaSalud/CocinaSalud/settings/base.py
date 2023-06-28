@@ -12,6 +12,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
+# Allow popups (necessary for Django > 4.0)
+SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
