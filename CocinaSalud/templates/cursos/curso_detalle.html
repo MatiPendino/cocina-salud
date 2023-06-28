@@ -362,7 +362,7 @@
             </div>
             <div class="p-3">
                 <p class="course-price mb-2">${{course.precio}}</p>
-                <button type="button" class="btn btn-success w-100 mb-3">COMPRAR CURSO</button>
+                <a href="{% url 'comprar_curso' course.slug %}" class="btn btn-success w-100 mb-3">COMPRAR CURSO</a>
                 <div>
                     <p class="h5">Este curso incluye:</p>
                     <ul>
@@ -379,7 +379,7 @@
                 <span class="course-price">${{course.precio}}</span>
             </div>
             <div class="col-9">
-                <button type="button" class="btn btn-success w-100">COMPRAR CURSO</button>
+                <a href="{% url 'comprar_curso' course.slug %}" class="btn btn-success w-100">COMPRAR CURSO</a>
             </div>
         </div>
     </div>

@@ -1,0 +1,13 @@
+
+.payment-container h3 {
+    font-size: 2.5rem;
+}
+
+h5, label, th, td {
+    font-family: var(--font-karla);
+    font-weight: 600;
+}
+
+.purchase-detail {
+    background-color: rgb(245, 245, 245);
+}

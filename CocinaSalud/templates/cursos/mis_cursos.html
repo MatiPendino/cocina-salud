@@ -11,8 +11,8 @@
 
     <div class="my-courses mx-0 row" style="overflow-x: hidden;">
         {% for user_course, percentage_completed in user_courses.items %}
-            <a href="{% url 'last_seen_user_lesson' user_course.curso.slug %}" style="text-decoration: none; color: var(--black);">
-                <div class="course col-12 col-md-3 mb-3">
+            <a href="{% url 'last_seen_user_lesson' user_course.curso.slug %}" class="col-12 col-md-3" style="text-decoration: none; color: var(--black);">
+                <div class="course mb-3">
                     <div class="course-image">
                         <img class="w-100 borde" src="{{MEDIA_URL}}{{user_course.curso.imagen_curso}}" alt="Imagen curso {{user_course.curso.nombre}}" />
                     </div>
