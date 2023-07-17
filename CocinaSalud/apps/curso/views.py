@@ -183,7 +183,7 @@ def comprar_curso(request, course_slug):
     # compra. Una idea sería agregar un paso anterior donde el usuario especifique que
     # medio de pago desea utilizar
     paypal_mdp = MedioDePago.objects.filter(
-        test=True, 
+        # test=True, 
         tipo=MedioDePago.TIPO_PAYPAL, 
         state=True
     ).first()
