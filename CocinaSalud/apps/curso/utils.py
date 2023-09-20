@@ -60,16 +60,16 @@ def leave_review(curso_usuario_id, rating, comment):
     curso.save()
 
 
-def complete_lesson(lesson_id, user):
+def complete_lesson(lesson_slug, user):
     user_lesson = LeccionUsuario.objects.filter(
         usuario__user=user,
-        leccion__id=lesson_id
+        leccion__slug=lesson_slug
     ).first()
     user_lesson.completada = True
     user_lesson.save()
 
 
-def get_id_lesson_to_pass(lesson, direction):
+def get_slug_lesson_to_pass(lesson, direction):
     if direction == 'next':
         # If there is a following lesson in the section, return its id. Otherwise,
         # pass to the next section.
@@ -78,7 +78,7 @@ def get_id_lesson_to_pass(lesson, direction):
             orden=lesson.orden+1
         ).first()
         if next_lesson:
-            return next_lesson.id
+            return next_lesson.slug
         else:
             # If there is a following section in the course, return the id of its first
             # lesson. Otherwise, we reached the final of the course
@@ -88,9 +88,9 @@ def get_id_lesson_to_pass(lesson, direction):
                 orden=1
             ).first()
             if next_lesson:
-                return next_lesson.id
+                return next_lesson.slug
             else:
-                return lesson.id
+                return lesson.slug
             
     elif direction == 'previous':
         # If there is a previous lesson in the section, return its id. Otherwise,
@@ -100,7 +100,7 @@ def get_id_lesson_to_pass(lesson, direction):
             orden=lesson.orden-1
         ).first()
         if previous_lesson:
-            return previous_lesson.id
+            return previous_lesson.slug
         else:
             # If there is a previous section in the course, return the id of its last
             # lesson. Otherwise, we reached the beginning of the course
@@ -109,6 +109,6 @@ def get_id_lesson_to_pass(lesson, direction):
                 seccion__curso=lesson.seccion.curso
             ).order_by('-orden').first()
             if previous_lesson:
-                return previous_lesson.id
+                return previous_lesson.slug
             else:
-                return lesson.id
+                return lesson.slug

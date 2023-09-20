@@ -10,7 +10,13 @@ h1 {
 }
 
 .gallery__box {
-    margin-bottom: 75px;
+    margin-bottom: 20px;
+}
+
+@media(min-width: 768px) {
+    .gallery__box {
+        margin-bottom: 50px;
+    }
 }
 
 .gallery__box a {
@@ -39,13 +45,7 @@ h1 {
 
 .gallery__title {
     font-family: var(--font-raleway);
-    font-size: 25px;
-}
-
-@media(min-width: 768px) {
-    .gallery__title {
-        font-size: 20px;
-    }
+    font-size: 20px;
 }
 
 /* Class called when the user hovers recipe's title */

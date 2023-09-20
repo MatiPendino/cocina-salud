@@ -10,8 +10,8 @@ class NutricionIndex(ListView):
     queryset = Nutricion.objects.filter(state=True)
 
 
-def ver_nutricion(request, nutricion_id):
-    nutricion = Nutricion.objects.filter(id=nutricion_id).first()
+def ver_nutricion(request, nutricion_slug):
+    nutricion = Nutricion.objects.filter(slug=nutricion_slug).first()
 
     if not nutricion:
         return redirect('nutricion')

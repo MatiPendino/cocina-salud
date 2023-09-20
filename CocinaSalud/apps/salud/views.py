@@ -10,9 +10,9 @@ class SaludIndex(ListView):
     queryset = Salud.objects.filter(state=True)
 
 
-def ver_salud(request, salud_id):
-    salud = Salud.objects.filter(id=salud_id).first()
-    items_salud = ItemSalud.objects.filter(salud__id=salud_id).order_by('numero_item')
+def ver_salud(request, salud_slug):
+    salud = Salud.objects.filter(slug=salud_slug).first()
+    items_salud = ItemSalud.objects.filter(salud=salud).order_by('numero_item')
 
     if not salud:
         return redirect('salud')

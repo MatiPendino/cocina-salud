@@ -16,12 +16,12 @@
     <div class="row d-flex mx-4">
         {% for nutricion in nutricion_posts %}
             <div class="col-12 col-md-6 col-lg-4 col-xl-3 gallery__box">
-                <a href="{% url 'ver_nutricion' nutricion.id %}">
+                <a href="{% url 'ver_nutricion' nutricion.slug %}">
                     <div id="image-{{forloop.counter}}" class="gallery__image__container mb-2">
                         {% if nutricion.imagen_miniatura %}
-                            <img alt="Nutrición" class="w-100 " src="{{MEDIA_URL}}{{nutricion.imagen_miniatura}}">
+                            <img alt="Nutrición" class="w-100" height="300px" src="{{MEDIA_URL}}{{nutricion.imagen_miniatura}}">
                         {% else %}
-                            <img alt="No image" class="w-100 " src="{% static 'img/no_image.jpg' %}">
+                            <img alt="No image" class="w-100" height="300px" src="{% static 'img/no_image.jpg' %}">
                         {% endif %}
                     </div>
                     <p id="titulo-{{forloop.counter}}" class="gallery__title centrar-mobile text-center text-uppercase">{{nutricion.titulo}}</p>
