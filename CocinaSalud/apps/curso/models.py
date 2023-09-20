@@ -78,10 +78,11 @@ class Seccion(BaseModel):
 
 class Leccion(BaseModel):
     nombre = models.CharField('Nombre de lección', max_length=255)
+    slug = models.SlugField('Slug de la lección', blank=True, null=True, help_text='Debe ser escrito todo en minúsculas y sin espacios')
     seccion = models.ForeignKey(Seccion, on_delete=models.CASCADE, verbose_name='Sección de la lección')
     descripcion = RichTextField('Descripción de lección', null=True, blank=True)
     duracion = models.PositiveSmallIntegerField('Duración de lección', help_text='Duración de la lección (en minutos)', default=0)
-    video = models.URLField('Video de la lección', help_text='Insertar la URL del video de la lección', null=True, blank=True)
+    video_id = models.CharField('Video de la lección', help_text='Insertar el id del video de la lección', null=True, blank=True, max_length=20)
     orden = models.PositiveSmallIntegerField('Orden de la lección')
 
     def get_seccion_nombre(self):

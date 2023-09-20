@@ -13,7 +13,7 @@
                 <h1 class="my-2">{{lesson.nombre}}</h1>
                 <iframe width="560" height="315"
                     id="youtube-video"
-                    src="{{lesson.video}}?controls=0&amp;rel=1&amp;showinfo=0&amp;modestbranding=1"
+                    src="https://www.youtube.com/embed/{{lesson.video_id}}?controls=0&amp;rel=1&amp;showinfo=0&amp;modestbranding=1"
                     title="{{lesson.nombre}}" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
                 </iframe>
@@ -25,7 +25,7 @@
                 <p>{{lesson.descripcion|safe}}</p>
 
                 <div class="row">
-                    <a class="btn btn-lesson__pass col-12 col-md-3 mb-3" href="{% url 'pass_lesson' lesson.id 'previous' %}"><i class="left-arrow bi bi-arrow-left me-2" style="font-size: 16px;"></i>Anterior lección</a>
+                    <a class="btn btn-lesson__pass col-12 col-md-3 mb-3" href="{% url 'pass_lesson' lesson.slug 'previous' %}"><i class="left-arrow bi bi-arrow-left me-2" style="font-size: 16px;"></i>Anterior lección</a>
                     
                     <div class="completed__container col-12 col-md-5 mb-3">
                         {% if leccion_usuario.completada %}
@@ -34,13 +34,13 @@
                             <form method="post">
                             {% csrf_token %}
                                 <input type="hidden" name="action" id="action" value="completed" />
-                                <input type="hidden" id="lesson" name="lesson" value="{{lesson.id}}" />
+                                <input type="hidden" id="lesson" name="lesson" value="{{lesson.slug}}" />
                                 <button type="submit" class="btn btn-lesson__check w-100">Marcar como completada</button>
                             </form>
                         {% endif %}
                     </div>
 
-                    <a class="btn btn-lesson__pass col-12 col-md-3 mb-3" href="{% url 'pass_lesson' lesson.id 'next' %}">Siguiente lección<i class="right-arrow bi bi-arrow-right ms-2" style="font-size: 16px;"></i></a>
+                    <a class="btn btn-lesson__pass col-12 col-md-3 mb-3" href="{% url 'pass_lesson' lesson.slug 'next' %}">Siguiente lección<i class="right-arrow bi bi-arrow-right ms-2" style="font-size: 16px;"></i></a>
                 </div>
 
                 <div class="lessons-menu__mobile d-flex d-md-none row w-100 text-center align-items-center py-3 m-0">
@@ -121,7 +121,7 @@
                             <input type="hidden" id="rating" name="rating" />
                             <input type="hidden" name="action" id="action" value="review" />
                             <input type="hidden" id="curso_usuario" name="curso_usuario" value="{{curso_usuario.id}}" />
-                            <input type="hidden" id="lesson" name="lesson" value="{{lesson.id}}" />
+                            <input type="hidden" id="lesson" name="lesson" value="{{lesson.slug}}" />
                             <p class="m-0 h6" for="comment">Comentario (opcional):</p>
                             <textarea id="comment" name="comment" class="form-control" rows="10" placeholder="Tu comentario"></textarea>
                             <button type="submit" class="btn btn-success mt-2">Enviar reseña</button>
@@ -148,9 +148,9 @@
                         <ul class="lessons-list__container list-group rounded-0">
                             {% for leccion_usuario in lecciones_usuario %}
                                 {% if leccion_usuario.completada %}
-                                    <li class="list-group-item"><a class="btn" href="{% url 'leccion_detalle' leccion_usuario.leccion.id %}"><i class="bi bi-check-circle-fill me-2"></i>{{leccion_usuario.get_leccion_nombre}}</a></li>
+                                    <li class="list-group-item"><a class="btn" href="{% url 'leccion_detalle' leccion_usuario.leccion.slug %}"><i class="bi bi-check-circle-fill me-2"></i>{{leccion_usuario.get_leccion_nombre}}</a></li>
                                 {% else %}
-                                    <li class="list-group-item"><a class="btn" href="{% url 'leccion_detalle' leccion_usuario.leccion.id %}"><i class="bi bi-circle me-2"></i>{{leccion_usuario.get_leccion_nombre}}</a></li>
+                                    <li class="list-group-item"><a class="btn" href="{% url 'leccion_detalle' leccion_usuario.leccion.slug %}"><i class="bi bi-circle me-2"></i>{{leccion_usuario.get_leccion_nombre}}</a></li>
                                 {% endif %}
                             {% endfor %}
                         </ul>

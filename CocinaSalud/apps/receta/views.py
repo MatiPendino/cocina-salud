@@ -11,9 +11,9 @@ class RecetasIndex(ListView):
     queryset = Receta.objects.filter(state=True)
 
 
-def ver_receta(request, receta_id):
-    receta = Receta.objects.filter(id=receta_id).first()
-    pasos_receta = PasoReceta.objects.filter(receta__id=receta_id).order_by('numero_paso')
+def ver_receta(request, receta_slug):
+    receta = Receta.objects.filter(slug=receta_slug).first()
+    pasos_receta = PasoReceta.objects.filter(receta__slug=receta_slug).order_by('numero_paso')
 
     if not receta:
         return redirect('recetas')

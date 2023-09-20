@@ -4,5 +4,5 @@ from .views import *
 # recetas/
 urlpatterns = [
     path('', NutricionIndex.as_view(), name='nutricion'),
-    path('<int:nutricion_id>', ver_nutricion, name='ver_nutricion'),
+    path('<slug:nutricion_slug>', ver_nutricion, name='ver_nutricion'),
 ]

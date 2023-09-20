@@ -16,17 +16,17 @@
 
             <h1 class="mt-2">{{nutricion.titulo}}</h1>
 
-            <div class="row my-4 hero__container">
+            <div class="row mt-4 hero__container">
                 <div class="col-12 col-lg-6 hero__image">
                     <div class="borde">
-                        <img class="w-100 borde" src="{{MEDIA_URL}}{{nutricion.imagen_principal}}" alt="Imagen nutrición {{nutricion.titulo}}">
+                        <img class="w-100 borde img-cover" width="500" height="500" src="{{MEDIA_URL}}{{nutricion.imagen_principal}}" alt="Imagen nutrición {{nutricion.titulo}}">
                     </div>
                 </div>
 
                 <div class="col-12 col-lg-6 text-start hero__content">
                     <div class="mb-4 margin-top-mobile">
                         <h3 class="mx-2">Introducción</h3>
-                        <p class="mx-2">{{nutricion.intro|safe}}</p>
+                        <div class="mx-2">{{nutricion.intro|safe}}</div>
                     </div>
 
                     <div class="row mt-4" >
@@ -43,24 +43,30 @@
                 </div>
             </div>
 
-            <div class="col-12 col-lg-10 mb-4 nutricion__text__container">
-                <p class="text-start">{{nutricion.texto_cuerpo|safe}}</p>
-                <img class="w-100 borde" src="{{MEDIA_URL}}{{nutricion.imagen_secundaria_1}}" alt="Imagen secundaria nutrición {{nutricion.titulo}}" />
+            <div class="col-11 col-lg-10 mb-4 justify-content-center nutricion__text__container">
+                <div class="text-start nutricion__text">{{nutricion.texto_cuerpo|safe}}</div>
             </div>
 
-            <div class="row mb-4 nutricion__image__container">
-                <div class="col-12 col-lg-5">
-                    <img class="w-100 borde" src="{{MEDIA_URL}}{{nutricion.imagen_secundaria_2}}" alt="Imagen secundaria 2 nutrición {{nutricion.titulo}}" />
-                </div>
-
-                <div class="col-12 col-lg-5">
-                    <p class="text-start">{{nutricion.texto_explicativo|safe}}</p>
-                </div>
+            <div class="col-12 col-lg-11 justify-content-center mb-4">
+                {% if nutricion.imagen_secundaria_1 %}
+                    <img class="w-100 borde img-cover" src="{{MEDIA_URL}}{{nutricion.imagen_secundaria_1}}" alt="Imagen secundaria nutrición {{nutricion.titulo}}" />
+                {% endif %}
+                <div class="text-start my-4">{{nutricion.texto_explicativo|safe}}</div>
+                {% if nutricion.imagen_secundaria_2 %}
+                    <div class="col-lg-5">
+                        <img class="w-100 borde img-cover" width="450" height="600" src="{{MEDIA_URL}}{{nutricion.imagen_secundaria_2}}" alt="Imagen secundaria 2 nutrición {{nutricion.titulo}}" />
+                    </div>
+                {% endif %}
+                {% if nutricion.imagen_secundaria_3 %}
+                    <div class="col-lg-5">
+                        <img class="w-100 borde img-cover" width="450" height="600" src="{{MEDIA_URL}}{{nutricion.imagen_secundaria_3}}" alt="Imagen secundaria 3 nutrición {{nutricion.titulo}}" />
+                    </div>
+                {% endif %}
             </div>
 
-            <div class="col-12 col-lg-10 mb-4 nutricion__conclusion__container">
+            <div class="col-12 col-lg-11 mb-4 px-4 py-2 nutricion__conclusion borde">
                 <h4>Conclusión</h4>
-                <p class="text-start">{{nutricion.resumen|safe}}</p>
+                <div class="text-start">{{nutricion.resumen|safe}}</div>
             </div>
 
         </div>

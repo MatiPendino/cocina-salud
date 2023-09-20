@@ -4,8 +4,19 @@
     }
 }
 
+.img-cover {
+    object-fit: cover;
+}
+
 h1 {
     font-family: var(--font-raleway);
+    font-size: 1.5rem;
+}
+
+@media(min-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
 }
 
 .hero__image div {
@@ -33,51 +44,82 @@ h1 {
     }
 }
 
-.recipe__instructions__container {
+.ingredients__container {
     margin: 0 auto auto auto;
 }
 
-.recipe__instructions {
+.ingredients {
     background-color: rgb(238,238,238);
-}
-
-@media(max-width: 768px){
-    .recipe__instructions {
-        margin-bottom: 15px;
-    }
-}
-
-.recipe__instructions h3 {
-    font-family: var(--font-sawarabi-gothic);
-}
-
-.recipe__instructions p {
-    font-family: var(--font-cambria);
-    font-size: 15px;
-    display: inline!important;
+    border-radius: 10px;
 }
 
 @media(min-width: 768px) {
-    .recipe__instructions p {
-        font-size: 16px;
+    .recipe__instructions,
+    .ingredients__container,
+    .escuela__steps__container {
+        padding-left: 1.3rem;
+        padding-right: 1.3rem;
     }
 }
 
-.recipe__analysis {
+
+.ingredients h3, 
+.recipe__instructions h3,
+.escuela__steps__container h3,
+.salud__items__container h4 {
+    font-family: var(--font-sawarabi-gothic);
+    margin-top: 15px;
+}
+
+.ingredients p {
+    font-family: var(--font-cambria);
+    font-size: 17px;
+    margin-left: 10px;
+}
+
+.recipe__instructions p,
+.escuela__steps__container p,
+.salud__items__container p {
+    font-family: var(--font-cambria);
+    font-size: 16px;
+}
+
+
+@media(min-width: 768px) {
+    .recipe__instructions p,
+    .escuela__steps__container p,
+    .salud__items__container p {
+        font-size: 17px;
+    }
+}
+
+.recipe__analysis,
+.nutricion__conclusion,
+.escuela__conclusion__container,
+.salud__conclusion {
     background-color: #f5f2f0;
 }
 
-.recipe__analysis h3 {
+.recipe__analysis h3,
+.nutricion__conclusion h4,
+.escuela__conclusion__container h3,
+.salud__conclusion h3 {
     font-family: var(--font-raleway);
 }
 
-.recipe__analysis p {
+.recipe__analysis p,
+.nutricion__conclusion p,
+.escuela__conclusion__container p,
+.salud__conclusion p {
     font-family: var(--font-cambria);
     font-size: 17px;
 }
 
 @media(min-width: 768px) {
-    .recipe__analysis p {
+    .recipe__analysis p,
+    .nutricion__conclusion p,
+    .escuela__conclusion__container p,
+    .salud__conclusion p {
         font-size: 18px;
     }
 }
@@ -87,7 +129,30 @@ h1 {
 }
 
 .escuela__steps__container,
-.nutricion__text__container,
-.nutricion__image__container {
+.nutricion__text__container {
     margin: 0 auto;
 }
+
+.nutricion__text {
+    margin-top: 2.8rem;
+    margin-bottom: 2.8rem;
+}
+
+.salud__items {
+    list-style: none;
+    padding-left: 0;
+}
+
+.salud__items li a {
+    text-decoration: none;
+    color: rgb(20,20,20);
+    font-family: var(--font-cambria);
+    font-size: 18px;
+    transition: all .15s ease-in-out;
+}
+
+.salud__items li a:hover {
+    text-decoration: line-through;
+    color: rgb(60,60,60);
+}
+
