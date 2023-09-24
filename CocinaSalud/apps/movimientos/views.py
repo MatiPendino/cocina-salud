@@ -1,10 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import never_cache
-from apps.curso.models import CursoUsuario, LeccionUsuario, Leccion
-from apps.usuario_custom.models import Usuario
-from .models import Movimiento, MedioDePago
-from .implementations import impl_paypal
+from .models import Movimiento
 from .utils import get_movimiento_condicion, create_curso_lecciones_usuario
 
 
@@ -32,6 +29,10 @@ def ipn(request, codigo_operacion):
             pass
 
         create_curso_lecciones_usuario(request.user, movimiento.curso)
+
+        # Modify number of students registered in the course
+        movimiento.curso.num_alumnos +=1
+        movimiento.curso.save()
 
         return redirect(
             'compra_finalizada', 

@@ -15,6 +15,7 @@ class Curso(BaseModel):
     descripcion_extensa = RichTextField('Descripción extensa', null=True, blank=True)
     calificacion = models.DecimalField('Calificación del curso', max_digits=3, decimal_places=2, default=0)
     num_alumnos = models.PositiveIntegerField('Número de alumnos', default=0)
+    num_calificaciones = models.PositiveIntegerField('Número de calificaciones', default=0)
     profesor = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Profesor del curso')
 
 
