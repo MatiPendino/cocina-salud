@@ -171,7 +171,7 @@ def last_seen_user_lesson(request, course_slug):
         orden=1,
         state=True
     ).first()
-    return redirect('leccion_detalle', pk=first_course_lesson.id)
+    return redirect('leccion_detalle', slug=first_course_lesson.slug)
 
 
 def comprar_curso(request, course_slug):
@@ -179,11 +179,8 @@ def comprar_curso(request, course_slug):
     precio = str(course.precio).replace(',', '.')
     codigo_operacion = generate_unique_code()
     usuario = Usuario.objects.filter(user=request.user, state=True).first()
-    # TODO: cuando tenga más medios de pago, modificar la lógica del proceso de 
-    # compra. Una idea sería agregar un paso anterior donde el usuario especifique que
-    # medio de pago desea utilizar
     paypal_mdp = MedioDePago.objects.filter(
-        # test=True, 
+        test=False, 
         tipo=MedioDePago.TIPO_PAYPAL, 
         state=True
     ).first()
