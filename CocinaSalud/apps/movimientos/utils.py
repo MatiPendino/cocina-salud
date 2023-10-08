@@ -1,5 +1,7 @@
 import string
 import random
+from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
+from django.http import HttpResponse
 from apps.usuario_custom.models import Usuario
 from apps.curso.models import CursoUsuario, LeccionUsuario, Leccion
 from apps.movimientos.models import Movimiento, MedioDePago
@@ -38,3 +40,30 @@ def create_curso_lecciones_usuario(user, curso):
             leccion=leccion,
             usuario=usuario
         )
+
+
+def send_compra_via_email(email_buyer, course):
+    message = f'''
+        Muchas gracias por tu compra!
+    '''
+    print(email_buyer)
+    print(course)
+
+    '''send_mail(
+        'Confirmación de compra',
+        message,
+        'cocinasalud2001@gmail.com',
+        [email_buyer],
+        fail_silently=False
+    )'''
+
+    html = '<h1>Mensaje importante</h1>'
+
+    msg = EmailMultiAlternatives(
+        'compra', 'important message', 'cocinasalud2001@gmail.com', [email_buyer]
+    )
+    msg.attach_alternative(html, "text/html")
+    msg.send()
+
+    print('Sobrevivimos')
+    # return HttpResponse('Email sent successfully')

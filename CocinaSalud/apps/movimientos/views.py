@@ -1,12 +1,28 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import never_cache
 from .models import Movimiento
-from .utils import get_movimiento_condicion, create_curso_lecciones_usuario
+from apps.usuario_custom.models import Usuario
+from .utils import get_movimiento_condicion, create_curso_lecciones_usuario, send_compra_via_email
+
+
+def mis_movimientos(request):
+    usuario = get_object_or_404(Usuario, user=request.user)
+    movimientos = Movimiento.objects.filter(
+        usuario=usuario
+    )
+
+    return render(request, 'mis_movimientos.html', {'movimientos': movimientos})
 
 
 def compra_finalizada(request, course_slug, codigo_operacion):
-    return render(request, 'compra_finalizada.html')
+    movimiento = Movimiento.objects.filter(codigo_operacion=codigo_operacion).first()
+
+    context = {
+        'movimiento': movimiento,
+        'course_slug': course_slug
+    }
+    return render(request, 'compra_finalizada.html', context)
 
 
 def compra_no_finalizada(request, course_slug, codigo_operacion):
@@ -23,10 +39,9 @@ def ipn(request, codigo_operacion):
 
     if movimiento.condicion == Movimiento.ESTADO_FINALIZADA:
         try:
-            # send_compra_via_email()
-            pass
+            send_compra_via_email(movimiento.usuario.user.email, movimiento.curso)
         except:
-            pass
+            print("Explotamos")
 
         create_curso_lecciones_usuario(request.user, movimiento.curso)
 

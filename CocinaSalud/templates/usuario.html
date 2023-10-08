@@ -9,7 +9,7 @@
 {% block content %}
 
     <div class="profile-image__container my-4">
-        {% if profile_image %}
+        {% if has_profile_image %}
             <img class="w-100 h-100" src="{{MEDIA_URL}}{{usuario.imagen_perfil}}" alt="Profile image" />
         {% else %}
             <img class="w-100 h-100" src="{% static 'img/no_profile_pic.jpg' %}" alt="No profile image" />
@@ -26,10 +26,20 @@
             <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
                 <div id="success"></div>
+                <h5>Datos personales</h4>
                 {{ form.as_p }}
+                <h5 class="mt-4">Cambio de contraseña</h4>
                 <p>
-                    <label for="id_password">Confirmar contraseña</label>
-                    <input class="form-control" name="password" type="password" id="id_password" placeholder="Introduce tu contraseña..." />
+                    <label for="current_password">Contraseña actual:</label>
+                    <input class="form-control" name="current_password" type="password" id="current_password"/>
+                </p>
+                <p>
+                    <label for="new_password1">Nueva contraseña:</label>
+                    <input class="form-control" name="new_password1" type="password" id="new_password1"/>
+                </p>
+                <p>
+                    <label for="new_password2">Confirma tu nueva contraseña:</label>
+                    <input class="form-control" name="new_password2" type="password" id="new_password2" />
                 </p>
                 <div class="text-center">
                     <button type="submit" class="btn btn-form">GUARDAR</button>
@@ -37,9 +47,6 @@
             </form>
         </div>
     </div>
-    <!-- TODO: enviar correos electrónicos al usuario para crear cuenta, y para modificar contraseña -->
-    <!-- TODO: hacer la implementación del cambio de foto de perfil -->
-    <!-- TODO: hacer la implementación para el cambio de contraseña -->
 
 {% endblock content %}
 
@@ -49,13 +56,13 @@
         const cameraIcon = document.getElementById('camera-icon');
 
         cameraIcon.addEventListener('mouseover', () => {
-            {% if profile_image %}
+            {% if has_profile_image %}
                 cameraIcon.classList.add('opacity-100');
             {% endif %}
         });
 
         cameraIcon.addEventListener('mouseout', () => {
-            {% if profile_image %}
+            {% if has_profile_image %}
                 cameraIcon.classList.remove('opacity-100');
             {% endif %}
         });

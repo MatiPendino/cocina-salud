@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
-{% block title %}Error compra{% endblock title %}
+{% block title %}Error en la compra{% endblock title %}
 
 {% block content %}
 
-    <h1>Error: La compra no pudo ser finalizada</h1>
+    <div class="container my-5">
+        <div class="alert alert-danger">
+            <h4 class="alert-heading">Error en la compra</h4>
+            <p>Lo sentimos, hubo un error procesando tu compra. Por favor intenta más tarde o contactate a cocinasalud2001@gmail.com por asistencia.</p>
+        </div>
+        <div class="text-center">
+            <a href="{% url 'index' %}" class="btn btn-secondary py-2 px-4">Inicio</a>
+        </div>
+    </div>
 
 {% endblock content%}
