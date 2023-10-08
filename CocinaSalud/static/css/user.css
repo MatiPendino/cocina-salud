@@ -1,3 +1,7 @@
+label {
+    font-size: 16px;
+    font-family: var(--font-helvetica);
+}
 
 .sign__header,
 .profile__header {

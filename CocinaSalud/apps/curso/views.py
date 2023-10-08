@@ -53,6 +53,15 @@ class CursoDetailView(DetailView):
 
         return context
     
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+
+        user, course = self.request.user, self.object
+        if has_user_course(user, course):
+            return redirect('last_seen_user_lesson', course_slug=self.object.slug)
+        
+        return response
+    
 
 class MisCursosListView(ListView):
     model = CursoUsuario
@@ -122,8 +131,10 @@ class LeccionDetailView(DetailView):
     
     def get(self, request, *args, **kwargs):
         response = super().get(request, *args, **kwargs)
-        if not has_user_course(self):
-            return redirect('curso_detalle', slug=self.object.seccion.curso.slug)
+
+        user, course = self.request.user, self.object.seccion.curso
+        if not has_user_course(user, course):
+            return redirect('curso_detalle', slug=course.slug)
         
         update_last_seen_user_lesson(self)
 
@@ -180,7 +191,7 @@ def comprar_curso(request, course_slug):
     codigo_operacion = generate_unique_code()
     usuario = Usuario.objects.filter(user=request.user, state=True).first()
     paypal_mdp = MedioDePago.objects.filter(
-        test=False, 
+        test=True, 
         tipo=MedioDePago.TIPO_PAYPAL, 
         state=True
     ).first()

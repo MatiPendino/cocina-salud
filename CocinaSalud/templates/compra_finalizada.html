@@ -3,6 +3,144 @@
 
 {% block content %}
 
-    <h1>La compra fue ejecutada exitosamente</h1>
+    <div class="container mt-5 mb-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <!-- <div class="text-left logo p-2 px-5">
+                        <img src="https://i.imgur.com/2zDU056.png" width="50">
+                    </div> -->
+
+                    <div class="invoice p-5">
+                        <h5>Compra finalizada!</h5>
+
+                        <span class="font-weight-bold d-block mt-4">Hola {{movimiento.usuario.get_username}}</span>
+                        <span>Muchas gracias por adquirir nuestro curso</span>
+
+                        <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+                            <table class="table table-borderless"> 
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="py-2">
+                                                <span class="d-block text-muted">Fecha de compra</span>
+                                                <span>{{movimiento.creation_date}}</span>   
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="py-2">
+                                                <span class="d-block text-muted">Order No</span>
+                                                <span>{{movimiento.codigo_operacion}}</span>   
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table> 
+                        </div>
+
+                        <div class="product border-bottom table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%">
+                                            <img src="{{MEDIA_URL}}{{movimiento.curso.imagen_curso}}" width="90">
+                                        </td>
+                                
+                                        <td width="60%">
+                                            <span class="font-weight-bold">{{movimiento.curso}}</span>
+                                            <div class="product-qty">
+                                                <span class="d-block">Cantidad: 1</span>
+                                            </div>
+                                        </td>
+
+                                        <td width="20%">
+                                            <div class="text-right">
+                                                <span class="font-weight-bold">${{movimiento.curso.precio}}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>  
+                            </table>
+                        </div>
+
+                        <div class="row d-flex justify-content-end">
+                            <div class="col-md-5">
+                                <table class="table table-borderless">
+                                    <tbody class="totals">
+                                        <tr>
+                                            <td>
+                                                <div class="text-left">
+                                                    <span class="text-muted">Subtotal</span> 
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right">
+                                                    <span>${{movimiento.curso.precio}}</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <div class="text-left">
+                                                    <span class="text-muted">Impuestos</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right">
+                                                    <span>$0,00</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <!--<tr>
+                                            <td>
+                                                <div class="text-left">
+                                                    <span class="text-muted">Discount</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right">
+                                                    <span class="text-success">$168.50</span>
+                                                </div>
+                                            </td>
+                                        </tr> -->
+
+
+                                        <tr class="border-top border-bottom">
+                                            <td>
+                                                <div class="text-left">
+                                                    <span class="font-weight-bold">Total</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right">
+                                                    <span class="font-weight-bold">${{movimiento.curso.precio}}</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- <p>We will be sending shipping confirmation email when the item shipped successfully!</p> -->
+                        <p class="font-weight-bold mb-0">Gracias por tu confianza!</p>
+                        <span>Margarita Gonzalez</span>
+
+                        <div class="mt-3 col-12 text-center">
+                            <a class="btn btn-success" href="{% url 'last_seen_user_lesson' course_slug %}">Ir al curso</a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between footer p-3">
+                        <span>Necesitas ayuda? Contáctanos en cocinasalud2001@gmail.com</span>
+                        <span>{% now "d \d\e F" %}</span>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div> 
 
 {% endblock content%}

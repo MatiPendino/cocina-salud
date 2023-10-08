@@ -1,0 +1,11 @@
+/* General */
+h1 {
+    font-family: var(--font-karla);
+    font-size: 1.7rem;
+}
+
+@media(min-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+}

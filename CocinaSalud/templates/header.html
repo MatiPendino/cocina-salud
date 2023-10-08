@@ -41,7 +41,7 @@
             <div class="dropdown-menu shadow" aria-labelledby="dLabel">
               <a class="nav-link drop-item text-left user-dropdown-option" href="{% url 'usuario' %}"><i class="bi bi-person px-2"></i>Mi perfil</a>
               <a class="nav-link drop-item text-left user-dropdown-option" href="{% url 'mis_cursos' %}"><i class="bi bi-archive px-2"></i>Mis cursos</a>
-              <a class="nav-link drop-item text-left user-dropdown-option" href="#"><i class="bi bi-book px-2"></i>Mis movimientos</a>
+              <a class="nav-link drop-item text-left user-dropdown-option" href="{% url 'mis_movimientos' %}"><i class="bi bi-book px-2"></i>Mis movimientos</a>
               <a class="nav-link drop-item text-left user-dropdown-option" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="bi bi-box-arrow-in-left px-2"></i>Cerrar sesión</a>
             </div>
         {% else %}
