@@ -16,7 +16,7 @@ def mis_movimientos(request):
 
 
 def compra_finalizada(request, course_slug, codigo_operacion):
-    movimiento = Movimiento.objects.filter(codigo_operacion=codigo_operacion).first()
+    movimiento = get_object_or_404(Movimiento, codigo_operacion=codigo_operacion)
 
     context = {
         'movimiento': movimiento,
@@ -32,7 +32,7 @@ def compra_no_finalizada(request, course_slug, codigo_operacion):
 @never_cache
 @csrf_exempt
 def ipn(request, codigo_operacion):
-    movimiento = Movimiento.objects.get(codigo_operacion=codigo_operacion)
+    movimiento = get_object_or_404(Movimiento, codigo_operacion=codigo_operacion)
 
     movimiento.condicion = get_movimiento_condicion(request, movimiento)
     movimiento.save()

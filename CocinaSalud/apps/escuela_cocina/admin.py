@@ -3,6 +3,10 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from .models import *
 
+class PasoTecnicaInline(admin.StackedInline):
+    model = PasoTecnica
+    extra = 1
+
 class EscuelaCocinaResources(resources.ModelResource):
     class Meta:
         model = EscuelaCocina
@@ -12,6 +16,7 @@ class EscuelaCocinaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ('titulo',)
     list_display = ('titulo', 'creation_date', 'state')
     resource_class = EscuelaCocinaResources
+    inlines = [PasoTecnicaInline]
 
 
 class PasoTecnicaResources(resources.ModelResource):

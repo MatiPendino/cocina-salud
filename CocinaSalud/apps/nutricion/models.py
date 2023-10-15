@@ -7,7 +7,7 @@ class Nutricion(BaseModel):
     image_upload = 'nutricion/'
 
     titulo = models.CharField(max_length=255, null=True)
-    slug = models.SlugField('Slug del artículo', null=True, blank=True, help_text='Debe ser escrito todo en minúsculas y sin espacios')
+    slug = models.SlugField('Slug del artículo', null=True, blank=True, unique=True, help_text='Debe ser escrito todo en minúsculas y sin espacios')
     imagen_principal = models.ImageField(upload_to=image_upload, blank=True, null=True)
     imagen_miniatura = models.ImageField(upload_to=image_upload, blank=True, null=True)
     intro = RichTextField(blank=True, null=True)
