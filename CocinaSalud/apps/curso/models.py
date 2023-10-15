@@ -44,7 +44,7 @@ class Curso(BaseModel):
     
     def get_porcentaje_completado_curso(self, user):
         lecciones_usuario = LeccionUsuario.objects.filter(usuario__user=user, leccion__seccion__curso=self, completada=True).count()
-        return int(lecciones_usuario / self.get_cantidad_lecciones() * 100)
+        return int(lecciones_usuario / self.get_cantidad_lecciones() * 100) if self.get_cantidad_lecciones() > 0 else 100
     
     def __str__(self):
         return f'{self.nombre} ({self.calificacion}) - {self.profesor.get_username()}'
