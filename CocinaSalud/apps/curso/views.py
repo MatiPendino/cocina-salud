@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from apps.usuario_custom.models import Usuario
 from apps.movimientos.models import MedioDePago, Movimiento
@@ -159,7 +159,7 @@ class LeccionDetailView(DetailView):
     
 
 def pass_lesson(request, current_lesson_slug, direction):
-    lesson = Leccion.objects.filter(slug=current_lesson_slug).first()
+    lesson = get_object_or_404(Leccion, slug=current_lesson_slug)
     slug_lesson_to_pass = get_slug_lesson_to_pass(lesson, direction)
     
     return redirect('leccion_detalle', slug=slug_lesson_to_pass)
@@ -175,27 +175,28 @@ def last_seen_user_lesson(request, course_slug):
 
     if user_lesson:
         return redirect('leccion_detalle', slug=user_lesson.leccion.slug)
-    
-    first_course_lesson = Leccion.objects.filter(
+
+    first_course_lesson = get_object_or_404(
+        Leccion,
         seccion__curso__slug=course_slug,
         seccion__orden=1,
         orden=1,
         state=True
-    ).first()
+    )
     return redirect('leccion_detalle', slug=first_course_lesson.slug)
 
 
 def comprar_curso(request, course_slug):
-    course = Curso.objects.filter(slug=course_slug, state=True).first()
+    course = get_object_or_404(Curso, slug=course_slug, state=True)
     precio = str(course.precio).replace(',', '.')
     codigo_operacion = generate_unique_code()
-    usuario = Usuario.objects.filter(user=request.user, state=True).first()
-    paypal_mdp = MedioDePago.objects.filter(
+    usuario = get_object_or_404(Usuario, user=request.user, state=True)
+    paypal_mdp = get_object_or_404(
+        MedioDePago, 
         test=True, 
         tipo=MedioDePago.TIPO_PAYPAL, 
         state=True
-    ).first()
-
+    )
 
     movimiento = Movimiento.objects.create(
         usuario=usuario,

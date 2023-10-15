@@ -4,6 +4,10 @@ from import_export.admin import ImportExportModelAdmin
 from .models import Curso, Seccion, Leccion, CursoUsuario, LeccionUsuario
 
 
+class SeccionInline(admin.StackedInline):
+    model = Seccion
+    extra = 1
+
 class CursoResources(resources.ModelResource):
     class Meta:
         model = Curso
@@ -12,7 +16,13 @@ class CursoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('nombre', 'precio', 'calificacion', 'num_alumnos')
     search_fields = ('nombre', 'descripcion_breve')
     resource_class = CursoResources
+    inlines = [SeccionInline]
 
+
+
+class LeccionInline(admin.StackedInline):
+    model = Leccion
+    extra = 1
 
 class SeccionResources(resources.ModelResource):
     class Meta:
@@ -22,6 +32,7 @@ class SeccionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ('nombre', 'curso__nombre')
     list_display = ('nombre', 'curso', 'orden')
     resource_class = SeccionResources
+    inlines = [LeccionInline]
 
 
 class LeccionResources(resources.ModelResource):

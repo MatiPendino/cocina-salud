@@ -1,6 +1,4 @@
-
-class PasswordException(Exception):
-    pass
+from apps.base.utils import PasswordException
 
 
 def change_password(request, user):

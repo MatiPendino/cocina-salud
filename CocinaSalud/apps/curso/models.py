@@ -8,7 +8,7 @@ class Curso(BaseModel):
     nombre = models.CharField('Nombre del curso', max_length=255) 
     imagen_curso = models.ImageField('Imagen del curso', null=True, blank=True, upload_to='curso')
     precio = models.DecimalField('Precio del curso', max_digits=10, decimal_places=2)
-    slug = models.SlugField('Slug del curso', null=True, blank=True, help_text='Debe ser escrito todo en minúsculas y sin espacios')
+    slug = models.SlugField('Slug del curso', null=True, blank=True, unique=True, help_text='Debe ser escrito todo en minúsculas y sin espacios')
     publico_dirigido = RichTextField('Público dirigido', null=True, blank=True)
     aprender = RichTextField('Qué aprenderá', null=True, blank=True)
     descripcion_breve = models.CharField('Descripción breve', max_length=255)
@@ -79,7 +79,7 @@ class Seccion(BaseModel):
 
 class Leccion(BaseModel):
     nombre = models.CharField('Nombre de lección', max_length=255)
-    slug = models.SlugField('Slug de la lección', blank=True, null=True, help_text='Debe ser escrito todo en minúsculas y sin espacios')
+    slug = models.SlugField('Slug de la lección', blank=True, null=True, unique=True, help_text='Debe ser escrito todo en minúsculas y sin espacios')
     seccion = models.ForeignKey(Seccion, on_delete=models.CASCADE, verbose_name='Sección de la lección')
     descripcion = RichTextField('Descripción de lección', null=True, blank=True)
     duracion = models.PositiveSmallIntegerField('Duración de lección', help_text='Duración de la lección (en minutos)', default=0)

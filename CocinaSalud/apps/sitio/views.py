@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from apps.usuario_custom.models import Usuario
+from apps.base.utils import PasswordException
+from .utils import create_custom_user
 
 
 def signup(request):
@@ -21,30 +23,16 @@ def signup(request):
         pass1 = request.POST['password']
         pass2 = request.POST['confirm_password']
 
-        username_repeated = True if User.objects.filter(username=username).first() else False
-
-        if not username_repeated:
-            if pass1 == pass2:
-                if len(pass1) >= 8:
-                    new_user = User.objects.create_user(
-                        username=username,
-                        email=email,
-                        password=pass1,
-                        first_name=first_name,
-                        last_name=last_name
-                    )
-                    new_custom_user = Usuario.objects.create(
-                        user=new_user,
-                        imagen_perfil=profile_image,
-                        fecha_nacimiento=birthdate
-                    )
-                    return redirect("signin")
-                
-                return render(request, 'auth/signup.html', {'message': 'La contraseña debe ser mayor o igual a 8 caracteres.'})
-            return render(request, 'auth/signup.html', {'message': 'Error: las contraseñas no coinciden.'})
-        return render(request, 'auth/signup.html', {'message': 'Error: ya existe un usuario con ese username.'})
-
-    return render(request, "auth/signup.html")
+        try:
+            create_custom_user(
+                pass1, pass2, 
+                username, first_name, last_name, email,
+                birthdate, profile_image
+            )
+            return redirect('signin')
+        except PasswordException as pe:
+            return render(request, 'auth/signup.html', {'message': pe})
+    return render(request, 'auth/signup.html')
 
 
 def signin(request):
@@ -58,7 +46,7 @@ def signin(request):
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-            return redirect("index")
+            return redirect('index')
         else:
             return render(request, 'auth/signin.html', {'message': 'Su correo y/o su contraseña son incorrectas.'})
 
