@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'uuka1t*9g)x%61-^(i!htfde4ly9mk@2hb5$$&%uv27jqvtp4u'
 
 # Allow popups (necessary for Django > 4.0)
 SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
