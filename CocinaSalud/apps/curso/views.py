@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
+from django.conf import settings
 from apps.usuario_custom.models import Usuario
 from apps.movimientos.models import MedioDePago, Movimiento
 from apps.movimientos.utils import generate_unique_code
@@ -191,12 +192,20 @@ def comprar_curso(request, course_slug):
     precio = str(course.precio).replace(',', '.')
     codigo_operacion = generate_unique_code()
     usuario = get_object_or_404(Usuario, user=request.user, state=True)
-    paypal_mdp = get_object_or_404(
-        MedioDePago, 
-        test=True, 
-        tipo=MedioDePago.TIPO_PAYPAL, 
-        state=True
-    )
+    if settings.DEBUG:
+        paypal_mdp = get_object_or_404(
+            MedioDePago, 
+            test=True, 
+            tipo=MedioDePago.TIPO_PAYPAL, 
+            state=True
+        )
+    else:
+        paypal_mdp = get_object_or_404(
+            MedioDePago, 
+            test=False, 
+            tipo=MedioDePago.TIPO_PAYPAL, 
+            state=True
+        )
 
     movimiento = Movimiento.objects.create(
         usuario=usuario,

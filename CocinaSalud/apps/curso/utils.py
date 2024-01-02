@@ -13,12 +13,14 @@ def get_lessons_for_section(lecciones_usuario, seccion):
 
 
 def has_user_course(user, course):
-    user_course = CursoUsuario.objects.filter(
-        usuario__user=user,
-        curso=course
-    )
-
-    return user_course.exists()
+    if user.username:
+        user_course = CursoUsuario.objects.filter(
+            usuario__user=user,
+            curso=course
+        )
+        return user_course.exists()
+    
+    return False
 
 
 def update_last_seen_user_lesson(instance):

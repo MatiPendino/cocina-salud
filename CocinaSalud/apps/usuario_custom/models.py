@@ -13,7 +13,7 @@ class Usuario(BaseModel):
         return self.user.username
 
     def __str__(self):
-        return f'{self.user.username}'
+        return self.user.username
     
     class Meta:
         verbose_name = 'Usuario Custom'
