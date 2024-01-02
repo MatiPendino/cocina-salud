@@ -10,72 +10,80 @@
     <h1 class="my-2 text-center">MIS CURSOS</h1>
 
     <div class="my-courses mx-0 row" style="overflow-x: hidden;">
-        {% for user_course, percentage_completed in user_courses.items %}
-            <a href="{% url 'last_seen_user_lesson' user_course.curso.slug %}" class="col-12 col-md-3" style="text-decoration: none; color: var(--black);">
-                <div class="course mb-3">
-                    <div class="course-image">
-                        <img class="w-100 borde" src="{{MEDIA_URL}}{{user_course.curso.imagen_curso}}" alt="Imagen curso {{user_course.curso.nombre}}" />
-                    </div>
-                    <div class="course-content">
-                        <h3 class="my-1">{{user_course.curso.nombre}}</h3>
-                        <p class="course-teacher mb-1">{{user_course.curso.profesor.user.get_full_name}}</p>
-                        <div class="mb-1 bar__container">
-                            <div class="progress-bar">
-                                <div class="progress" id="bar-{{forloop.counter}}"></div>
+        {% if not user_courses %}
+            <div class="text-center">
+                <h1 class="display-5">Aún no posees ningún curso</h1>
+                <p class="lead">Aprende sobre nutrición con cursos hechos por profesionales con décadas de experiencia</p>
+                <a href="{% url 'cursos' %}" class="btn btn-success px-5 py-3 my-4">VER CURSOS</a>
+            </div>
+        {% else %}
+            {% for user_course, percentage_completed in user_courses.items %}
+                <a href="{% url 'last_seen_user_lesson' user_course.curso.slug %}" class="col-12 col-md-3" style="text-decoration: none; color: var(--black);">
+                    <div class="course mb-3">
+                        <div class="course-image">
+                            <img class="w-100 borde" src="{{MEDIA_URL}}{{user_course.curso.imagen_curso}}" alt="Imagen curso {{user_course.curso.nombre}}" />
+                        </div>
+                        <div class="course-content">
+                            <h3 class="my-1">{{user_course.curso.nombre}}</h3>
+                            <p class="course-teacher mb-1">{{user_course.curso.profesor.user.get_full_name}}</p>
+                            <div class="mb-1 bar__container">
+                                <div class="progress-bar">
+                                    <div class="progress" id="bar-{{forloop.counter}}"></div>
+                                </div>
+                            </div>
+                            <div class="row course-details">
+                                <span class="completed-text w-auto">{{percentage_completed}}% completado</span>
+                                <div class="w-auto course-stars">
+                                    <!-- TODO: meter un modal para editar la calificación desde acá -->
+                                    {% if user_course.calificacion == 0 %}
+                                        <i class="bi bi-star"></i>
+                                        <i class="bi bi-star"></i>
+                                        <i class="bi bi-star"></i>
+                                        <i class="bi bi-star"></i>
+                                        <i class="bi bi-star"></i>
+                                    {% elif user_course.calificacion == 1 %}
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                        <i class="bi bi-star"></i>
+                                        <i class="bi bi-star"></i>
+                                        <i class="bi bi-star"></i>
+                                    {% elif user_course.calificacion == 2 %}
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                        <i class="bi bi-star"></i>
+                                        <i class="bi bi-star"></i>
+                                    {% elif user_course.calificacion == 3 %}
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                        <i class="bi bi-star"></i>
+                                    {% elif user_course.calificacion == 4 %}
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                    {% elif user_course.calificacion == 5 %}
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    {% endif %}
+                                    {% if user_course.calificacion == 0 %}
+                                        <p class="calification-text m-0">Deja una calificación</p>
+                                    {% else %}
+                                        <p class="calification-text m-0">Tu calificación</p>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-                        <div class="row course-details">
-                            <span class="completed-text w-auto">{{percentage_completed}}% completado</span>
-                            <div class="w-auto course-stars">
-                                <!-- TODO: meter un modal para editar la calificación desde acá -->
-                                {% if user_course.calificacion == 0 %}
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                {% elif user_course.calificacion == 1 %}
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                {% elif user_course.calificacion == 2 %}
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                {% elif user_course.calificacion == 3 %}
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                {% elif user_course.calificacion == 4 %}
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                {% elif user_course.calificacion == 5 %}
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                {% endif %}
-                                {% if user_course.calificacion == 0 %}
-                                    <p class="calification-text m-0">Deja una calificación</p>
-                                {% else %}
-                                    <p class="calification-text m-0">Tu calificación</p>
-                                {% endif %}
-                            </div>
-                        </div>
                     </div>
-                </div>
-            </a>
-        {% endfor %}
+                </a>
+            {% endfor %}
+        {% endif %}
     </div>
 
 {% endblock content %}
