@@ -1,8 +1,9 @@
 from .base import *
 from decouple import config
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+
+SECRET_KEY = config('SECRET_KEY')
 
 ALLOWED_HOSTS = [
     'localhost',
