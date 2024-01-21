@@ -46,8 +46,6 @@ def send_compra_via_email(email_buyer, course):
     message = f'''
         Muchas gracias por tu compra!
     '''
-    print(email_buyer)
-    print(course)
 
     '''send_mail(
         'Confirmación de compra',
@@ -65,5 +63,4 @@ def send_compra_via_email(email_buyer, course):
     msg.attach_alternative(html, "text/html")
     msg.send()
 
-    print('Sobrevivimos')
     # return HttpResponse('Email sent successfully')

@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<div id="carouselDesktop" class="carousel slide d-none d-md-block" data-bs-ride="carousel">
+<section id="carouselDesktop" class="carousel slide d-none d-md-block" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselDesktop" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#carouselDesktop" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -52,9 +52,9 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
-</div>
+</section>
 
-<div id="carouselMobile" class="carousel slide d-block d-md-none" data-bs-ride="carousel">
+<section id="carouselMobile" class="carousel slide d-block d-md-none" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselMobile" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselMobile" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -99,9 +99,9 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div>
+</section>
 
-<div class="col-12 d-flex welcome__container">
+<section class="col-12 d-flex welcome__container">
     <div class="col-12 col-md-6 text-center">
         <img src="{% static 'img/inicio.jpg' %}" class="welcome__image" alt="Welcome image">
     </div>
@@ -119,7 +119,15 @@
         </div>
         
     </div>
-</div>
+</section>
+
+<section class="container call-to-action my-4">
+  <div class="call-to-action-container text-center py-3">
+    <h6 class='mb-4'>ESTÁS LISTO?</h6>
+    <p class="h3 mb-4">Reserva una sesión personalizada para alcanzar tus objetivos</p>
+    <a class='btn px-5 py-2 play-btn' href="{% url 'programa' %}">VER MÁS</a>
+  </div>
+</section>
 
 <script>
   $(document).ready(function() {

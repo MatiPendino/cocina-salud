@@ -1,4 +1,6 @@
-from apps.curso.models import Leccion, LeccionUsuario, CursoUsuario
+from django.shortcuts import get_object_or_404
+from apps.curso.models import Leccion, LeccionUsuario, CursoUsuario, Curso
+from apps.movimientos.models import Movimiento, MedioDePago
 
 
 def get_percentage_rating(rating, num_ratings):
@@ -115,3 +117,48 @@ def get_slug_lesson_to_pass(lesson, direction):
                 return previous_lesson.slug
             else:
                 return lesson.slug
+            
+
+def get_curso(course_slug):
+    if course_slug == 'programa':
+        return None
+    return get_object_or_404(Curso, slug=course_slug, state=True)
+
+def get_precio(curso):
+    if curso:
+        return str(curso.precio).replace(',', '.')
+    return '30.00'
+
+def create_movimiento(curso, usuario, paypal_mdp, codigo_operacion):
+    if curso:
+        return Movimiento.objects.create(
+            usuario=usuario,
+            curso=curso,
+            medio_de_pago=paypal_mdp,
+            importe=curso.precio,
+            descripcion=f'Compra curso {curso.nombre} por parte de {usuario.get_username()} a través de {paypal_mdp.nombre}',
+            condicion=Movimiento.ESTADO_INICIADA,
+            codigo_operacion=codigo_operacion
+        )
+    return Movimiento.objects.create(
+        usuario=usuario,
+        medio_de_pago=paypal_mdp,
+        importe=30,
+        descripcion=f'Compra programa de nutrición por parte de {usuario.get_username()} a través de {paypal_mdp.nombre}',
+        condicion=Movimiento.ESTADO_INICIADA,
+        codigo_operacion=codigo_operacion
+    )
+
+def create_context(curso, paypal_mdp, movimiento, precio):
+    if curso:
+        return {
+            'course': curso,
+            'paypal_mdp': paypal_mdp,
+            'movimiento': movimiento,
+            'precio': precio
+        } 
+    return {
+        'paypal_mdp': paypal_mdp,
+        'movimiento': movimiento,
+        'precio': precio
+    }
