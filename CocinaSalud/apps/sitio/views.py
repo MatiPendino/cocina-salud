@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from apps.usuario_custom.models import Usuario
+from django.conf import settings
 from apps.base.utils import PasswordException
 from .utils import create_custom_user
 

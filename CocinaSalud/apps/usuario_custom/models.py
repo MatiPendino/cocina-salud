@@ -8,6 +8,7 @@ class Usuario(BaseModel):
     imagen_perfil = models.ImageField('Foto de perfil', upload_to='usuario', null=True, blank=True)
     fecha_nacimiento = models.DateField('Fecha de nacimiento')
     profesion = models.CharField('Profesión del usuario', max_length=255, blank=True, null=True)
+    compro_gestoria = models.BooleanField('Compró gestoría', default=False)
 
     def get_username(self):
         return self.user.username

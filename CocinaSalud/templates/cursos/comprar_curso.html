@@ -326,16 +326,20 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{course.nombre}}</td>
-                            <td>{{course.precio}} {{paypal_mdp.moneda_codigo}}</td>
+                            {% if course %}
+                                <td>{{course.nombre}}</td>
+                            {% else %}
+                                <td>Programa</td>
+                            {% endif %}
+                            <td>{{precio}} {{paypal_mdp.moneda_codigo}}</td>
                         </tr>
                         <tr>
                             <td>Subtotal</td>
-                            <td>{{course.precio}} {{paypal_mdp.moneda_codigo}}</td>
+                            <td>{{precio}} {{paypal_mdp.moneda_codigo}}</td>
                         </tr>
                         <tr>
                             <td>Total</td>
-                            <td>{{course.precio}} {{paypal_mdp.moneda_codigo}}</td>
+                            <td>{{precio}} {{paypal_mdp.moneda_codigo}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -354,7 +358,6 @@
     </script>
     <script>
         let csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0];
-        console.log(csrfToken.value);
         paypal.Buttons({
             style: {
                 shape: 'rect',
@@ -385,7 +388,11 @@
                     orderID: data.orderID
                 })
             }).then(function () {
-                location.href = '/movimientos/compra_finalizada/{{course.slug}}/{{movimiento.codigo_operacion}}/';
+                if ("{{course}}"){
+                    location.href = '/movimientos/compra_finalizada/{{course.slug}}/{{movimiento.codigo_operacion}}/';
+                } else {
+                    location.href = '/movimientos/compra_finalizada/programa/{{movimiento.codigo_operacion}}/';
+                }
             })
             },
         }).render('#paypal-button-container');

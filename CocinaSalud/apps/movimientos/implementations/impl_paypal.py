@@ -3,7 +3,7 @@ import json
 import base64
 from paypalcheckoutsdk.core import PayPalHttpClient, SandboxEnvironment, LiveEnvironment 
 from paypalcheckoutsdk.orders import OrdersGetRequest, OrdersCaptureRequest
-from apps.movimientos.models import MedioDePago, Movimiento
+from apps.movimientos.models import Movimiento
 
 def paypal_token(cliente_id, client_secret):
     url = "https://api-m.sandbox.paypal.com/v1/oauth2/token"
@@ -29,9 +29,7 @@ class PayPalClient:
             self.environment = SandboxEnvironment(client_id=self.client_id, client_secret=self.client_secret)
         else:
             self.environment = LiveEnvironment(client_id=self.client_id, client_secret=self.client_secret)
-        # print(self.environment.__dict__)
         self.client = PayPalHttpClient(self.environment)
-        # print(self.client.__dict__)
 
 
 class GetOrder(PayPalClient):

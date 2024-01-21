@@ -2,13 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.conf import settings
 from apps.usuario_custom.models import Usuario
-from apps.movimientos.models import MedioDePago, Movimiento
+from apps.movimientos.models import MedioDePago
 from apps.movimientos.utils import generate_unique_code
 from .models import Curso, CursoUsuario, Leccion, LeccionUsuario
-from .utils import get_slug_lesson_to_pass, get_percentage_rating \
-    , get_lessons_for_section, update_last_seen_user_lesson, leave_review, complete_lesson \
-    , has_user_course
-
+from .utils import *
 
 class CursosListView(ListView):
     model = Curso
@@ -188,8 +185,8 @@ def last_seen_user_lesson(request, course_slug):
 
 
 def comprar_curso(request, course_slug):
-    course = get_object_or_404(Curso, slug=course_slug, state=True)
-    precio = str(course.precio).replace(',', '.')
+    curso = get_curso(course_slug)
+    precio = get_precio(curso)
     codigo_operacion = generate_unique_code()
     usuario = get_object_or_404(Usuario, user=request.user, state=True)
     if settings.DEBUG:
@@ -206,23 +203,9 @@ def comprar_curso(request, course_slug):
             tipo=MedioDePago.TIPO_PAYPAL, 
             state=True
         )
-
-    movimiento = Movimiento.objects.create(
-        usuario=usuario,
-        curso=course,
-        medio_de_pago=paypal_mdp,
-        importe=course.precio,
-        descripcion=f'Compra curso {course.nombre} por parte de {usuario.get_username()} a través de {paypal_mdp.nombre}',
-        condicion=Movimiento.ESTADO_INICIADA,
-        codigo_operacion=codigo_operacion
-    )
-
-    context = {
-        'course': course,
-        'paypal_mdp': paypal_mdp,
-        'movimiento': movimiento,
-        'precio': precio
-    }
+    
+    movimiento = create_movimiento(curso, usuario, paypal_mdp, codigo_operacion)
+    context = create_context(curso, paypal_mdp, movimiento, precio)
 
     return render(request, 'cursos/comprar_curso.html', context)
     
