@@ -19,7 +19,7 @@
 
                 <div class="col-12 col-lg-6 hero__image">
                     <div class="borde">
-                        <img class="w-100 borde img-cover" width="500" height="500" src="{{MEDIA_URL}}{{receta.imagen_principal}}" alt="Imagen receta {{receta.titulo}}">
+                        <img loading="lazy" class="w-100 borde img-cover" width="500" height="500" src="{{MEDIA_URL}}{{receta.imagen_principal}}" alt="Imagen receta {{receta.titulo}}">
                     </div>
                 </div>
 
@@ -90,12 +90,12 @@
                 </div>
                 {% if receta.imagen_secundaria_1 %}
                     <div class="col-lg-5">
-                        <img alt="Imagen secundaria 1 {{receta.titulo}}" width="450" height="600" class="w-100 borde mb-4 img-cover" src="{{MEDIA_URL}}{{receta.imagen_secundaria_1}}">
+                        <img loading="lazy" alt="Imagen secundaria 1 {{receta.titulo}}" width="450" height="600" class="w-100 borde mb-4 img-cover" src="{{MEDIA_URL}}{{receta.imagen_secundaria_1}}">
                     </div>
                 {% endif %}
                 {% if receta.imagen_secundaria_2 %}
                     <div class="col-lg-5">
-                        <img alt="Imagen secundaria 2 {{receta.titulo}}" width="450" height="600" class="w-100 borde img-cover" src="{{MEDIA_URL}}{{receta.imagen_secundaria_2}}">
+                        <img loading="lazy" alt="Imagen secundaria 2 {{receta.titulo}}" width="450" height="600" class="w-100 borde img-cover" src="{{MEDIA_URL}}{{receta.imagen_secundaria_2}}">
                     </div>
                 {% endif %}
             </div>
@@ -108,12 +108,12 @@
             <div class="row mb-4 col-12 justify-content-center">
                 {% if receta.imagen_secundaria_3 %}
                     <div class="col-lg-5">
-                        <img alt="Imagen secundaria 3 {{receta.titulo}}" width="450" height="600" class="w-100 borde mb-4 img-cover" src="{{MEDIA_URL}}{{receta.imagen_secundaria_3}}">
+                        <img loading="lazy" alt="Imagen secundaria 3 {{receta.titulo}}" width="450" height="600" class="w-100 borde mb-4 img-cover" src="{{MEDIA_URL}}{{receta.imagen_secundaria_3}}">
                     </div>
                 {% endif %}
                 {% if receta.imagen_secundaria_4 %}
                     <div class="col-lg-5">
-                        <img alt="Imagen secundaria 4 {{receta.titulo}}" width="450" height="600" class="w-100 borde img-cover" src="{{MEDIA_URL}}{{receta.imagen_secundaria_4}}">
+                        <img loading="lazy" alt="Imagen secundaria 4 {{receta.titulo}}" width="450" height="600" class="w-100 borde img-cover" src="{{MEDIA_URL}}{{receta.imagen_secundaria_4}}">
                     </div>
                 {% endif %}
             </div>

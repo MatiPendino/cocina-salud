@@ -19,7 +19,7 @@
 
                 <div class="col-12 col-lg-6 hero__image">
                     <div class="mb-4">
-                        <img class="w-100 borde img-cover" width="500" height="500" src="{{MEDIA_URL}}{{salud.imagen_principal}}" alt="Imagen salud {{salud.titulo}}">
+                        <img loading="lazy" class="w-100 borde img-cover" width="500" height="500" src="{{MEDIA_URL}}{{salud.imagen_principal}}" alt="Imagen salud {{salud.titulo}}">
                     </div>
                 </div>
 
@@ -64,12 +64,12 @@
             <div class="row mb-4 justify-content-center">
                 {% if salud.imagen_secundaria_1 %}
                     <div class="col-lg-5">
-                        <img alt="Imagen secundaria 1 {{salud.titulo}}" width="450" height="600" class="w-100 borde mb-4 img-cover" src="{{MEDIA_URL}}{{salud.imagen_secundaria_1}}">
+                        <img loading="lazy" alt="Imagen secundaria 1 {{salud.titulo}}" width="450" height="600" class="w-100 borde mb-4 img-cover" src="{{MEDIA_URL}}{{salud.imagen_secundaria_1}}">
                     </div>
                 {% endif %}
                 {% if salud.imagen_secundaria_2 %}
                     <div class="col-lg-5">
-                        <img alt="Imagen secundaria 2 {{salud.titulo}}" width="450" height="600" class="w-100 borde img-cover" src="{{MEDIA_URL}}{{salud.imagen_secundaria_2}}">
+                        <img loading="lazy" alt="Imagen secundaria 2 {{salud.titulo}}" width="450" height="600" class="w-100 borde img-cover" src="{{MEDIA_URL}}{{salud.imagen_secundaria_2}}">
                     </div>
                 {% endif %}
             </div>

@@ -19,7 +19,7 @@
             <div class="row my-4 hero__container">
                 <div class="col-12 col-lg-6 hero__image">
                     <div class="borde">
-                        <img class="w-100 borde img-cover" height="500" width="500" src="{{MEDIA_URL}}{{escuela_cocina.imagen_principal}}" alt="Imagen técnica de cocina {{escuela_cocina.titulo}}">
+                        <img loading="lazy" class="w-100 borde img-cover" height="500" width="500" src="{{MEDIA_URL}}{{escuela_cocina.imagen_principal}}" alt="Imagen técnica de cocina {{escuela_cocina.titulo}}">
                     </div>
                 </div>
 
@@ -79,18 +79,18 @@
 
                 {% if escuela_cocina.imagen_secundaria_1 %}
                     <div class="col-lg-5">
-                        <img alt="Imagen secundaria 1 {{escuela_cocina.titulo}}" width="450" height="600" class="w-100 borde mb-4 img-cover" src="{{MEDIA_URL}}{{escuela_cocina.imagen_secundaria_1}}">
+                        <img loading="lazy" alt="Imagen secundaria 1 {{escuela_cocina.titulo}}" width="450" height="600" class="w-100 borde mb-4 img-cover" src="{{MEDIA_URL}}{{escuela_cocina.imagen_secundaria_1}}">
                     </div>
                 {% endif %}
                 {% if escuela_cocina.imagen_secundaria_2 %}
                     <div class="col-lg-5">
-                        <img alt="Imagen secundaria 2 {{escuela_cocina.titulo}}" width="450" height="600" class="w-100 borde mb-4 img-cover" src="{{MEDIA_URL}}{{escuela_cocina.imagen_secundaria_2}}">
+                        <img loading="lazy" alt="Imagen secundaria 2 {{escuela_cocina.titulo}}" width="450" height="600" class="w-100 borde mb-4 img-cover" src="{{MEDIA_URL}}{{escuela_cocina.imagen_secundaria_2}}">
                     </div>
                 {% endif %}
 
                 {% if escuela_cocina.imagen_secundaria_3 %}
                     <div class="col-12 col-lg-11">
-                        <img class="w-100 borde img-cover" src="{{MEDIA_URL}}{{escuela_cocina.imagen_secundaria_3}}" />
+                        <img loading="lazy" class="w-100 borde img-cover" src="{{MEDIA_URL}}{{escuela_cocina.imagen_secundaria_3}}" />
                     </div> 
                 {% endif %}               
             </div>

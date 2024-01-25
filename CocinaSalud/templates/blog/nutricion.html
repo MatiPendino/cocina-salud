@@ -19,9 +19,9 @@
                 <a href="{% url 'ver_nutricion' nutricion.slug %}">
                     <div id="image-{{forloop.counter}}" class="gallery__image__container mb-2">
                         {% if nutricion.imagen_miniatura %}
-                            <img alt="Nutrición" class="w-100" height="300px" src="{{MEDIA_URL}}{{nutricion.imagen_miniatura}}">
+                            <img loading="lazy" alt="Nutrición" class="w-100" height="300px" src="{{MEDIA_URL}}{{nutricion.imagen_miniatura}}">
                         {% else %}
-                            <img alt="No image" class="w-100" height="300px" src="{% static 'img/no_image.jpg' %}">
+                            <img loading="lazy" alt="No image" class="w-100" height="300px" src="{% static 'img/no_image.jpg' %}">
                         {% endif %}
                     </div>
                     <p id="titulo-{{forloop.counter}}" class="gallery__title centrar-mobile text-center text-uppercase">{{nutricion.titulo}}</p>
