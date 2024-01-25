@@ -19,7 +19,7 @@
             <div class="row mt-4 hero__container">
                 <div class="col-12 col-lg-6 hero__image">
                     <div class="borde">
-                        <img class="w-100 borde img-cover" width="500" height="500" src="{{MEDIA_URL}}{{nutricion.imagen_principal}}" alt="Imagen nutrición {{nutricion.titulo}}">
+                        <img loading="lazy" class="w-100 borde img-cover" width="500" height="500" src="{{MEDIA_URL}}{{nutricion.imagen_principal}}" alt="Imagen nutrición {{nutricion.titulo}}">
                     </div>
                 </div>
 
@@ -49,17 +49,17 @@
 
             <div class="col-12 col-lg-11 justify-content-center mb-4">
                 {% if nutricion.imagen_secundaria_1 %}
-                    <img class="w-100 borde img-cover" src="{{MEDIA_URL}}{{nutricion.imagen_secundaria_1}}" alt="Imagen secundaria nutrición {{nutricion.titulo}}" />
+                    <img loading="lazy" class="w-100 borde img-cover" src="{{MEDIA_URL}}{{nutricion.imagen_secundaria_1}}" alt="Imagen secundaria nutrición {{nutricion.titulo}}" />
                 {% endif %}
                 <div class="text-start my-4">{{nutricion.texto_explicativo|safe}}</div>
                 {% if nutricion.imagen_secundaria_2 %}
                     <div class="col-lg-5">
-                        <img class="w-100 borde img-cover" width="450" height="600" src="{{MEDIA_URL}}{{nutricion.imagen_secundaria_2}}" alt="Imagen secundaria 2 nutrición {{nutricion.titulo}}" />
+                        <img loading="lazy" class="w-100 borde img-cover" width="450" height="600" src="{{MEDIA_URL}}{{nutricion.imagen_secundaria_2}}" alt="Imagen secundaria 2 nutrición {{nutricion.titulo}}" />
                     </div>
                 {% endif %}
                 {% if nutricion.imagen_secundaria_3 %}
                     <div class="col-lg-5">
-                        <img class="w-100 borde img-cover" width="450" height="600" src="{{MEDIA_URL}}{{nutricion.imagen_secundaria_3}}" alt="Imagen secundaria 3 nutrición {{nutricion.titulo}}" />
+                        <img loading="lazy" class="w-100 borde img-cover" width="450" height="600" src="{{MEDIA_URL}}{{nutricion.imagen_secundaria_3}}" alt="Imagen secundaria 3 nutrición {{nutricion.titulo}}" />
                     </div>
                 {% endif %}
             </div>

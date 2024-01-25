@@ -11,7 +11,7 @@
     <div class="w-100 mx-0" style="overflow-x: hidden;">
         <div class="">
             <div class="course-image d-block d-md-none">
-                <img class="w-100" src="{{MEDIA_URL}}{{course.imagen_curso}}" alt="Imagen curso" />
+                <img loading="lazy" class="w-100" src="{{MEDIA_URL}}{{course.imagen_curso}}" alt="Imagen curso" />
             </div>
             <section id="course-description">
                 <div class="col-12 col-md-8 course-content__container">
@@ -88,7 +88,7 @@
                     <div class="row">
                         <p class="w-auto my-auto fw-bold h5">Profesor:</p>
                         <div class="profile-image__container">
-                            <img class="w-100 h-100" src="{{MEDIA_URL}}{{course.profesor.imagen_perfil}}" alt="Profile Image" />
+                            <img loading="lazy" class="w-100 h-100" src="{{MEDIA_URL}}{{course.profesor.imagen_perfil}}" alt="Profile Image" />
                         </div>
                         <div class="w-auto profile-user__container">
                             <p>{{course.profesor.user.get_full_name}}</p>
@@ -302,11 +302,11 @@
                                 <li class="row list-group-item" style="display: flex!important;">
                                     {% if curso_usuario.usuario.imagen_perfil %}
                                         <div class="profile-image__container col-3 mt-3">
-                                            <img class="w-100 h-100" src="{{MEDIA_URL}}{{curso_usuario.usuario.imagen_perfil}}" alt="User Profile Image" />
+                                            <img loading="lazy" class="w-100 h-100" src="{{MEDIA_URL}}{{curso_usuario.usuario.imagen_perfil}}" alt="User Profile Image" />
                                         </div>
                                     {% else %}
                                         <div class="profile-image__container col-3 mt-3">
-                                            <img class="w-100 h-100" src="{% static 'img/no_profile_pic.jpg' %}" alt="User Profile Image" />
+                                            <img loading="lazy" class="w-100 h-100" src="{% static 'img/no_profile_pic.jpg' %}" alt="User Profile Image" />
                                         </div>
                                     {% endif %}
                                     <div class="col-9">
@@ -358,7 +358,7 @@
 
         <div class="course-buy__desktop d-none d-md-block" id="course-buy__desktop">
             <div class="course-image">
-                <img class="w-100 borde" src="{{MEDIA_URL}}{{course.imagen_curso}}" alt="Imagen curso" />
+                <img loading="lazy" class="w-100 borde" src="{{MEDIA_URL}}{{course.imagen_curso}}" alt="Imagen curso" />
             </div>
             <div class="p-3">
                 <p class="course-price mb-2">${{course.precio}}</p>
