@@ -15,7 +15,7 @@ def get_lessons_for_section(lecciones_usuario, seccion):
 
 
 def has_user_course(user, course):
-    if user.username:
+    if user.is_authenticated:
         user_course = CursoUsuario.objects.filter(
             usuario__user=user,
             curso=course
@@ -148,17 +148,3 @@ def create_movimiento(curso, usuario, paypal_mdp, codigo_operacion):
         condicion=Movimiento.ESTADO_INICIADA,
         codigo_operacion=codigo_operacion
     )
-
-def create_context(curso, paypal_mdp, movimiento, precio):
-    if curso:
-        return {
-            'course': curso,
-            'paypal_mdp': paypal_mdp,
-            'movimiento': movimiento,
-            'precio': precio
-        } 
-    return {
-        'paypal_mdp': paypal_mdp,
-        'movimiento': movimiento,
-        'precio': precio
-    }

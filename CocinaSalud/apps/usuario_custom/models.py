@@ -17,5 +17,5 @@ class Usuario(BaseModel):
         return self.user.username
     
     class Meta:
-        verbose_name = 'Usuario Custom'
-        verbose_name_plural = 'Usuarios Custom'
+        verbose_name = 'Perfil'
+        verbose_name_plural = 'Perfiles'

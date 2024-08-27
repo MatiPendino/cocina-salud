@@ -24,13 +24,13 @@ def signup(request):
 
         try:
             create_custom_user(
-                pass1, pass2, 
-                username, first_name, last_name, email,
+                pass1, pass2, username, first_name, last_name, email,
                 birthdate, profile_image
             )
             return redirect('signin')
         except PasswordException as pe:
             return render(request, 'auth/signup.html', {'message': pe})
+        
     return render(request, 'auth/signup.html')
 
 
