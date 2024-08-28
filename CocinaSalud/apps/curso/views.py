@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.conf import settings
+from django.http import Http404
+from apps.curso.selectors import get_current_user_lesson, get_curso_usuario, get_cursos_usuarios_curso, get_last_seen_leccion_usuario, get_primera_leccion
 from apps.usuario_custom.models import Usuario
 from apps.movimientos.models import MedioDePago
 from apps.movimientos.utils import generate_unique_code
 from .models import Curso, CursoUsuario, Leccion, LeccionUsuario
 from .utils import *
+from .services import get_estrellas, get_secciones_lecciones_usuario
 
 class CursosListView(ListView):
     model = Curso
@@ -22,39 +25,19 @@ class CursoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        cursos_usuarios = CursoUsuario.objects.filter(
-            curso=context['course'], 
-            state=True, 
-            calificacion__gte=1
-        )
+        cursos_usuarios = get_cursos_usuarios_curso(curso=context['course'])
         context['cursos_usuarios'] = cursos_usuarios
-
-        ratings = list(cursos_usuarios.values_list('calificacion', flat=True))
-        # Obtain how many qualifications each rating has
-        one_star, two_stars, three_stars, four_stars, five_stars = [
-            ratings.count(rating) for rating in range(1, 6)
-        ]
-        context['one_star'] = one_star
-        context['two_stars'] = two_stars
-        context['three_stars'] = three_stars
-        context['four_stars'] = four_stars
-        context['five_stars'] = five_stars
-
-        num_ratings = sum([one_star, two_stars, three_stars, four_stars, five_stars])
-        context['num_ratings'] = num_ratings
-
-        context['one_star_p'] = get_percentage_rating(one_star, num_ratings)
-        context['two_stars_p'] = get_percentage_rating(two_stars, num_ratings)
-        context['three_stars_p'] = get_percentage_rating(three_stars, num_ratings)
-        context['four_stars_p'] = get_percentage_rating(four_stars, num_ratings)
-        context['five_stars_p'] = get_percentage_rating(five_stars, num_ratings)
+        context['estrellas'] = get_estrellas(cursos_usuarios)
 
         return context
     
     def get(self, request, *args, **kwargs):
         response = super().get(request, *args, **kwargs)
+        user = self.request.user
+        course = self.object
 
-        user, course = self.request.user, self.object
+        # Si el usuario ya compró el curso, se le redirige a la última lección vista,
+        # caso contrario se retorna la response
         if has_user_course(user, course):
             return redirect('last_seen_user_lesson', course_slug=self.object.slug)
         
@@ -97,40 +80,27 @@ class LeccionDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         curso = context['lesson'].seccion.curso
 
-        curso_usuario = CursoUsuario.objects.filter(
-            curso__id=curso.id,
-            usuario__user=self.request.user
-        ).first()
-        context['curso_usuario'] = curso_usuario
-
-        # Obtain all the course sections and the user lessons
-        secciones = list(context['lesson'].get_secciones_curso())
-        lecciones_usuario = LeccionUsuario.objects.filter(
-            usuario__user=self.request.user, 
-            leccion__seccion__curso=curso, 
-            state=True
-        ).order_by('leccion__orden')
-
-        # Creation of a dictionary where the keys are the section names, and values
-        # their corresponding list of user lessons
-        secciones_lecciones_usuario = {
-            seccion.nombre: get_lessons_for_section(lecciones_usuario, seccion)
-            for seccion in secciones
-        }
-        context['secciones_lecciones_usuario'] = secciones_lecciones_usuario
-
-        current_user_lesson = LeccionUsuario.objects.filter(
-            usuario__user=self.request.user,
+        context['curso_usuario'] = get_curso_usuario(curso_id=curso.id, user=self.request.user)
+        context['secciones_lecciones_usuario'] = get_secciones_lecciones_usuario(
+            lesson=context['lesson'],
+            user=self.request.user,
+            curso=curso
+        )
+        context['leccion_usuario'] = get_current_user_lesson(
+            user=self.request.user, 
             leccion=context['lesson']
-        ).first()
-        context['leccion_usuario'] = current_user_lesson
+        )
 
         return context
     
     def get(self, request, *args, **kwargs):
         response = super().get(request, *args, **kwargs)
+        user = self.request.user 
+        course = self.object.seccion.curso
 
-        user, course = self.request.user, self.object.seccion.curso
+        # Si el usuario no compró el curso, se le redirige al detalle del mismo,
+        # caso contrario se actualiza la última lección vista por el usuario y
+        # se retorna la response
         if not has_user_course(user, course):
             return redirect('curso_detalle', slug=course.slug)
         
@@ -164,24 +134,17 @@ def pass_lesson(request, current_lesson_slug, direction):
 
 
 def last_seen_user_lesson(request, course_slug):
-    user_lesson = LeccionUsuario.objects.filter(
-        usuario__user=request.user,
-        leccion__seccion__curso__slug=course_slug,
-        ultima=True,
-        state=True
-    ).first()
-
+    # Si ya existe una última lección vista por el usuario, redireccionamos a esa
+    # caso contrario, obtenemos la primer lección del curso y hacemos la redirección
+    user_lesson = get_last_seen_leccion_usuario(user=request.user, curso_slug=course_slug)
     if user_lesson:
         return redirect('leccion_detalle', slug=user_lesson.leccion.slug)
 
-    first_course_lesson = get_object_or_404(
-        Leccion,
-        seccion__curso__slug=course_slug,
-        seccion__orden=1,
-        orden=1,
-        state=True
-    )
-    return redirect('leccion_detalle', slug=first_course_lesson.slug)
+    try:
+        primera_leccion_curso = get_primera_leccion(curso_slug=course_slug) 
+    except Leccion.DoesNotExist:
+        raise Http404('Lección no encontrada')
+    return redirect('leccion_detalle', slug=primera_leccion_curso.slug)
 
 
 def comprar_curso(request, course_slug):
@@ -189,23 +152,20 @@ def comprar_curso(request, course_slug):
     precio = get_precio(curso)
     codigo_operacion = generate_unique_code()
     usuario = get_object_or_404(Usuario, user=request.user, state=True)
-    if settings.DEBUG:
-        paypal_mdp = get_object_or_404(
-            MedioDePago, 
-            test=True, 
-            tipo=MedioDePago.TIPO_PAYPAL, 
-            state=True
-        )
-    else:
-        paypal_mdp = get_object_or_404(
-            MedioDePago, 
-            test=False, 
-            tipo=MedioDePago.TIPO_PAYPAL, 
-            state=True
-        )
+    paypal_mdp = get_object_or_404(
+        MedioDePago, 
+        test=settings.DEBUG, 
+        tipo=MedioDePago.TIPO_PAYPAL, 
+        state=True
+    )
     
     movimiento = create_movimiento(curso, usuario, paypal_mdp, codigo_operacion)
-    context = create_context(curso, paypal_mdp, movimiento, precio)
+    context = {
+        'course': curso if curso else None,
+        'paypal_mdp': paypal_mdp,
+        'movimiento': movimiento,
+        'precio': precio
+    } 
 
     return render(request, 'cursos/comprar_curso.html', context)
     

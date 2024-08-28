@@ -74,3 +74,8 @@ h1 {
 .course-stars i {
     color: var(--golden);
 }
+
+.course-image img {
+    height: 150px;
+    object-fit: cover;
+}

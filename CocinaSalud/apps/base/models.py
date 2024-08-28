@@ -9,5 +9,3 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
-        verbose_name = 'Modelo base'
-        verbose_name_plural = 'Modelos base'

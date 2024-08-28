@@ -1,25 +1,7 @@
-import requests
 import json
-import base64
 from paypalcheckoutsdk.core import PayPalHttpClient, SandboxEnvironment, LiveEnvironment 
 from paypalcheckoutsdk.orders import OrdersGetRequest, OrdersCaptureRequest
 from apps.movimientos.models import Movimiento
-
-def paypal_token(cliente_id, client_secret):
-    url = "https://api-m.sandbox.paypal.com/v1/oauth2/token"
-    data = {
-                "client_id": cliente_id,
-                "client_secret": client_secret,
-                "grant_type":"client_credentials"
-            }
-    headers = {
-                "Content-Type": "application/x-www-form-urlencoded",
-                "Authorization": "Basic {0}".format(base64.b64encode((cliente_id + ":" + client_secret).encode()).decode())
-            }
-
-    token = requests.post(url, data, headers=headers)
-    return token.json()['access_token']
-
 
 class PayPalClient:
     def __init__(self, movimiento):
@@ -61,8 +43,10 @@ def ipn(request, movimiento):
     if float(detalle_precio) == float(movimiento.importe):
         transaccion = CaptureOrder(movimiento).capture_order(order_id, debug=False)
 
-        # if transaccion.status_code in [200, 201] and transaccion.result.status in ['APPROVED', 'COMPLETED']:
-        if transaccion.status_code in [200, 201] and transaccion.result.purchase_units[0].payments.captures[0].status in ['APPROVED', 'COMPLETED']:
+        if (
+            transaccion.status_code in [200, 201] and 
+            transaccion.result.purchase_units[0].payments.captures[0].status in ['APPROVED', 'COMPLETED']
+        ):
             print(f'''
                 PAGO REALIZADO CON ÉXITO:
                 Código operación: {transaccion.result.purchase_units[0].reference_id}

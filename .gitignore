@@ -130,3 +130,6 @@ dmypy.json
 
 # Images
 media/
+
+# Firebase file
+photo-reminder.json

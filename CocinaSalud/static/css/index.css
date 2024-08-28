@@ -26,6 +26,13 @@
     background-image: linear-gradient(to bottom, rgba(173, 216, 230, .2), rgba(9, 124, 16, .55) 70%);
 }
 
+@media(max-width: 768px) {
+    .carousel-item img {
+        height: 350px;
+        object-fit: cover;
+    }
+}
+
 .welcome__container {
     flex-direction: column;
     background-color: var(--welcome-background-color);

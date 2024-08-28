@@ -49,7 +49,6 @@ h1 {
 }
 
 .ingredients {
-    background-color: rgb(238,238,238);
     border-radius: 10px;
 }
 
@@ -95,9 +94,10 @@ h1 {
 
 .recipe__analysis,
 .nutricion__conclusion,
-.escuela__conclusion__container,
-.salud__conclusion {
-    background-color: #f5f2f0;
+.salud__conclusion,
+.escuela__conclusion__container {
+    border: 1.5px solid var(--primary-color);
+    background-color: #eeeeee!important;
 }
 
 .recipe__analysis h3,
@@ -109,18 +109,18 @@ h1 {
 
 .recipe__analysis p,
 .nutricion__conclusion p,
-.escuela__conclusion__container p,
-.salud__conclusion p {
+.salud__conclusion p,
+.escuela__conclusion__container p  {
+    font-size: 16px;
     font-family: var(--font-cambria);
-    font-size: 17px;
 }
 
 @media(min-width: 768px) {
     .recipe__analysis p,
     .nutricion__conclusion p,
-    .escuela__conclusion__container p,
-    .salud__conclusion p {
-        font-size: 18px;
+    .salud__conclusion p,
+    .escuela__conclusion__container p {
+        font-size: 17px;
     }
 }
 
@@ -139,7 +139,7 @@ h1 {
 }
 
 .salud__items {
-    list-style: none;
+    list-style: inside;
     padding-left: 0;
 }
 
@@ -152,7 +152,7 @@ h1 {
 }
 
 .salud__items li a:hover {
-    text-decoration: line-through;
+    text-decoration: underline;
     color: rgb(60,60,60);
 }
 

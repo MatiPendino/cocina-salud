@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import never_cache
+from django.http import Http404
 from .models import Movimiento
 from apps.usuario_custom.models import Usuario
-from .utils import get_movimiento_condicion, create_curso_lecciones_usuario, send_compra_via_email
+from .utils import get_movimiento_condicion, finalizar_compra, get_slug_compra
 
 
 def mis_movimientos(request):
@@ -39,33 +40,19 @@ def ipn(request, codigo_operacion):
 
     if movimiento.condicion == Movimiento.ESTADO_FINALIZADA:
         try:
-            send_compra_via_email(movimiento.usuario.user.email, movimiento.curso)
-        except:
-            print("Mail server not implemented yet")
-
-        if movimiento.curso:
-            create_curso_lecciones_usuario(request.user, movimiento.curso)
-
-            # Modify number of students registered in the course
-            movimiento.curso.num_alumnos +=1
-            movimiento.curso.save()
-        else:
-            usuario = get_object_or_404(Usuario, user=request.user)
-            usuario.compro_gestoria = True
-            usuario.save()
-
-
-        if movimiento.curso:
-            return redirect(
-                'compra_finalizada', 
-                course_slug=movimiento.curso.slug, 
-                codigo_operacion=codigo_operacion
+            finalizar_compra(
+                user=request.user, 
+                movimiento=movimiento, 
             )
+        except Exception as err:
+            raise Http404('Error finalizing purchase', err)
+        
+        slug_compra = get_slug_compra(movimiento.curso)
         return redirect(
-            'compra_finalizada', 
-            course_slug='programa', 
+            'compra_finalizada',
+            course_slug=slug_compra,
             codigo_operacion=codigo_operacion
-        )
+        )       
     else:
         return redirect(
             'compra_no_finalizada',
