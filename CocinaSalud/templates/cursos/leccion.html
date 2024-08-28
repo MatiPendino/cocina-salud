@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}{{lesson.get_curso_nombre}}{% endblock title %}
 {% load static %}
+{% load curso_calificacion_tag %}
 
 {% block stylesheet %}
     <link href="{% static 'css/leccion.css' %}" rel="stylesheet" />
@@ -17,11 +18,6 @@
                     title="{{lesson.nombre}}" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
                 </iframe>
-                <!-- <iframe src="https://player.vimeo.com/video/823068139?h=74e6936594" 
-                    width="640" height="360" frameborder="0" 
-                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
-                </iframe>
-                <p><a href="https://vimeo.com/823068139">Simple Days</a> from <a href="https://vimeo.com/wastedtalent">WASTED TALENT</a> on <a href="https://vimeo.com">Vimeo</a>.</p> -->
                 <p>{{lesson.descripcion|safe}}</p>
 
                 <div class="row">
@@ -73,37 +69,7 @@
                     {% if curso_usuario.calificacion %}
                         <h3>Tu reseña</h3>
                         <div class="course-stars">
-                            {% if curso_usuario.calificacion == 1 %}
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star"></i>
-                                <i class="bi bi-star"></i>
-                                <i class="bi bi-star"></i>
-                                <i class="bi bi-star"></i>
-                            {% elif curso_usuario.calificacion == 2 %}
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star"></i>
-                                <i class="bi bi-star"></i>
-                                <i class="bi bi-star"></i>
-                            {% elif curso_usuario.calificacion == 3 %}
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star"></i>
-                                <i class="bi bi-star"></i>
-                            {% elif curso_usuario.calificacion == 4 %}
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star"></i>
-                            {% elif curso_usuario.calificacion == 5 %}
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                            {% endif %}
+                            {% calificacion_estrella_usuario curso_usuario.calificacion %}
                         </div>
                         <p class="m-0 h6">Tu comentario:</p>
                         <p class="m-0">{{curso_usuario.opinion|safe}}

@@ -117,7 +117,7 @@ h1 {
 }
 
 .sections-desktop__container {
-    height: 350px;
+    max-height: 350px;
     overflow-y: auto;
 }
 

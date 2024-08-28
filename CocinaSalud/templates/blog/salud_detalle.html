@@ -13,19 +13,11 @@
 
         <div align="center" class="container-fluid">
 
-            <h1 class="mt-2">{{salud.titulo}}</h1>
+            <h1 class="mt-3 mb-2">{{salud.titulo}}</h1>
 
-            <div class="row my-4 col-12 col-lg-11 hero__container">
-
-                <div class="col-12 col-lg-6 hero__image">
-                    <div class="mb-4">
-                        <img loading="lazy" class="w-100 borde img-cover" width="500" height="500" src="{{MEDIA_URL}}{{salud.imagen_principal}}" alt="Imagen salud {{salud.titulo}}">
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6 text-start hero__content">
+            <div class="mx-auto mb-4 col-12 col-lg-11 hero__container">
+                <div class="col-10 col-lg-9 text-start hero__content">
                     <div class="mb-4 salud__summary">
-                        <h3 class="mx-2">Resumen útil</h4>
                         <div class="mx-2 text-start">{{salud.resumen|safe}}</div>
                     </div>
 
@@ -33,12 +25,12 @@
                         <h3 class="mx-2">Ítems a tratar</h3>
                         <ul class="salud__items">
                             {% for item in items %}
-                                <li class="mx-2"><a href="#{{item.titulo}}">{{item.titulo}}</a></li>
+                                <li class="mx-2 my-1"><a href="#{{item.titulo}}">{{item.titulo}}</a></li>
                             {% endfor %}
                         </ul>
                     </div>
 
-                    <div class="row mt-4" >
+                    <div class="row mt-4 mb-3">
                         {% if salud.youtube_id %}
                             <div class="col-3 col-lg-2" style="margin-left: 5px;">
                                 <a href="{{salud.youtube_id}}" target="_blank" class="btn btn-outline-danger">
@@ -50,9 +42,15 @@
                         {% endif %}
                     </div>
                 </div>
+
+                <div class="col-10 col-lg-9 hero__image">
+                    <div class="mb-4">
+                        <img loading="lazy" class="w-100 borde img-cover" src="{{MEDIA_URL}}{{salud.imagen_principal}}" alt="Imagen salud {{salud.titulo}}">
+                    </div>
+                </div>
             </div>
 
-            <div class="col-11 mb-4 salud__items__container">
+            <div class="col-10 col-lg-9 mb-4 salud__items__container">
                 {% for item in items %}
                     <div class="mb-4" id="{{item.titulo}}">
                         <h4 class="text-start">{{item.titulo}}</h5>
@@ -61,15 +59,15 @@
                 {% endfor %}
             </div>
 
-            <div class="row mb-4 justify-content-center">
+            <div class="mx-auto mb-4 justify-content-center">
                 {% if salud.imagen_secundaria_1 %}
-                    <div class="col-lg-5">
-                        <img loading="lazy" alt="Imagen secundaria 1 {{salud.titulo}}" width="450" height="600" class="w-100 borde mb-4 img-cover" src="{{MEDIA_URL}}{{salud.imagen_secundaria_1}}">
+                    <div class="col-10 col-lg-8">
+                        <img loading="lazy" alt="Imagen secundaria 1 {{salud.titulo}}" class="w-100 borde mb-4 img-cover" src="{{MEDIA_URL}}{{salud.imagen_secundaria_1}}">
                     </div>
                 {% endif %}
                 {% if salud.imagen_secundaria_2 %}
-                    <div class="col-lg-5">
-                        <img loading="lazy" alt="Imagen secundaria 2 {{salud.titulo}}" width="450" height="600" class="w-100 borde img-cover" src="{{MEDIA_URL}}{{salud.imagen_secundaria_2}}">
+                    <div class="col-10 col-lg-8">
+                        <img loading="lazy" alt="Imagen secundaria 2 {{salud.titulo}}" class="w-100 borde img-cover" src="{{MEDIA_URL}}{{salud.imagen_secundaria_2}}">
                     </div>
                 {% endif %}
             </div>
