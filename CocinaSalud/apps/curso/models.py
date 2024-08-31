@@ -16,7 +16,7 @@ class Curso(BaseModel):
     calificacion = models.DecimalField('Calificación del curso', max_digits=3, decimal_places=2, default=0)
     num_alumnos = models.PositiveIntegerField('Número de alumnos', default=0)
     num_calificaciones = models.PositiveIntegerField('Número de calificaciones', default=0)
-    profesor = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Profesor del curso')
+    profesor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, verbose_name='Profesor del curso', null=True)
 
 
     def get_cantidad_lecciones(self):
@@ -45,6 +45,10 @@ class Curso(BaseModel):
     def get_porcentaje_completado_curso(self, user):
         lecciones_usuario = LeccionUsuario.objects.filter(usuario__user=user, leccion__seccion__curso=self, completada=True).count()
         return int(lecciones_usuario / self.get_cantidad_lecciones() * 100) if self.get_cantidad_lecciones() > 0 else 100
+    
+    def get_cantidad_cursos_usuarios(self):
+        num_cursos_usuarios = CursoUsuario.objects.filter(curso=self).count()
+        return num_cursos_usuarios
     
     def __str__(self):
         return f'{self.nombre} ({self.calificacion}) - {self.profesor.get_username()}'
@@ -126,6 +130,10 @@ class LeccionUsuario(BaseModel):
 
     def get_leccion_nombre(self):
         return self.leccion.nombre
+    
+    def complete_lesson(self):
+        self.completada = True
+        self.save()
 
     def __str__(self):
         return f'{self.leccion.nombre} ({self.leccion.get_curso_nombre()}) - {self.usuario.get_username()}'
