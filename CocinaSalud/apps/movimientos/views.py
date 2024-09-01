@@ -4,7 +4,8 @@ from django.views.decorators.cache import never_cache
 from django.http import Http404
 from .models import Movimiento
 from apps.usuario_custom.models import Usuario
-from .utils import get_movimiento_condicion, finalizar_compra, get_slug_compra
+from .utils import get_movimiento_condicion, get_slug_compra, send_compra_via_email
+from .services import finalizar_compra
 
 
 def mis_movimientos(request):
@@ -39,6 +40,11 @@ def ipn(request, codigo_operacion):
     movimiento.save()
 
     if movimiento.condicion == Movimiento.ESTADO_FINALIZADA:
+        try:
+            send_compra_via_email(movimiento.usuario.user.email, movimiento.curso)
+        except:
+            print("Mail server not implemented yet")
+            
         try:
             finalizar_compra(
                 user=request.user, 

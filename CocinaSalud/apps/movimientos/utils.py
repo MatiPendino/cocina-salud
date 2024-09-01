@@ -1,8 +1,6 @@
 import string
 import random
 from django.core.mail import EmailMultiAlternatives
-from django.shortcuts import get_object_or_404
-from django.db.models import F
 from apps.usuario_custom.models import Usuario
 from apps.curso.models import CursoUsuario, LeccionUsuario, Leccion
 from apps.movimientos.models import Movimiento, MedioDePago
@@ -23,24 +21,6 @@ def get_movimiento_condicion(request, movimiento):
         condicion = impl_paypal.ipn(request, movimiento)
     
     return condicion
-
-
-def create_curso_lecciones_usuario(user, curso):
-    usuario = Usuario.objects.get(user=user, state=True)
-    CursoUsuario.objects.create(
-        curso=curso,
-        usuario=usuario,
-    )
-    lecciones = Leccion.objects.filter(
-        state=True,
-        seccion__curso=curso
-    )
-
-    for leccion in lecciones:
-        LeccionUsuario.objects.create(
-            leccion=leccion,
-            usuario=usuario
-        )
 
 
 def send_compra_via_email(email_buyer, course):
@@ -64,25 +44,6 @@ def send_compra_via_email(email_buyer, course):
     msg.attach_alternative(html, "text/html")
     msg.send()
 
-
-def finalizar_compra(user, movimiento):
-    curso = movimiento.curso
-    try:
-        send_compra_via_email(movimiento.usuario.user.email, curso)
-    except:
-        print("Mail server not implemented yet")
-
-    if curso:
-        create_curso_lecciones_usuario(user, curso)
-
-        # Modify number of students registered in the course
-        curso.num_alumnos = F('num_alumnos') + 1
-        curso.save()
-    else:
-        usuario = get_object_or_404(Usuario, user=user)
-        usuario.compro_gestoria = True
-        usuario.save()
-    
 
 def get_slug_compra(curso):
     return curso.slug if curso else 'programa'

@@ -1,5 +1,5 @@
 from apps.curso.selectors import get_lecciones_usuario
-from apps.curso.utils import get_leccion_usuario_por_seccion, get_percentage_rating
+from apps.curso.utils import get_leccion_usuario_por_seccion, get_porcentaje_estrella
 from apps.curso.models import LeccionUsuario, CursoUsuario
 
 def get_estrellas(cursos_usuarios):
@@ -14,11 +14,11 @@ def get_estrellas(cursos_usuarios):
         una_estrella, dos_estrellas, tres_estrellas, cuatro_estrellas, cinco_estrellas
     ])
 
-    una_estrella_p = get_percentage_rating(una_estrella, num_total_estrellas)
-    dos_estrellas_p = get_percentage_rating(dos_estrellas, num_total_estrellas)
-    tres_estrellas_p = get_percentage_rating(tres_estrellas, num_total_estrellas)
-    cuatro_estrellas_p = get_percentage_rating(cuatro_estrellas, num_total_estrellas)
-    cinco_estrellas_p = get_percentage_rating(cinco_estrellas, num_total_estrellas)
+    una_estrella_p = get_porcentaje_estrella(una_estrella, num_total_estrellas)
+    dos_estrellas_p = get_porcentaje_estrella(dos_estrellas, num_total_estrellas)
+    tres_estrellas_p = get_porcentaje_estrella(tres_estrellas, num_total_estrellas)
+    cuatro_estrellas_p = get_porcentaje_estrella(cuatro_estrellas, num_total_estrellas)
+    cinco_estrellas_p = get_porcentaje_estrella(cinco_estrellas, num_total_estrellas)
 
     return {
         'una_estrella': una_estrella,

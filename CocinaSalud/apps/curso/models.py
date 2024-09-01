@@ -2,6 +2,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from apps.base.models import BaseModel
 from apps.usuario_custom.models import Usuario
+from .managers import LeccionManager, CursoUsuarioManager
 
 
 class Curso(BaseModel):
@@ -90,6 +91,8 @@ class Leccion(BaseModel):
     video_id = models.CharField('Video de la lección', help_text='Insertar el id del video de la lección', null=True, blank=True, max_length=20)
     orden = models.PositiveSmallIntegerField('Orden de la lección')
 
+    objects = LeccionManager()
+
     def get_seccion_nombre(self):
         return self.seccion.nombre
     
@@ -113,6 +116,8 @@ class CursoUsuario(BaseModel):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     calificacion = models.DecimalField('Calificación del usuario', max_digits=3, decimal_places=2, default=0)
     opinion = RichTextField('Opinión del curso', null=True, blank=True)
+
+    objects = CursoUsuarioManager()
 
     def __str__(self):
         return f'{self.curso.nombre} - {self.usuario.get_username()}'

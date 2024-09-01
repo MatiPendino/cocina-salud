@@ -39,7 +39,7 @@ class CursoDetailView(DetailView):
 
         # Si el usuario ya compró el curso, se le redirige a la última lección vista,
         # caso contrario se retorna la response
-        if has_user_course(user, course):
+        if CursoUsuario.objects.existe_curso_usuario(user, course):
             return redirect('last_seen_user_lesson', course_slug=self.object.slug)
         
         return response
@@ -101,7 +101,7 @@ class LeccionDetailView(DetailView):
         # Si el usuario no compró el curso, se le redirige al detalle del mismo,
         # caso contrario se actualiza la última lección vista por el usuario y
         # se retorna la response
-        if not has_user_course(user, course):
+        if not CursoUsuario.objects.existe_curso_usuario(user, course):
             return redirect('curso_detalle', slug=course.slug)
         
         update_last_seen_leccion_usuario(user=self.request.user, leccion=self.object)
@@ -131,10 +131,10 @@ class LeccionDetailView(DetailView):
     
 
 def pass_lesson(request, current_lesson_slug, direction):
-    lesson = get_object_or_404(Leccion, slug=current_lesson_slug)
-    slug_lesson_to_pass = get_slug_lesson_to_pass(lesson, direction)
+    leccion = get_object_or_404(Leccion, slug=current_lesson_slug)
+    proximo_slug = Leccion.objects.get_slug_leccion(leccion, direction)
     
-    return redirect('leccion_detalle', slug=slug_lesson_to_pass)
+    return redirect('leccion_detalle', slug=proximo_slug)
 
 
 def last_seen_user_lesson(request, course_slug):
@@ -153,7 +153,7 @@ def last_seen_user_lesson(request, course_slug):
 
 def comprar_curso(request, course_slug):
     curso = get_curso(course_slug)
-    precio = get_precio(curso)
+    precio = get_precio_str(curso)
     codigo_operacion = generate_unique_code()
     usuario = get_object_or_404(Usuario, user=request.user, state=True)
     paypal_mdp = get_object_or_404(
