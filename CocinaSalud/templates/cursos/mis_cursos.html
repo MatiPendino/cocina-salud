@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load curso_calificacion_tag %}
 {% block title %}Mis Cursos{% endblock title %}
 
 {% block stylesheet %}
@@ -35,43 +36,8 @@
                                 <span class="completed-text w-auto">{{percentage_completed}}% completado</span>
                                 <div class="w-auto course-stars">
                                     <!-- TODO: meter un modal para editar la calificación desde acá -->
-                                    {% if user_course.calificacion == 0 %}
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                    {% elif user_course.calificacion == 1 %}
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                    {% elif user_course.calificacion == 2 %}
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                    {% elif user_course.calificacion == 3 %}
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                    {% elif user_course.calificacion == 4 %}
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                    {% elif user_course.calificacion == 5 %}
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                    {% endif %}
+                                    {% calificacion_estrella_usuario user_course.calificacion %}
+                                    
                                     {% if user_course.calificacion == 0 %}
                                         <p class="calification-text m-0">Deja una calificación</p>
                                     {% else %}
