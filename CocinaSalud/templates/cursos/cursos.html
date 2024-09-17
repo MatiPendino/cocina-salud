@@ -11,32 +11,39 @@
     <h1 class="mt-2 mb-4 text-center">CURSOS</h1>
 
     <div class="courses__container col-11 col-lg-10 m-auto">
-        {% for course in courses %}
-            <a href="{% url 'curso_detalle' course.slug %}" style="text-decoration: none; color: var(--black);">
-                <div class="course__box row mb-3">
-                    <div class="course-image col-4">
-                        <img class="w-100 borde" src="{{MEDIA_URL}}{{course.imagen_curso}}" alt="Imagen curso" />
-                    </div>
-                    <div class="course-content col-8 col-md-7">
-                        <h3>{{course.nombre}}</h3>
-                        <p class="mb-2 d-none d-md-block">{{course.descripcion_breve}}</p>
-                        <p class="course-teacher">{{course.profesor.user.get_full_name}}</p>
-                        <div class="row flex">
-                            <div class="w-auto course-calification">{{course.calificacion}}</div>
-                            <div class="w-auto course-stars">
-                                {% calificacion_estrella course.calificacion %}
-                            </div>
-                            <div class="w-auto course-nstudents">({{course.num_alumnos}})</div>
+        {% if courses %}
+            {% for course in courses %}
+                <a href="{% url 'curso_detalle' course.slug %}" style="text-decoration: none; color: var(--black);">
+                    <div class="course__box row mb-3">
+                        <div class="course-image col-4">
+                            <img class="w-100 borde" src="{{MEDIA_URL}}{{course.imagen_curso}}" alt="Imagen curso" />
                         </div>
-                        <p class="m-0 p-0">{{course.get_duracion_curso}} horas en total - {{course.get_cantidad_lecciones}} lecciones</p>
-                        <p class="d-block d-md-none m-0 p-0 course-price">${{course.precio}}</p>
+                        <div class="course-content col-8 col-md-7">
+                            <h3>{{course.nombre}}</h3>
+                            <p class="mb-2 d-none d-md-block">{{course.descripcion_breve}}</p>
+                            <p class="course-teacher">{{course.profesor.user.get_full_name}}</p>
+                            <div class="row flex">
+                                <div class="w-auto course-calification">{{course.calificacion}}</div>
+                                <div class="w-auto course-stars">
+                                    {% calificacion_estrella course.calificacion %}
+                                </div>
+                                <div class="w-auto course-nstudents">({{course.num_alumnos}})</div>
+                            </div>
+                            <p class="m-0 p-0">{{course.get_duracion_curso}} horas en total - {{course.get_cantidad_lecciones}} lecciones</p>
+                            <p class="d-block d-md-none m-0 p-0 course-price">${{course.precio}}</p>
+                        </div>
+                        <div class="d-none d-md-block col-md-1 mb-0">
+                            <p class="course-price">${{course.precio}}</p>
+                        </div>
                     </div>
-                    <div class="d-none d-md-block col-md-1 mb-0">
-                        <p class="course-price">${{course.precio}}</p>
-                    </div>
-                </div>
-            </a>
-        {% endfor %}
+                </a>
+            {% endfor %}
+        {% else %}
+            <div class="text-center">
+                <h1 class="display-5">Aún no hay ningún curso creado</h1>
+                <p class="lead mb-5">Pronto encontrarás cursos creados por gente experta en la nutrición y la medicina.</p>
+            </div>
+        {% endif %}
     </div>
 
 
