@@ -5,14 +5,7 @@ DEBUG = False
 
 SECRET_KEY = config('SECRET_KEY')
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '192.168.0.165',
-    '161.35.51.95',
-    'cocinasalud.net',
-    'www.cocinasalud.net',
-    '*.cocinasalud.net',
-]
+ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
 
 DATABASES = {
     'default': {
