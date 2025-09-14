@@ -36,7 +36,7 @@ AWS_STORAGE_BUCKET_NAME = config('AMAZONWS_STORAGE_BUCKET_NAME')
 AWS_QUERYSTRING_AUTH = False 
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_REGION_NAME = config('AMAZONWS_S3_REGION_NAME')
-STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/'
+# STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/'
 MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/media/'
 
 STORAGES = {
@@ -45,8 +45,8 @@ STORAGES = {
         'OPTIONS': {
         },
     },
-    'staticfiles': {
-        'BACKEND': 'storages.backends.s3.S3Storage'
-    }
+    # 'staticfiles': {
+    #     'BACKEND': 'storages.backends.s3.S3Storage'
+    # }
 }
 AWS_DEFAULT_ACL = None
