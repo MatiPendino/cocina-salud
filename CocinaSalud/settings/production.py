@@ -37,13 +37,13 @@ AWS_STORAGE_BUCKET_NAME = config('AMAZONWS_STORAGE_BUCKET_NAME')
 AWS_QUERYSTRING_AUTH = False 
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_REGION_NAME = config('AMAZONWS_S3_REGION_NAME')
-# STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/'
 MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/media/'
 
 STORAGES = {
     'default': {
-        'BACKEND': 'storages.backends.s3.S3Storage',
+        'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
         'OPTIONS': {
+            'location': 'media',
         },
     },
     'staticfiles': {
