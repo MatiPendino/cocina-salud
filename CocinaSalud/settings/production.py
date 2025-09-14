@@ -45,8 +45,8 @@ STORAGES = {
         'OPTIONS': {
         },
     },
-    # 'staticfiles': {
-    #     'BACKEND': 'storages.backends.s3.S3Storage'
-    # }
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
 }
 AWS_DEFAULT_ACL = None
