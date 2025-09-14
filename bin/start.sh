@@ -5,7 +5,7 @@ set -euo pipefail
 python manage.py migrate --noinput
 
 # Collect static files
-python manage.py collectstatic --noinput
+#python manage.py collectstatic --noinput
 
 # Create a superuser once
 python manage.py shell <<'PY'
