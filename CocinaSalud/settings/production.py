@@ -28,6 +28,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 INSTALLED_APPS += ['whitenoise.runserver_nostatic']
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS = [BASE_DIR.parent / 'static']
 
 # S3 Configuration
 AWS_ACCESS_KEY_ID = config('AMAZONWS_ACCESS_KEY_ID')
