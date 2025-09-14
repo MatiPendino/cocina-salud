@@ -4,9 +4,6 @@ set -euo pipefail
 # DB migrations
 python manage.py migrate --noinput
 
-# Collect static files
-#python manage.py collectstatic --noinput
-
 # Create a superuser once
 python manage.py shell <<'PY'
 from django.contrib.auth import get_user_model
