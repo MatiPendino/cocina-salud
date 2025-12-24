@@ -1,0 +1,22 @@
+name: Dependabot Updates
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0'  # Run weekly on Sunday at midnight
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Run Dependabot
+        uses: github/dependabot-action@v2
+        with:
+          package-ecosystem: pip
+          directory: /
